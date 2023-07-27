@@ -1,10 +1,12 @@
+import FluidLayout from '@/Layouts/FluidLayout'
+import { Typography } from '@mui/material'
 import { type FC } from 'react'
 
 const App: FC = () => {
   return (
-    <>
-      Hello World!
-    </>
+    <FluidLayout>
+      <Typography variant="h1">Character Editor</Typography>
+    </FluidLayout>
   )
 }
 
