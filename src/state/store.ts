@@ -1,9 +1,11 @@
 import appSlice from '@/state/appSlice'
 import { configureStore } from '@reduxjs/toolkit'
+import feedbackSlice from './feedbackSlice'
 
 const store = configureStore({
   reducer: {
-    app: appSlice.reducer
+    app: appSlice.reducer,
+    feedback: feedbackSlice.reducer
   }
 })
 
