@@ -95,7 +95,7 @@ const ImageDrop: FC<ImageDropProps> = ({ onDropedImage }) => {
         Drag &amp; drop your image here, or click to select file
       </Typography>
       <Typography variant="caption" align="center" gutterBottom>
-        Accepted formats: .png, .jpg, .jpeg, .gif, .webp. Preferred aspect ratio is 1/2
+        Accepted formats: .png, .jpg, .jpeg, .gif, .webp. Preferred aspect ratio is 2/3
       </Typography>
       <Button variant="contained" color="primary">
         Upload
