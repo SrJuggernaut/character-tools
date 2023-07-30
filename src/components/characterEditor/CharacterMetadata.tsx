@@ -27,11 +27,15 @@ const CharacterMetadata: FC = () => {
   return (
     <>
       <Typography variant="h2" align="center" gutterBottom>Character Metadata</Typography>
+      <Typography variant="body1" gutterBottom>
+        In this section you can write information about this character card, none of this information should be sent inside the prompt and its main function is to keep a better organization of characters.
+      </Typography>
       <TextField
         id="creator"
         label="Creator"
         value={characterEditorState.creator}
         onChange={handleChange}
+        helperText="The name or nickname of the creator of this character card"
         variant="outlined"
         fullWidth
         margin="normal"
@@ -41,6 +45,7 @@ const CharacterMetadata: FC = () => {
         label="Creator Notes"
         value={characterEditorState.creator_notes}
         onChange={handleChange}
+        helperText="Any additional notes about the character card"
         variant="outlined"
         fullWidth
         margin="normal"
@@ -52,10 +57,16 @@ const CharacterMetadata: FC = () => {
         label="Character Version"
         value={characterEditorState.character_version}
         onChange={handleChange}
+        helperText='The version of the character cardThe version of this character card. The recommended format is 0.0.0, but it can be any text. For example: "trip to the beach 1.0.2".'
         variant="outlined"
         fullWidth
         margin="normal"
       />
+
+      <Typography variant="h3" gutterBottom>Tags</Typography>
+      <Typography variant="caption" component="p" gutterBottom>
+        Tags can be any text, preferably short, that helps to identify the character, such as gender, characteristics, etc.
+      </Typography>
       {characterEditorState.tags.length > 0 && (
         <div
           css={{
@@ -99,6 +110,7 @@ const CharacterMetadata: FC = () => {
             </InputAdornment>
           )
         }}
+        helperText="Add a tag to this character card. Press Enter to add"
         variant="outlined"
         fullWidth
         margin="normal"
