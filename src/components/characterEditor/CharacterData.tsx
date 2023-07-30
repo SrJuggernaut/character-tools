@@ -1,3 +1,5 @@
+import CopyButton from '@/components/CopyButton'
+import ImageDrop from '@/components/ImageDrop'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
@@ -5,7 +7,6 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import { type FC } from 'react'
-import ImageDrop from '../ImageDrop'
 
 const CharacterData: FC = () => {
   const characterEditorState = useAppSelector((state) => state.characterEditor)
@@ -17,7 +18,8 @@ const CharacterData: FC = () => {
   return (
     <>
       <Typography variant="h2" align="center" gutterBottom>Character Data</Typography>
-      <Typography variant="body1">
+      <Typography variant="body1" gutterBottom>
+        In this section you can write the data about your character. All fields sent at the prompt should accept the macros <CopyButton textToCopy='{{char}}'>&#123;&#123;char&#125;&#125;</CopyButton> and <CopyButton textToCopy='{{user}}'>&#123;&#123;user&#125;&#125;</CopyButton> which will be replaced by the character and user name respectively, this is very useful to quickly change the character name without having to edit all the content.
       </Typography>
       <TextField
         id="name"
@@ -25,7 +27,7 @@ const CharacterData: FC = () => {
         value={characterEditorState.name}
         onChange={handleChange}
         error={characterEditorState.name === ''}
-        helperText={characterEditorState.name === '' ? 'Name is required' : (<>This is the character name, it will be replaced later on other fields by <code>&#123;&#123;char&#125;&#125;</code></>)}
+        helperText={characterEditorState.name === '' ? 'Name is required' : 'The name of your character, this is the only field where you should not use the {{char}} macro.'}
         variant="outlined"
         fullWidth
         margin="normal"
@@ -36,7 +38,7 @@ const CharacterData: FC = () => {
         value={characterEditorState.description}
         onChange={handleChange}
         error={characterEditorState.description === ''}
-        helperText={characterEditorState.description === '' ? 'Description is required' : 'Description of the character. Would be included by default in every prompt'}
+        helperText={characterEditorState.description === '' ? 'Description is required' : 'Used to add the character description and the rest that the AI should know. This will always be present in the prompt, so all the important facts should be included here.'}
         variant="outlined"
         fullWidth
         margin="normal"
@@ -47,6 +49,7 @@ const CharacterData: FC = () => {
         id="personality"
         label="Personality"
         value={characterEditorState.personality}
+        helperText="A brief description of the personality."
         onChange={handleChange}
         variant='outlined'
         fullWidth
@@ -57,6 +60,9 @@ const CharacterData: FC = () => {
         label="Message Example"
         value={characterEditorState.mes_example}
         onChange={handleChange}
+        helperText={(
+          <>Describes how the character speaks. Before each example, you need to add the <CopyButton textToCopy='<START>'>&lt;START&gt;</CopyButton> macro.</>
+        )}
         variant='outlined'
         fullWidth
         margin='normal'
@@ -68,6 +74,7 @@ const CharacterData: FC = () => {
         label="Scenario"
         value={characterEditorState.scenario}
         onChange={handleChange}
+        helperText="Circumstances and context of the dialogue."
         variant='outlined'
         fullWidth
         margin='normal'
@@ -77,12 +84,17 @@ const CharacterData: FC = () => {
         label="First Message"
         value={characterEditorState.first_mes}
         onChange={handleChange}
+        helperText="The First Message is an important thing that sets exactly how and in what style the character will communicate."
         variant='outlined'
         fullWidth
         margin='normal'
         multiline
         minRows={4}
       />
+      <Typography variant="h3" gutterBottom>Alternate Greetings</Typography>
+      <Typography variant="caption" component="p" gutterBottom>
+        You can add as many alternative greetings as you wish to your character. These greetings will be used as alternatives to the First Message.
+      </Typography>
       {characterEditorState.alternate_greetings.length > 0 && characterEditorState.alternate_greetings.map((greeting, index) => (
         <TextField
           key={`alternate_greeting_${index}`}
