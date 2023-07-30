@@ -3,8 +3,9 @@ import useAppSelector from '@/hooks/useAppSelector'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
+import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 import { type FC } from 'react'
+import ImageDrop from '../ImageDrop'
 
 const CharacterData: FC = () => {
   const characterEditorState = useAppSelector((state) => state.characterEditor)
@@ -117,9 +118,59 @@ const CharacterData: FC = () => {
           minRows={4}
         />
       ))}
-      <Button variant="contained" onClick={() => dispatch(updateCharacterEditor({ alternate_greetings: [...characterEditorState.alternate_greetings, 'Hello!'] }))}>
+      <Button
+        variant="contained"
+        onClick={() => {
+          dispatch(updateCharacterEditor({ alternate_greetings: [...characterEditorState.alternate_greetings, 'Hello!'] }))
+        }}
+        sx={{
+          marginY: 2
+        }}
+      >
         Add Alternate Greeting
       </Button>
+      <Typography variant="h3" gutterBottom>Image</Typography>
+      <Box
+        sx={(theme) => ({
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gap: theme.spacing(2),
+          marginY: theme.spacing(2),
+          [theme.breakpoints.up('md')]: {
+            gridTemplateColumns: '1fr 1fr'
+          }
+        })}
+      >
+        <div>
+          <ImageDrop
+            onDropedImage={(imageUrl) => {
+              dispatch(updateCharacterEditor({ image: imageUrl }))
+            }}
+          />
+        </div>
+        <div
+          css={{
+            dispaly: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: '100%',
+            aspectRatio: '2/1'
+          }}
+        >
+          {characterEditorState.image !== undefined && (
+            <img
+              src={characterEditorState.image}
+              alt={`${characterEditorState.name}-image`}
+              css={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain'
+
+              }}
+            />
+          )}
+        </div>
+      </Box>
     </>
   )
 }

@@ -40,7 +40,8 @@ const App: FC = () => {
             <Tab icon={<FontAwesomeIcon icon={faUserCog}/>} label="Character Data" value="Character Data" />
             <Tab icon={<FontAwesomeIcon icon={faCircleInfo}/>} label="Character Metadata" value="Character Metadata" />
             <Tab icon={<FontAwesomeIcon icon={faUserGear}/>} label="Prompt Engineering" value="Prompt Engineering" />
-            <Tab icon={<FontAwesomeIcon icon={faFileExport}/>} label="Export or Save" value="Export or Save" />
+            {/* <Tab icon={<FontAwesomeIcon icon={faFileExport}/>} label="Export or Save" value="Export or Save" /> */}
+            <Tab icon={<FontAwesomeIcon icon={faFileExport}/>} label="Export" value="Export or Save" />
           </TabList>
         </Box>
         <div
