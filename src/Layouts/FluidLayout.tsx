@@ -13,6 +13,7 @@ const Fluid: FC<FluidProps> = ({
     <>
       <Header />
       <Box
+        component="main"
         sx={(theme) => ({
           minHeight: 'calc(100vh - 70px)',
           padding: theme.spacing(2),
