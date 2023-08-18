@@ -4,25 +4,25 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prepare": "husky install",
+    "postinstall": "husky install",
     "develop": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@commitlint/cli": "^17.6.7",
-    "@commitlint/config-conventional": "^17.6.7",
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.5",
-    "@fontsource/source-code-pro": "^5.0.5",
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
-    "@fortawesome/free-brands-svg-icons": "^6.4.0",
-    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@fontsource/source-code-pro": "^5.0.8",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/lab": "^5.0.0-alpha.137",
-    "@mui/material": "^5.14.2",
+    "@mui/lab": "^5.0.0-alpha.140",
+    "@mui/material": "^5.14.5",
     "@reduxjs/toolkit": "^1.9.5",
     "character-card-utils": "^2.0.3",
     "exifreader": "^4.13.0",
@@ -37,11 +37,11 @@
     "vite-tsconfig-paths": "^4.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.15",
+    "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react": "^4.0.3",
+    "@vitejs/plugin-react": "^4.0.4",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^37.0.0",
     "eslint-plugin-import": "^2.25.2",
@@ -51,7 +51,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "husky": "^8.0.3",
-    "typescript": "*",
-    "vite": "^4.4.5"
-  }
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9"
+  },
+  "packageManager": "yarn@3.6.2"
 }
