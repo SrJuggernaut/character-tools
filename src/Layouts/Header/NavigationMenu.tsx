@@ -43,12 +43,19 @@ const NavigationMenu: FC = () => {
           role="presentation"
           onClick={() => { setOpenDrawer(false) }}
         >
+          <Box
+            sx={(theme) => ({
+              height: '78px',
+              borderBottom: `1px solid ${theme.palette.divider}`
+            })}
+          />
           <List
             disablePadding
           >
             {MenuLinks.map((menuLink, index) => (
               <ListItem
                 disableGutters
+                disablePadding
                 key={`menu-link-${index}`}
               >
                 <ListItemButton
