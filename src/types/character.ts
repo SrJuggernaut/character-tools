@@ -22,3 +22,8 @@ export interface CharacterEditorState extends CharacterData {
   id?: string
   image?: string
 }
+
+export interface CharacterDatabaseData extends CharacterData {
+  id: string
+  image?: string
+}

@@ -28,7 +28,6 @@ const CopyButton: FC<CopyButtonProps> = ({ children, textToCopy }) => {
         variant='text'
         color={copyState === 'success' ? 'success' : copyState === 'error' ? 'error' : undefined}
         onClick={() => {
-          console.log('Click!')
           navigator.clipboard.writeText(textToCopy)
             .then(() => {
               setCopyState('success')

@@ -75,6 +75,19 @@ const Home: FC = () => {
               </CardContent>
             </CardActionArea>
           </Card>
+          <Card>
+            <CardActionArea
+              component="a"
+              href="/character-library"
+            >
+              <CardContent>
+                <Typography variant="h3" align="center" gutterBottom>Character library</Typography>
+                <Typography variant="body1" align="center">
+                  Manage your characters, make it easy to modify them, create copies and different versions
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
         </div>
       </div>
     </Fluid>

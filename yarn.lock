@@ -245,6 +245,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.22.11":
+  version: 7.22.11
+  resolution: "@babel/runtime@npm:7.22.11"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: a5cd6683a8fcdb8065cb1677f221e22f6c67ec8f15ad1d273b180b93ab3bd86c66da2c48f500d4e72d8d2cfa85ff4872a3f350e5aa3855630036af5da765c001
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/template@npm:7.22.5"
@@ -1170,6 +1179,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mui/x-data-grid@npm:^6.12.0":
+  version: 6.12.0
+  resolution: "@mui/x-data-grid@npm:6.12.0"
+  dependencies:
+    "@babel/runtime": ^7.22.11
+    "@mui/utils": ^5.14.5
+    clsx: ^2.0.0
+    prop-types: ^15.8.1
+    reselect: ^4.1.8
+  peerDependencies:
+    "@mui/material": ^5.4.1
+    "@mui/system": ^5.4.1
+    react: ^17.0.0 || ^18.0.0
+    react-dom: ^17.0.0 || ^18.0.0
+  checksum: 7d191f0cf658fd6c0c66afe2563d61c664faad0004f9fc8f7196ad78dd18ded2cc57e9cc6d09a9ecf45e690719fa2522227444fce09a0916bd5d21b5367b17b1
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -2079,6 +2106,7 @@ __metadata:
     "@fortawesome/react-fontawesome": ^0.2.0
     "@mui/lab": ^5.0.0-alpha.140
     "@mui/material": ^5.14.5
+    "@mui/x-data-grid": ^6.12.0
     "@reduxjs/toolkit": ^1.9.5
     "@types/react": ^18.2.20
     "@types/react-dom": ^18.2.7
@@ -2086,6 +2114,9 @@ __metadata:
     "@typescript-eslint/parser": ^6.0.0
     "@vitejs/plugin-react": ^4.0.4
     character-card-utils: ^2.0.3
+    dexie: ^3.2.4
+    dexie-export-import: ^4.0.7
+    dexie-react-hooks: ^1.1.6
     eslint: ^8.0.1
     eslint-config-standard-with-typescript: ^37.0.0
     eslint-plugin-import: ^2.25.2
@@ -2098,6 +2129,7 @@ __metadata:
     husky: ^8.0.3
     json5: ^2.2.3
     meta-png: ^1.0.6
+    nanoid: ^4.0.2
     react: ^18.2.0
     react-dom: ^18.2.0
     react-dropzone: ^14.2.3
@@ -2374,6 +2406,33 @@ __metadata:
   version: 1.0.0
   resolution: "delegates@npm:1.0.0"
   checksum: a51744d9b53c164ba9c0492471a1a2ffa0b6727451bdc89e31627fdf4adda9d51277cfcbfb20f0a6f08ccb3c436f341df3e92631a3440226d93a8971724771fd
+  languageName: node
+  linkType: hard
+
+"dexie-export-import@npm:^4.0.7":
+  version: 4.0.7
+  resolution: "dexie-export-import@npm:4.0.7"
+  peerDependencies:
+    dexie: ^2.0.4 || ^3.0.0 || ^4.0.1-alpha.5
+  checksum: e0a80b09b5805da5d3daa90e5d8de397e4f3f16650b84e2aea46af4f44f1e2259babb094fca4c2944345696068ca593197781a5627569e875b60ab8d32b31db3
+  languageName: node
+  linkType: hard
+
+"dexie-react-hooks@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "dexie-react-hooks@npm:1.1.6"
+  peerDependencies:
+    "@types/react": ">=16"
+    dexie: ^3.2 || ^4.0.1-alpha
+    react: ">=16"
+  checksum: 64beabf2929327b14963b92002a395237be081dfa2c1cf1d1884d196950fbee00457960ec3ec866de814433a7729000722d1355352810fb9b5f863a04236a8e3
+  languageName: node
+  linkType: hard
+
+"dexie@npm:^3.2.4":
+  version: 3.2.4
+  resolution: "dexie@npm:3.2.4"
+  checksum: 4e5294a954118b6862c864b8c3970904a1733daebcd919488624520696411e2e81ed1bceeac3634c5c15a21e37ce4b8502ed41c4edfbc5ba3f5925c34d56497b
   languageName: node
   linkType: hard
 
@@ -4498,6 +4557,15 @@ __metadata:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: 7d0eda657002738aa5206107bd0580aead6c95c460ef1bdd0b1a87a9c7ae6277ac2e9b945306aaa5b32c6dcb7feaf462d0f552e7f8b5718abfc6ead5c94a71b3
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "nanoid@npm:4.0.2"
+  bin:
+    nanoid: bin/nanoid.js
+  checksum: 747c399cea4664dd0be1d0ec498ffd1ef8f1f5221676fc8b577e3f46f66d9afcddb9595d63d19a2e78d0bc6cc33984f65e66bf1682c850b9e26288883d96b53f
   languageName: node
   linkType: hard
 

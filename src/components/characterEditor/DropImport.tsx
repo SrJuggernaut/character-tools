@@ -51,6 +51,7 @@ const DropImport: FC = () => {
         })
     })
   }, [])
+
   const { getRootProps, getInputProps, isDragAccept, isDragReject, isDragActive } = useDropzone({
     onDropAccepted,
     accept: {

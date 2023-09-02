@@ -1,4 +1,4 @@
-import { faBars, faHome, faUserPen, type IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faHome, faUserPen, faUsersBetweenLines, type IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material'
 import { useState, type FC } from 'react'
@@ -12,13 +12,13 @@ interface MenuLink {
 
 const MenuLinks: MenuLink[] = [
   { label: 'Home', url: '/', icon: faHome },
-  { label: 'Character Editor', url: '/character-editor', icon: faUserPen }
+  { label: 'Character Editor', url: '/character-editor', icon: faUserPen },
+  { label: 'Character Library', url: '/character-library', icon: faUsersBetweenLines }
 ]
 
 const NavigationMenu: FC = () => {
   const [openDrawer, setOpenDrawer] = useState(false)
   const location = useLocation()
-  console.log(location)
   return (
     <>
       <IconButton

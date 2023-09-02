@@ -23,7 +23,11 @@ const Header: FC = () => {
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[1],
         zIndex: theme.zIndex.appBar,
-        minHeight: '70px'
+        minHeight: '70px',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%'
       })}
     >
       <div>

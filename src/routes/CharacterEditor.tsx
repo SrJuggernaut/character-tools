@@ -8,14 +8,26 @@ import { faCircleInfo, faFileExport, faFileImport, faUserCog, faUserGear } from 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Tab, Typography, useMediaQuery, type Theme } from '@mui/material'
-import { useState, type FC } from 'react'
+import { useEffect, useState, type FC } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
-type tabs = 'Import or Create' | 'Character Data' | 'Character Metadata' | 'Prompt Engineering' | 'Export or Save'
+type tabs = 'import-create' | 'character-data' | 'character-metadata' | 'prompt-engineering' | 'export-or-save'
 
 const CharacterEditorPage: FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
   const isMediumScreen = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
 
-  const [currentTab, setCurrentTab] = useState<tabs>('Import or Create')
+  const [currentTab, setCurrentTab] = useState<tabs>('import-create')
+  useEffect(() => {
+    if (searchParams.has('tab')) {
+      const tab = searchParams.get('tab')
+      if (tab === 'import-create' || tab === 'character-data' || tab === 'character-metadata' || tab === 'prompt-engineering' || tab === 'export-or-save') {
+        setCurrentTab(tab)
+      }
+      setSearchParams({})
+    }
+  }, [])
+
   return (
     <FluidLayout>
       <Typography variant="h1" align="center" gutterBottom>Character Editor</Typography>
@@ -36,12 +48,11 @@ const CharacterEditorPage: FC = () => {
             allowScrollButtonsMobile
             onChange={(_, newValue) => { setCurrentTab(newValue) }}
           >
-            <Tab icon={<FontAwesomeIcon icon={faFileImport}/>} label="Import or Create" value="Import or Create" />
-            <Tab icon={<FontAwesomeIcon icon={faUserCog}/>} label="Character Data" value="Character Data" />
-            <Tab icon={<FontAwesomeIcon icon={faCircleInfo}/>} label="Character Metadata" value="Character Metadata" />
-            <Tab icon={<FontAwesomeIcon icon={faUserGear}/>} label="Prompt Engineering" value="Prompt Engineering" />
-            {/* <Tab icon={<FontAwesomeIcon icon={faFileExport}/>} label="Export or Save" value="Export or Save" /> */}
-            <Tab icon={<FontAwesomeIcon icon={faFileExport}/>} label="Export" value="Export or Save" />
+            <Tab icon={<FontAwesomeIcon icon={faFileImport}/>} label="Import or Create" value="import-create" />
+            <Tab icon={<FontAwesomeIcon icon={faUserCog}/>} label="Character Data" value="character-data" />
+            <Tab icon={<FontAwesomeIcon icon={faCircleInfo}/>} label="Character Metadata" value="character-metadata" />
+            <Tab icon={<FontAwesomeIcon icon={faUserGear}/>} label="Prompt Engineering" value="prompt-engineering" />
+            <Tab icon={<FontAwesomeIcon icon={faFileExport}/>} label="Export or Save" value="export-or-save" />
           </TabList>
         </Box>
         <div
@@ -49,19 +60,19 @@ const CharacterEditorPage: FC = () => {
             marginBottom: '72px'
           }}
         >
-          <TabPanel value="Import or Create">
+          <TabPanel value="import-create">
             <ImportOrCreate />
           </TabPanel>
-          <TabPanel value="Character Data">
+          <TabPanel value="character-data">
             <CharacterData />
           </TabPanel>
-          <TabPanel value="Character Metadata">
+          <TabPanel value="character-metadata">
             <CharacterMetadata />
           </TabPanel>
-          <TabPanel value="Prompt Engineering">
+          <TabPanel value="prompt-engineering">
             <PromptEngingeering />
           </TabPanel>
-          <TabPanel value="Export or Save">
+          <TabPanel value="export-or-save">
             <ExportOrSave />
           </TabPanel>
         </div>
