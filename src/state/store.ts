@@ -8,6 +8,14 @@ const store = configureStore({
     app: appSlice.reducer,
     feedback: feedbackSlice.reducer,
     characterEditor: characterEditorSlice.reducer
+  },
+  middleware (getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: {
+        ignoredPaths: ['feedback.dialog.onCancel', 'feedback.dialog.onConfirm'],
+        ignoredActionPaths: ['payload.onCancel', 'payload.onConfirm']
+      }
+    })
   }
 })
 
