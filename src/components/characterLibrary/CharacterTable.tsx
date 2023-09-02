@@ -52,7 +52,6 @@ const CharacterTable: FC = () => {
         : characters.orderBy(sortModel[0].field).reverse()
     const filteredCharacters = sortedCharacters.filter((character) => {
       if (filterModel.items.length === 0) {
-        console.log('no filter')
         return true
       }
       const fieldToFilter = filterModel.items[0].field as 'name' | 'description' | 'personality' | 'creator' | 'creator_notes' | 'character_version' | 'tags' | 'system_prompt' | 'post_history_instructions'
