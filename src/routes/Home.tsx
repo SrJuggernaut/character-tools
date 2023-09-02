@@ -3,6 +3,7 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Card, CardActionArea, CardContent, IconButton, Typography } from '@mui/material'
 import { type FC } from 'react'
+import { Link } from 'react-router-dom'
 
 const Home: FC = () => {
   return (
@@ -64,8 +65,8 @@ const Home: FC = () => {
         >
           <Card>
             <CardActionArea
-              component="a"
-              href="/character-editor"
+              component={Link}
+              to="/character-editor"
             >
               <CardContent>
                 <Typography variant="h3" align="center" gutterBottom>Character Editor</Typography>
@@ -77,8 +78,8 @@ const Home: FC = () => {
           </Card>
           <Card>
             <CardActionArea
-              component="a"
-              href="/character-library"
+              component={Link}
+              to="/character-library"
             >
               <CardContent>
                 <Typography variant="h3" align="center" gutterBottom>Character library</Typography>
