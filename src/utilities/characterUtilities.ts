@@ -61,10 +61,10 @@ export const FileToCharacterEditorState = async (file: File): Promise<CharacterE
 export const importedToCharacterEditorState = (data: any): CharacterEditorState => {
   const v1Result = v1.safeParse(data)
   const v2Result = v2.safeParse(data)
-  if (v1Result.success) {
-    return { ...v1Result.data, alternate_greetings: [], creator: '', creator_notes: '', character_version: '', tags: [], system_prompt: '', post_history_instructions: '', extensions: {} }
-  } else if (v2Result.success) {
+  if (v2Result.success) {
     return { ...v2Result.data.data }
+  } else if (v1Result.success) {
+    return { ...v1Result.data, alternate_greetings: [], creator: '', creator_notes: '', character_version: '', tags: [], system_prompt: '', post_history_instructions: '', extensions: {} }
   } else {
     throw new Error('Imported data is not a valid character')
   }
