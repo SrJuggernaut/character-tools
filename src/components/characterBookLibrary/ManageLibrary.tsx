@@ -1,6 +1,7 @@
 import Drop from '@/components/ui/Drop'
 import useAppDispatch from '@/hooks/useAppDispatch'
-import { deleteAllCharacters, exportCharacterCollection, importCharacterCollection } from '@/services/character'
+import { exportCharacterCollection } from '@/services/character'
+import { deleteAllCharacterBooks, importCharacterBookCollection } from '@/services/characterBooks'
 import { setAlert, setDialog } from '@/state/feedbackSlice'
 import { faFileImport } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,11 +11,11 @@ import { type FC } from 'react'
 const ManageLibrary: FC = () => {
   const dispatch = useAppDispatch()
   return (
-    <>
+    <div>
       <Typography variant="h1" align="center" gutterBottom>Manage Character Library</Typography>
       <Typography variant="h2" gutterBottom>Clear Library</Typography>
       <Typography variant="body1" gutterBottom>
-        Clearing the library will delete all characters in the library. This cannot be undone.
+        Clearing the library will delete all characterBooks in the library. This cannot be undone.
       </Typography>
       <Button
         type="button"
@@ -22,10 +23,10 @@ const ManageLibrary: FC = () => {
         onClick={() => {
           dispatch(setDialog({
             title: 'Clear library',
-            content: 'Are you sure you want to clear the character library? This cannot be undone.',
+            content: 'Are you sure you want to clear the characterBook library? This cannot be undone.',
             confirmText: 'Clear library',
             onConfirm: () => {
-              deleteAllCharacters()
+              deleteAllCharacterBooks()
                 .then(() => {
                   dispatch(setAlert({
                     title: 'Library cleared',
@@ -54,7 +55,7 @@ const ManageLibrary: FC = () => {
           }))
         }}
       >
-        Clear library
+        Clear Library
       </Button>
       <Typography variant="h2" gutterBottom>Export Library</Typography>
       <Typography variant="body1" gutterBottom>
@@ -65,24 +66,32 @@ const ManageLibrary: FC = () => {
         variant="contained"
         onClick={() => {
           exportCharacterCollection()
-            .then((Blob) => {
-              const url = window.URL.createObjectURL(Blob)
-              const a = document.createElement('a')
-              a.href = url
-              a.download = 'character-library.json'
-              a.click()
+            .then((data) => {
+              const blob = new Blob([JSON.stringify(data)], { type: 'application/json' })
+              const url = URL.createObjectURL(blob)
+              const link = document.createElement('a')
+              link.download = 'characterLibrary.json'
+              link.href = url
+              link.click()
             })
             .catch((error) => {
-              dispatch(setAlert({
-                title: 'Error while exporting library',
-                severity: 'error',
-                message: error.message
-              }))
+              if (error instanceof Error) {
+                dispatch(setAlert({
+                  title: 'Error while exporting library',
+                  severity: 'error',
+                  message: error.message
+                }))
+              } else {
+                dispatch(setAlert({
+                  title: 'Error while exporting library',
+                  severity: 'error',
+                  message: 'An unknown error occurred while exporting the library'
+                }))
+              }
             })
-        }
-        }
+        }}
       >
-        Export library
+        Export Library
       </Button>
       <Typography variant="h2" gutterBottom>Import Library</Typography>
       <Typography variant="body1" gutterBottom>
@@ -106,7 +115,7 @@ const ManageLibrary: FC = () => {
               },
               multiple: false,
               onDropAccepted: (files) => {
-                importCharacterCollection(files[0])
+                importCharacterBookCollection(files[0])
                   .then(() => {
                     dispatch(setAlert({
                       title: 'Library imported',
@@ -131,24 +140,22 @@ const ManageLibrary: FC = () => {
                   })
               }
             }}
-
           >
             <FontAwesomeIcon icon={faFileImport} size="3x" />
             <Typography variant="subtitle1" align="center" gutterBottom>
               Import character library
             </Typography>
             <Typography variant="body1" align="center" gutterBottom>
-              Drag &amp; drop your character library file here, or click to select file
+              Importing the library will add all characters in the imported file to the library.
             </Typography>
             <Typography variant="caption" align="center" gutterBottom>
-              Supported file types: .json
+              Supported formats: JSON
             </Typography>
           </Drop>
         </div>
-        <div>
-        </div>
+        <div></div>
       </Box>
-    </>
+    </div>
   )
 }
 export default ManageLibrary

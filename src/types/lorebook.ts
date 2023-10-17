@@ -15,12 +15,20 @@ export interface CharacterBookEntry {
   position?: 'before_char' | 'after_char'
 }
 
-export interface LoreBook {
-  name?: string
+export interface CharacterBookData {
+  name: string
   description?: string
   scan_depth?: number
   token_budget?: number
   recursive_scanning?: boolean
   extensions: Record<string, any>
   entries: CharacterBookEntry[]
+}
+
+export interface CharacterBookEditorState extends CharacterBookData {
+  id?: string
+}
+
+export interface CharacterBookDatabaseData extends CharacterBookData {
+  id: string
 }
