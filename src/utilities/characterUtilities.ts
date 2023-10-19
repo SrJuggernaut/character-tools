@@ -11,7 +11,7 @@ interface ExtractCharacterDataReturn {
   image?: string
 }
 
-const extractCharacterData = async (file: File): Promise<ExtractCharacterDataReturn> => {
+export const extractCharacterData = async (file: File): Promise<ExtractCharacterDataReturn> => {
   switch (file.type) {
     case 'application/json':{
       const text = await file.text()

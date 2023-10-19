@@ -1,11 +1,54 @@
-import DropImport from '@/components/characterEditor/DropImport'
+import Drop from '@/components/ui/Drop'
 import useAppDispatch from '@/hooks/useAppDispatch'
-import { clearCharacterEditor, loadExampleCharacter } from '@/state/characterEditorSlice'
+import { clearCharacterEditor, loadExampleCharacter, setCharacterEditor } from '@/state/characterEditorSlice'
+import { setAlert } from '@/state/feedbackSlice'
+import { type CharacterEditorState } from '@/types/character'
+import { extractCharacterData, importedToCharacterEditorState } from '@/utilities/characterUtilities'
+import imageToPng from '@/utilities/imageToPng'
+import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Button, Typography } from '@mui/material'
-import { type FC } from 'react'
+import { useCallback, type FC } from 'react'
 
 const ImportOrCreate: FC = () => {
   const dispatch = useAppDispatch()
+
+  const handleImport = useCallback(async (file: File): Promise<CharacterEditorState> => {
+    const extracted = await extractCharacterData(file)
+    const image = extracted.image !== undefined ? await imageToPng(extracted.image) : undefined
+    const character = importedToCharacterEditorState(extracted.character)
+    return {
+      ...character,
+      image
+    }
+  }, [])
+
+  const onDropAccepted = useCallback((files: File[]): void => {
+    handleImport(files[0])
+      .then((characterEditorState) => {
+        dispatch(setCharacterEditor(characterEditorState))
+        dispatch(setAlert({
+          title: 'Character imported',
+          message: 'The character has been imported successfully',
+          severity: 'success'
+        }))
+      })
+      .catch((error) => {
+        if (error instanceof Error) {
+          dispatch(setAlert({
+            title: 'Error while importing character',
+            message: error.message,
+            severity: 'error'
+          }))
+        }
+        dispatch(setAlert({
+          title: 'Error while importing character',
+          message: 'The character could not be imported',
+          severity: 'error'
+        }))
+      })
+  }, [handleImport])
+
   return (
     <>
       <Typography variant="h2" align="center" gutterBottom>Import or Create</Typography>
@@ -20,7 +63,29 @@ const ImportOrCreate: FC = () => {
         })}
       >
         <div>
-          <DropImport/>
+          <Drop
+            dropzoneOptions={{
+              onDropAccepted,
+              accept: {
+                'image/png': ['.png'],
+                'image/webp': ['.webp'],
+                'application/json': ['.json']
+              },
+              multiple: false
+            }
+            }
+          >
+            <FontAwesomeIcon icon={faFileUpload} size="3x" />
+            <Typography variant="body1" align="center" gutterBottom>
+              Drag &amp; drop your character file here, or click to select file
+            </Typography>
+            <Typography variant="caption" align="center" gutterBottom>
+              Supported file types: .png, .webp, .json
+            </Typography>
+            <Button variant="contained" color="primary">
+              Upload
+            </Button>
+          </Drop>
         </div>
         <div
           css={{
