@@ -1,4 +1,4 @@
-import { type CharacterBookData } from './lorebook'
+import { type CharacterBook } from 'character-card-utils'
 
 export interface CharacterData {
   name: string
@@ -14,7 +14,7 @@ export interface CharacterData {
   tags: string[]
   system_prompt: string
   post_history_instructions: string
-  character_book?: CharacterBookData
+  character_book?: CharacterBook
   extensions: Record<string, any>
 }
 

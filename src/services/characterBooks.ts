@@ -4,6 +4,7 @@ import 'dexie-export-import'
 import { nanoid } from 'nanoid'
 
 export const createCharacterBook = async (characterBook: CharacterBookEditorState): Promise<CharacterBookDatabaseData> => {
+  if (characterBook.name === undefined || characterBook.name === '') throw new Error('Character book name is required')
   const id = nanoid()
   await dataBase.characterBooks.add({
     ...characterBook,

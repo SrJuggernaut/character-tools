@@ -89,6 +89,32 @@ const Home: FC = () => {
               </CardContent>
             </CardActionArea>
           </Card>
+          <Card>
+            <CardActionArea
+              component={Link}
+              to="/characterbook-editor"
+            >
+              <CardContent>
+                <Typography variant="h3" align="center" gutterBottom>CharacterBook editor</Typography>
+                <Typography variant="body1" align="center">
+                  Edit or create characterBooks, a really useful tool to give context about the world or the character.
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card>
+            <CardActionArea
+              component={Link}
+              to="/characterbook-library"
+            >
+              <CardContent>
+                <Typography variant="h3" align="center" gutterBottom>CharacterBook library</Typography>
+                <Typography variant="body1" align="center">
+                  Manage your characterBooks, make it easy to modify them, create copies and different versions
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
         </div>
       </div>
     </Fluid>

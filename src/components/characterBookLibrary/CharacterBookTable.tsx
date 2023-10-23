@@ -1,6 +1,7 @@
 import useAppDispatch from '@/hooks/useAppDispatch'
 import { dataBase } from '@/lib/dexie'
-import { deleteCharacter } from '@/services/character'
+import { deleteCharacterBook } from '@/services/characterBooks'
+import { setCharacterBookEditor } from '@/state/characterBookEditorSlice'
 import { setAlert, setDialog } from '@/state/feedbackSlice'
 import { type CharacterBookDatabaseData } from '@/types/lorebook'
 import { faPencil, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -15,7 +16,7 @@ const CharacterBookTable: FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
-  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({ page: 0, pageSize: 0 })
+  const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({ page: 0, pageSize: 10 })
   const [totalCharacterBooks, setTotalCharacterBooks] = useState(0)
   const [filterModel, setFilterModel] = useState<GridFilterModel>({ items: [] })
   const [sortModel, setSortModel] = useState<GridSortModel>([])
@@ -72,8 +73,8 @@ const CharacterBookTable: FC = () => {
         onCancel: () => { },
         confirmText: 'Edit',
         onConfirm: () => {
-          // dispatch(setCharacterEditor(params.row))
-          navigate('/character-editor?tab=character-data')
+          dispatch(setCharacterBookEditor(params.row))
+          navigate('/characterbook-editor?tab=characterbook-data')
         }
       }))
     }}>
@@ -87,7 +88,7 @@ const CharacterBookTable: FC = () => {
         onCancel: () => {},
         confirmText: 'Delete',
         onConfirm: () => {
-          deleteCharacter(params.row.id)
+          deleteCharacterBook(params.row.id)
             .then(() => {
               dispatch(setAlert({
                 title: 'Character deleted',
@@ -123,8 +124,8 @@ const CharacterBookTable: FC = () => {
         onCancel: () => { },
         confirmText: 'Edit',
         onConfirm: () => {
-          // TODO: dispatch
-          navigate('/character-editor?tab=character-data')
+          dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
+          navigate('/characterbook-editor?tab=characterbook-data')
         }
       }))
     }
