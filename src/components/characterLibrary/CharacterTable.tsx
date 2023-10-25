@@ -105,13 +105,21 @@ const CharacterTable: FC = () => {
       dispatch(setDialog({
         title: 'Edit character?',
         content: 'if you have unsaved information in the editor it will be lost.',
-        cancelText: 'Cancel',
-        onCancel: () => { },
-        confirmText: 'Edit',
-        onConfirm: () => {
-          dispatch(setCharacterEditor(params.row))
-          navigate('/character-editor?tab=character-data')
-        }
+        actions: [
+          {
+            label: 'Cancel',
+            onClick: () => {},
+            severity: 'inherit'
+          },
+          {
+            label: 'Edit',
+            onClick: () => {
+              dispatch(setCharacterEditor(params.row))
+              navigate('/character-editor?tab=character-data')
+            },
+            severity: 'success'
+          }
+        ]
       }))
     }}>
       <FontAwesomeIcon icon={faPencil} fixedWidth size="sm" />
@@ -120,34 +128,42 @@ const CharacterTable: FC = () => {
       dispatch(setDialog({
         title: 'Delete character?',
         content: 'This action cannot be undone.',
-        cancelText: 'Cancel',
-        onCancel: () => {},
-        confirmText: 'Delete',
-        onConfirm: () => {
-          deleteCharacter(params.row.id)
-            .then(() => {
-              dispatch(setAlert({
-                title: 'Character deleted',
-                message: `Character ${params.row.name} deleted`,
-                severity: 'success'
-              }))
-            })
-            .catch((error) => {
-              if (error instanceof Error) {
-                dispatch(setAlert({
-                  title: 'Error deleting character',
-                  message: error.message,
-                  severity: 'error'
-                }))
-                return
-              }
-              dispatch(setAlert({
-                title: 'Error deleting character',
-                message: `Character ${params.row.name} could not be deleted`,
-                severity: 'error'
-              }))
-            })
-        }
+        actions: [
+          {
+            label: 'Cancel',
+            onClick: () => {},
+            severity: 'inherit'
+          },
+          {
+            label: 'Delete',
+            severity: 'error',
+            onClick: () => {
+              deleteCharacter(params.row.id)
+                .then(() => {
+                  dispatch(setAlert({
+                    title: 'Character deleted',
+                    message: `Character ${params.row.name} deleted`,
+                    severity: 'success'
+                  }))
+                })
+                .catch((error) => {
+                  if (error instanceof Error) {
+                    dispatch(setAlert({
+                      title: 'Error deleting character',
+                      message: error.message,
+                      severity: 'error'
+                    }))
+                    return
+                  }
+                  dispatch(setAlert({
+                    title: 'Error deleting character',
+                    message: `Character ${params.row.name} could not be deleted`,
+                    severity: 'error'
+                  }))
+                })
+            }
+          }
+        ]
       }))
     }}>
       <FontAwesomeIcon icon={faTrashAlt} fixedWidth size="sm" />
@@ -156,16 +172,24 @@ const CharacterTable: FC = () => {
       dispatch(setDialog({
         title: 'Edit as new character?',
         content: 'if you have unsaved information in the editor it will be lost.',
-        cancelText: 'Cancel',
-        onCancel: () => { },
-        confirmText: 'Edit',
-        onConfirm: () => {
-          dispatch(setCharacterEditor({
-            ...params.row,
-            id: undefined
-          }))
-          navigate('/character-editor?tab=character-data')
-        }
+        actions: [
+          {
+            label: 'Cancel',
+            onClick: () => {},
+            severity: 'inherit'
+          },
+          {
+            label: 'Edit',
+            onClick: () => {
+              dispatch(setCharacterEditor({
+                ...params.row,
+                id: undefined
+              }))
+              navigate('/character-editor?tab=character-data')
+            },
+            severity: 'success'
+          }
+        ]
       }))
     }
     }>

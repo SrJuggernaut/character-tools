@@ -23,34 +23,42 @@ const ManageLibrary: FC = () => {
           dispatch(setDialog({
             title: 'Clear library',
             content: 'Are you sure you want to clear the character library? This cannot be undone.',
-            confirmText: 'Clear library',
-            onConfirm: () => {
-              deleteAllCharacters()
-                .then(() => {
-                  dispatch(setAlert({
-                    title: 'Library cleared',
-                    severity: 'success',
-                    message: 'The library was successfully cleared'
-                  }))
-                })
-                .catch((error) => {
-                  if (error instanceof Error) {
-                    dispatch(setAlert({
-                      title: 'Error while clearing library',
-                      severity: 'error',
-                      message: error.message
-                    }))
-                  } else {
-                    dispatch(setAlert({
-                      title: 'Error while clearing library',
-                      severity: 'error',
-                      message: 'An unknown error occurred while clearing the library'
-                    }))
-                  }
-                })
-            },
-            cancelText: 'Cancel',
-            onCancel: () => {}
+            actions: [
+              {
+                label: 'Cancel',
+                severity: 'inherit',
+                onClick: () => {}
+              },
+              {
+                label: 'Clear library',
+                severity: 'success',
+                onClick: () => {
+                  deleteAllCharacters()
+                    .then(() => {
+                      dispatch(setAlert({
+                        title: 'Library cleared',
+                        severity: 'success',
+                        message: 'The library was successfully cleared'
+                      }))
+                    })
+                    .catch((error) => {
+                      if (error instanceof Error) {
+                        dispatch(setAlert({
+                          title: 'Error while clearing library',
+                          severity: 'error',
+                          message: error.message
+                        }))
+                      } else {
+                        dispatch(setAlert({
+                          title: 'Error while clearing library',
+                          severity: 'error',
+                          message: 'An unknown error occurred while clearing the library'
+                        }))
+                      }
+                    })
+                }
+              }
+            ]
           }))
         }}
       >

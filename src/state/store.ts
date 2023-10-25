@@ -14,8 +14,8 @@ const store = configureStore({
   middleware (getDefaultMiddleware) {
     return getDefaultMiddleware({
       serializableCheck: {
-        ignoredPaths: ['feedback.dialog.onCancel', 'feedback.dialog.onConfirm'],
-        ignoredActionPaths: ['payload.onCancel', 'payload.onConfirm']
+        ignoredPaths: ['feedback.dialog'],
+        ignoreActions: true
       }
     })
   }

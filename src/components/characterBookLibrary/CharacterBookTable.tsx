@@ -69,13 +69,21 @@ const CharacterBookTable: FC = () => {
       dispatch(setDialog({
         title: 'Edit character?',
         content: 'if you have unsaved information in the editor it will be lost.',
-        cancelText: 'Cancel',
-        onCancel: () => { },
-        confirmText: 'Edit',
-        onConfirm: () => {
-          dispatch(setCharacterBookEditor(params.row))
-          navigate('/characterbook-editor?tab=characterbook-data')
-        }
+        actions: [
+          {
+            label: 'Cancel',
+            severity: 'inherit',
+            onClick: () => {}
+          },
+          {
+            label: 'Edit',
+            severity: 'success',
+            onClick: () => {
+              dispatch(setCharacterBookEditor(params.row))
+              navigate('/characterbook-editor?tab=characterbook-data')
+            }
+          }
+        ]
       }))
     }}>
       <FontAwesomeIcon icon={faPencil} fixedWidth size="sm" />
@@ -84,34 +92,42 @@ const CharacterBookTable: FC = () => {
       dispatch(setDialog({
         title: 'Delete character?',
         content: 'This action cannot be undone.',
-        cancelText: 'Cancel',
-        onCancel: () => {},
-        confirmText: 'Delete',
-        onConfirm: () => {
-          deleteCharacterBook(params.row.id)
-            .then(() => {
-              dispatch(setAlert({
-                title: 'Character deleted',
-                message: 'Character Book deleted',
-                severity: 'success'
-              }))
-            })
-            .catch((error) => {
-              if (error instanceof Error) {
-                dispatch(setAlert({
-                  title: 'Error deleting character',
-                  message: error.message,
-                  severity: 'error'
-                }))
-                return
-              }
-              dispatch(setAlert({
-                title: 'Error deleting character',
-                message: 'Character Book could not be deleted',
-                severity: 'error'
-              }))
-            })
-        }
+        actions: [
+          {
+            label: 'Cancel',
+            severity: 'inherit',
+            onClick: () => {}
+          },
+          {
+            label: 'Delete',
+            severity: 'error',
+            onClick: () => {
+              deleteCharacterBook(params.row.id)
+                .then(() => {
+                  dispatch(setAlert({
+                    title: 'Character deleted',
+                    message: 'Character Book deleted',
+                    severity: 'success'
+                  }))
+                })
+                .catch((error) => {
+                  if (error instanceof Error) {
+                    dispatch(setAlert({
+                      title: 'Error deleting character',
+                      message: error.message,
+                      severity: 'error'
+                    }))
+                    return
+                  }
+                  dispatch(setAlert({
+                    title: 'Error deleting character',
+                    message: 'Character Book could not be deleted',
+                    severity: 'error'
+                  }))
+                })
+            }
+          }
+        ]
       }))
     }}>
       <FontAwesomeIcon icon={faTrashAlt} fixedWidth size="sm" />
@@ -120,13 +136,28 @@ const CharacterBookTable: FC = () => {
       dispatch(setDialog({
         title: 'Edit as new character?',
         content: 'if you have unsaved information in the editor it will be lost.',
-        cancelText: 'Cancel',
-        onCancel: () => { },
-        confirmText: 'Edit',
-        onConfirm: () => {
-          dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
-          navigate('/characterbook-editor?tab=characterbook-data')
-        }
+        // cancelText: 'Cancel',
+        // onCancel: () => { },
+        // confirmText: 'Edit',
+        // onConfirm: () => {
+        //   dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
+        //   navigate('/characterbook-editor?tab=characterbook-data')
+        // }
+        actions: [
+          {
+            label: 'Cancel',
+            severity: 'inherit',
+            onClick: () => {}
+          },
+          {
+            label: 'Edit',
+            severity: 'success',
+            onClick: () => {
+              dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
+              navigate('/characterbook-editor?tab=characterbook-data')
+            }
+          }
+        ]
       }))
     }
     }>

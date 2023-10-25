@@ -17,6 +17,12 @@ const ImportOrCreate: FC = () => {
     const extracted = await extractCharacterData(file)
     const image = extracted.image !== undefined ? await imageToPng(extracted.image) : undefined
     const character = importedToCharacterEditorState(extracted.character)
+    // const characterBook = character.character_book
+    // dispatch(setDialog({
+    //   title: 'Import CharacterBook',
+    //   content: '',
+
+    // }))
     return {
       ...character,
       image
