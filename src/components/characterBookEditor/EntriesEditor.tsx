@@ -92,7 +92,7 @@ const EntriesEditor: FC = () => {
                     name: '',
                     content: '',
                     enabled: true,
-                    extensions: [],
+                    extensions: {},
                     insertion_order: 1,
                     keys: [],
                     case_sensitive: false,

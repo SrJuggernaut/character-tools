@@ -1,13 +1,15 @@
 import Fluid from '@/Layouts/FluidLayout'
 import CharacterBookTable from '@/components/characterBookLibrary/CharacterBookTable'
+import ImportCharacterBooks from '@/components/characterBookLibrary/ImportCharacterBooks'
 import ManageLibrary from '@/components/characterBookLibrary/ManageLibrary'
-import { faUsersBetweenLines } from '@fortawesome/free-solid-svg-icons'
+import bookArrowUp from '@/components/icons/bookArrowUp'
+import Books from '@/components/icons/books'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Tab, Typography, useMediaQuery, type Theme } from '@mui/material'
 import { useState, type FC } from 'react'
 
-type Tabs = 'Library' | 'Manage'
+type Tabs = 'Library' | 'Manage' | 'Import'
 
 const CharacterBookLibrary: FC = () => {
   const isMediumScreen = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
@@ -32,8 +34,9 @@ const CharacterBookLibrary: FC = () => {
             allowScrollButtonsMobile
             onChange={(_, newValue) => { setCurrentTab(newValue) }}
           >
-            <Tab icon={<FontAwesomeIcon icon={faUsersBetweenLines}/>} label="Character Book Library" value="Library" />
-            <Tab icon={<FontAwesomeIcon icon={faUsersBetweenLines}/>} label="Manage Library" value="Manage" />
+            <Tab icon={<FontAwesomeIcon icon={Books}/>} label="Character Book Library" value="Library" />
+            <Tab icon={<FontAwesomeIcon icon={bookArrowUp}/>} label="Import Character Book" value="Import" />
+            <Tab icon={<FontAwesomeIcon icon={Books}/>} label="Manage Library" value="Manage" />
           </TabList>
         </Box>
 
@@ -44,6 +47,9 @@ const CharacterBookLibrary: FC = () => {
         >
           <TabPanel value="Library">
             <CharacterBookTable />
+          </TabPanel>
+          <TabPanel value="Import">
+            <ImportCharacterBooks />
           </TabPanel>
           <TabPanel value="Manage">
             <ManageLibrary />
