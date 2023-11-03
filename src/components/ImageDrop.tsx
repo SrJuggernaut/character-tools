@@ -42,6 +42,7 @@ const ImageDrop: FC<ImageDropProps> = ({ onDropedImage }) => {
           onDropedImage(imageUrl)
         })
         .catch((error) => {
+          console.error(error)
           if (error instanceof Error) {
             dispatch(setAlert({
               title: 'Error while importing character',

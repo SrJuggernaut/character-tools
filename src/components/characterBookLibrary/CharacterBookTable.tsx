@@ -62,7 +62,7 @@ const CharacterBookTable: FC = () => {
     const paginatedCharacterBooks = await filteredCharacterBooks.offset(paginationModel.page * paginationModel.pageSize).limit(paginationModel.pageSize).toArray()
     setIsLoading(false)
     return paginatedCharacterBooks
-  })
+  }, [paginationModel, filterModel, sortModel])
 
   const renderActions: GridActionsColDef<CharacterBookDatabaseData>['getActions'] = useCallback((params) => [
     <IconButton key={`edit-${params.row.id}`} size='small' onClick={() => {
@@ -167,9 +167,12 @@ const CharacterBookTable: FC = () => {
 
   const columns: Array<GridColDef<CharacterBookDatabaseData>> = [
     { field: 'actions', type: 'actions', hideable: false, sortable: false, minWidth: 120, getActions: renderActions, filterable: false },
-    { field: 'id', headerName: 'ID', width: 150, sortable: false, filterable: false },
+    { field: 'id', headerName: 'ID', width: 150, sortable: true, filterable: true },
     { field: 'name', headerName: 'Name', flex: 1, minWidth: 120, type: 'string', filterable: true, sortable: true },
-    { field: 'description', headerName: 'Description', flex: 1, minWidth: 120, type: 'string', filterable: true, sortable: true }
+    { field: 'description', headerName: 'Description', flex: 1, minWidth: 120, type: 'string', filterable: false, sortable: false },
+    { field: 'scan_depth', headerName: 'Scan Depth', flex: 0, minWidth: 40, type: 'number', filterable: false, sortable: false },
+    { field: 'token_budget', headerName: 'Token Budget', flex: 0, minWidth: 40, type: 'number', filterable: false, sortable: false },
+    { field: 'recursive_scanning', headerName: 'Recursive Scanning', flex: 0, minWidth: 40, type: 'boolean', filterable: false, sortable: false }
   ]
 
   return (

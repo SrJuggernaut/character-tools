@@ -1,5 +1,5 @@
 import { type CharacterBookEditorState } from '@/types/lorebook'
-import { type CharacterBook } from 'character-card-utils'
+import { v2, type CharacterBook, type V1, type V2 } from 'character-card-utils'
 import { z } from 'zod'
 
 const characterBookEntrySchema = z.object({
@@ -29,6 +29,15 @@ const characterBookSchema = z.object({
   extensions: z.record(z.any()).optional(),
   entries: z.array(characterBookEntrySchema)
 })
+
+export const extractCharacterBookFromCharacter = (character: V1 | V2): CharacterBook | undefined => {
+  const v2Result = v2.safeParse(character)
+  if (v2Result.success) {
+    return v2Result.data.data.character_book
+  } else {
+    return undefined
+  }
+}
 
 export const characterBookToCharacterEditor = (characterBook: CharacterBook): CharacterBookEditorState => {
   const result = characterBookSchema.safeParse(characterBook)

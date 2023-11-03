@@ -67,6 +67,9 @@ const Home: FC = () => {
             <CardActionArea
               component={Link}
               to="/character-editor"
+              sx={{
+                height: '100%'
+              }}
             >
               <CardContent>
                 <Typography variant="h3" align="center" gutterBottom>Character Editor</Typography>
@@ -80,6 +83,9 @@ const Home: FC = () => {
             <CardActionArea
               component={Link}
               to="/character-library"
+              sx={{
+                height: '100%'
+              }}
             >
               <CardContent>
                 <Typography variant="h3" align="center" gutterBottom>Character library</Typography>
@@ -93,6 +99,9 @@ const Home: FC = () => {
             <CardActionArea
               component={Link}
               to="/characterbook-editor"
+              sx={{
+                height: '100%'
+              }}
             >
               <CardContent>
                 <Typography variant="h3" align="center" gutterBottom>CharacterBook editor</Typography>
@@ -106,6 +115,9 @@ const Home: FC = () => {
             <CardActionArea
               component={Link}
               to="/characterbook-library"
+              sx={{
+                height: '100%'
+              }}
             >
               <CardContent>
                 <Typography variant="h3" align="center" gutterBottom>CharacterBook library</Typography>

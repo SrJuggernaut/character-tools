@@ -13,6 +13,10 @@ export const createCharacterBook = async (characterBook: CharacterBookEditorStat
   return await dataBase.characterBooks.where('id').equals(id).first() as CharacterBookDatabaseData
 }
 
+export const getCharacterBook = async (id: string): Promise<CharacterBookDatabaseData> => {
+  return await dataBase.characterBooks.where('id').equals(id).first() as CharacterBookDatabaseData
+}
+
 export const getAllCharacterBooks = async (): Promise<CharacterBookDatabaseData[]> => {
   return await dataBase.characterBooks.toArray()
 }

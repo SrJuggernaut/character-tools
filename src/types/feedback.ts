@@ -15,7 +15,7 @@ export interface DialogAction {
 export interface Dialog {
   title: string
   content: ReactNode
-  actions: DialogAction[]
+  actions?: DialogAction[]
 }
 
 export interface feedbackState {

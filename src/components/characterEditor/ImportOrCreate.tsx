@@ -1,8 +1,10 @@
 import Drop from '@/components/ui/Drop'
 import useAppDispatch from '@/hooks/useAppDispatch'
+import { createCharacterBook } from '@/services/characterBooks'
 import { clearCharacterEditor, loadExampleCharacter, setCharacterEditor } from '@/state/characterEditorSlice'
-import { setAlert } from '@/state/feedbackSlice'
+import { setAlert, setDialog } from '@/state/feedbackSlice'
 import { type CharacterEditorState } from '@/types/character'
+import { characterBookToCharacterEditor, extractCharacterBookFromCharacter } from '@/utilities/characterBookUtilities'
 import { extractCharacterData, importedToCharacterEditorState } from '@/utilities/characterUtilities'
 import imageToPng from '@/utilities/imageToPng'
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
@@ -17,12 +19,55 @@ const ImportOrCreate: FC = () => {
     const extracted = await extractCharacterData(file)
     const image = extracted.image !== undefined ? await imageToPng(extracted.image) : undefined
     const character = importedToCharacterEditorState(extracted.character)
-    // const characterBook = character.character_book
-    // dispatch(setDialog({
-    //   title: 'Import CharacterBook',
-    //   content: '',
-
-    // }))
+    const characterBook = extractCharacterBookFromCharacter(extracted.character)
+    if (characterBook !== undefined) {
+      const characterBookEditor = characterBookToCharacterEditor(characterBook)
+      dispatch(setDialog({
+        title: 'Import CharacterBook',
+        content: (
+          <>
+            <Typography gutterBottom>
+              A character book has been found in the imported file.
+            </Typography>
+          </>
+        ),
+        actions: [
+          {
+            label: 'ignore',
+            severity: 'inherit',
+            onClick: () => {}
+          },
+          {
+            label: 'Import',
+            severity: 'success',
+            onClick: () => {
+              createCharacterBook(characterBookEditor)
+                .then(() => {
+                  dispatch(setAlert({
+                    title: 'CharacterBook imported',
+                    message: 'The character book has been imported successfully',
+                    severity: 'success'
+                  }))
+                })
+                .catch((error) => {
+                  if (error instanceof Error) {
+                    dispatch(setAlert({
+                      title: 'Error while importing character book',
+                      message: error.message,
+                      severity: 'error'
+                    }))
+                  }
+                  dispatch(setAlert({
+                    title: 'Error while importing character book',
+                    message: 'The character book could not be imported',
+                    severity: 'error'
+                  }))
+                })
+            }
+          }
+        ]
+      }))
+    }
     return {
       ...character,
       image

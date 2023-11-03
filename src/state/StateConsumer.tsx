@@ -68,7 +68,7 @@ const StateConsumer: FC<StateConsumerProps> = ({ children }) => {
           keepMounted={false}
           maxWidth='sm'
         >
-          <DialogTitle>{dialog?.title}</DialogTitle>
+          <DialogTitle variant='subtitle1'>{dialog?.title}</DialogTitle>
           <DialogContent>
             {dialog?.content}
           </DialogContent>

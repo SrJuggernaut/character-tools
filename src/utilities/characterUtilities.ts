@@ -1,10 +1,12 @@
+import { getCharacterBook } from '@/services/characterBooks'
 import { type CharacterEditorState } from '@/types/character'
 import imageToPng from '@/utilities/imageToPng'
 import { b64DecodeUnicode, b64EncodeUnicode } from '@/utilities/stringConversion'
-import { v1, v2, type V1, type V2 } from 'character-card-utils'
+import { v1, v2, type CharacterBook, type V1, type V2 } from 'character-card-utils'
 import ExifReader, { type XmpTag } from 'exifreader'
 import json5 from 'json5'
 import { addMetadataFromBase64DataURI, getMetadata } from 'meta-png'
+import { characterEditorToCharacterBook } from './characterBookUtilities'
 
 interface ExtractCharacterDataReturn {
   character: V1 | V2
@@ -62,9 +64,9 @@ export const importedToCharacterEditorState = (data: any): CharacterEditorState 
   const v1Result = v1.safeParse(data)
   const v2Result = v2.safeParse(data)
   if (v2Result.success) {
-    return { ...v2Result.data.data }
+    return { ...v2Result.data.data, character_book: 'none' }
   } else if (v1Result.success) {
-    return { ...v1Result.data, alternate_greetings: [], creator: '', creator_notes: '', character_version: '', tags: [], system_prompt: '', post_history_instructions: '', extensions: {} }
+    return { ...v1Result.data, alternate_greetings: [], creator: '', creator_notes: '', character_version: '', tags: [], system_prompt: '', post_history_instructions: '', extensions: {}, character_book: 'none' }
   } else {
     throw new Error('Imported data is not a valid character')
   }
@@ -81,12 +83,21 @@ export const characterEditorStateToV1 = (characterData: CharacterEditorState): V
   }
 }
 
-export const characterEditorStateToV2 = (characterData: CharacterEditorState): V2 => {
+export const characterEditorStateToV2 = async (characterData: CharacterEditorState): Promise<V2> => {
   const { id, image, ...rest } = characterData
+  let characterBook: CharacterBook | undefined
+  if (characterData.character_book !== undefined) {
+    const characterBookEditor = await getCharacterBook(characterData.character_book)
+    if (characterBookEditor === undefined) throw new Error(`CharacterBook with id ${characterData.character_book} does not exist, maybe it was deleted?`)
+    characterBook = characterEditorToCharacterBook(characterBookEditor)
+  }
   return {
     spec: 'chara_card_v2',
     spec_version: '2.0',
-    data: rest
+    data: {
+      ...rest,
+      character_book: characterBook
+    }
   }
 }
 

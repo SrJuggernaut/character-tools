@@ -1,5 +1,3 @@
-import { type CharacterBook } from 'character-card-utils'
-
 export interface CharacterData {
   name: string
   description: string
@@ -14,7 +12,7 @@ export interface CharacterData {
   tags: string[]
   system_prompt: string
   post_history_instructions: string
-  character_book?: CharacterBook
+  character_book?: string
   extensions: Record<string, any>
 }
 
