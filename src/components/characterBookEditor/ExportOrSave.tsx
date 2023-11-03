@@ -1,6 +1,6 @@
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
-import { createCharacterBook } from '@/services/characterBooks'
+import { createCharacterBook, updateCharacterBook } from '@/services/characterBooks'
 import { setCharacterBookEditor } from '@/state/characterBookEditorSlice'
 import { setAlert } from '@/state/feedbackSlice'
 import { type CharacterBookDatabaseData, type CharacterBookEditorState } from '@/types/lorebook'
@@ -18,7 +18,8 @@ const ExportOrSave: FC = () => {
   }, [])
 
   const handleUpdate = useCallback(async (data: CharacterBookEditorState): Promise<CharacterBookDatabaseData> => {
-    const updatedCharacterBook = await createCharacterBook(data)
+    if (data.id === undefined) throw new Error('Cannot update a character book without an id')
+    const updatedCharacterBook = await updateCharacterBook(data as CharacterBookDatabaseData)
     return updatedCharacterBook
   }, [])
 
