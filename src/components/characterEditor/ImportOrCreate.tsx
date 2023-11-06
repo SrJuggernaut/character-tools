@@ -42,7 +42,11 @@ const ImportOrCreate: FC = () => {
             severity: 'success',
             onClick: () => {
               createCharacterBook(characterBookEditor)
-                .then(() => {
+                .then((characterBookAdded) => {
+                  dispatch(setCharacterEditor({
+                    ...character,
+                    character_book: characterBookAdded.id
+                  }))
                   dispatch(setAlert({
                     title: 'CharacterBook imported',
                     message: 'The character book has been imported successfully',
