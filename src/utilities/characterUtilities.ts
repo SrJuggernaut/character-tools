@@ -64,9 +64,9 @@ export const importedToCharacterEditorState = (data: any): CharacterEditorState 
   const v1Result = v1.safeParse(data)
   const v2Result = v2.safeParse(data)
   if (v2Result.success) {
-    return { ...v2Result.data.data, character_book: 'none' }
+    return { ...v2Result.data.data, character_book: undefined }
   } else if (v1Result.success) {
-    return { ...v1Result.data, alternate_greetings: [], creator: '', creator_notes: '', character_version: '', tags: [], system_prompt: '', post_history_instructions: '', extensions: {}, character_book: 'none' }
+    return { ...v1Result.data, alternate_greetings: [], creator: '', creator_notes: '', character_version: '', tags: [], system_prompt: '', post_history_instructions: '', extensions: {} }
   } else {
     throw new Error('Imported data is not a valid character')
   }
