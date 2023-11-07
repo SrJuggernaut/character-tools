@@ -2,7 +2,7 @@ import NavigationMenu from '@/Layouts/Header/NavigationMenu'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { setTheme } from '@/state/appSlice'
-import { faMoon, faScrewdriverWrench, faSun } from '@fortawesome/free-solid-svg-icons'
+import { faBug, faMoon, faScrewdriverWrench, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, IconButton, Link as MuiLink, Typography } from '@mui/material'
 import { visuallyHidden } from '@mui/utils'
@@ -43,6 +43,13 @@ const Header: FC = () => {
         </MuiLink>
       </div>
       <div>
+        <IconButton
+          component="a"
+          href="https://github.com/SrJuggernaut/character-tools/issues"
+          target="_blank"
+        >
+          <FontAwesomeIcon icon={faBug} fixedWidth size="sm" />
+        </IconButton>
         <IconButton
           type="button"
           onClick={() => {
