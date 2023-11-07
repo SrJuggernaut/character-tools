@@ -6,13 +6,16 @@ export interface Alert {
   message?: string
 }
 
+export interface DialogAction {
+  label: ReactNode
+  severity?: 'success' | 'info' | 'warning' | 'error' | 'inherit' | 'primary' | 'secondary'
+  onClick: () => void
+}
+
 export interface Dialog {
   title: string
   content: ReactNode
-  onConfirm?: () => void
-  confirmText?: string
-  onCancel?: () => void
-  cancelText?: string
+  actions?: DialogAction[]
 }
 
 export interface feedbackState {

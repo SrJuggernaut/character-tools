@@ -1,11 +1,19 @@
 import CopyButton from '@/components/CopyButton'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
+import { dataBase } from '@/lib/dexie'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
-import { TextField, Typography } from '@mui/material'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Autocomplete, TextField, Typography } from '@mui/material'
+import { useLiveQuery } from 'dexie-react-hooks'
 import { type FC } from 'react'
 
 const PromptEngingeering: FC = () => {
+  const characterBooks = useLiveQuery(async () => {
+    const characterBooks = await dataBase.characterBooks.toArray()
+    return characterBooks.map((characterBook) => ({ label: characterBook.name, value: characterBook.id }))
+  })
   const characterEditorState = useAppSelector((state) => state.characterEditor)
   const dispatch = useAppDispatch()
 
@@ -41,6 +49,45 @@ const PromptEngingeering: FC = () => {
         multiline
         minRows={4}
       />
+      {characterBooks === undefined
+        ? <Typography variant="body1" gutterBottom>Loading character books...</Typography>
+        : <Autocomplete
+          value={
+            characterEditorState.character_book === undefined
+              ? null
+              : characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) !== undefined
+                ? characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book)
+                : { label: 'Not Found', value: characterEditorState.character_book }}
+          onChange={(_, value) => {
+            if (value !== null) {
+              dispatch(updateCharacterEditor({ character_book: value.value }))
+            } else {
+              dispatch(updateCharacterEditor({ character_book: undefined }))
+            }
+          }}
+          options={characterBooks ?? []}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              error={
+                characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
+              }
+              helperText={
+                characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
+                  ? `Character Book with id ${characterEditorState.character_book} not found, please select a valid Character Book. Or to leave it empty, delete the value.`
+                  : undefined
+              }
+              label="Character Book"
+              margin="normal"
+              fullWidth
+            />
+          )}
+          clearIcon={(
+            <FontAwesomeIcon icon={faTimes} size="xs" fixedWidth />
+          )}
+        />
+      }
+
     </>
   )
 }

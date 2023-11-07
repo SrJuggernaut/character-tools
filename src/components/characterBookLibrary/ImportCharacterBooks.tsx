@@ -1,11 +1,11 @@
 import Drop from '@/components/ui/Drop'
-import { createCharacter } from '@/services/character'
-import { type CharacterDatabaseData } from '@/types/character'
-import { FileToCharacterEditorState } from '@/utilities/characterUtilities'
+import { createCharacterBook } from '@/services/characterBooks'
+import { type CharacterBookDatabaseData } from '@/types/lorebook'
+import { characterBookToCharacterEditor } from '@/utilities/characterBookUtilities'
 import { faCheckCircle, faFileImport, faHourglass, faSpinner, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, List, ListItem, ListItemIcon, ListItemText, ListSubheader, Typography } from '@mui/material'
-import { useEffect, useState, type FC } from 'react'
+import { useCallback, useEffect, useState, type FC } from 'react'
 
 type ImportedFile = {
   file: File
@@ -14,13 +14,22 @@ type ImportedFile = {
 } | {
   file: File
   status: 'success'
-  data: CharacterDatabaseData
+  data: CharacterBookDatabaseData
 
 }
-const ImportCharacter: FC = () => {
+
+const ImportCharacterBook: FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
   const [importedFiles, setImportedFiles] = useState<ImportedFile[]>([])
   const [processingFile, setProcessingFile] = useState<File | undefined>(undefined)
+
+  const processFile = useCallback(async (uploadedFile: File) => {
+    const text = await uploadedFile.text()
+    const characterBook = JSON.parse(text)
+    const editorState = characterBookToCharacterEditor(characterBook)
+    const characterCreatedInDB = await createCharacterBook(editorState)
+    return characterCreatedInDB
+  }, [])
 
   useEffect(() => {
     if (uploadedFiles.length > 0 && processingFile === undefined) {
@@ -32,18 +41,16 @@ const ImportCharacter: FC = () => {
 
   useEffect(() => {
     if (processingFile !== undefined) {
-      FileToCharacterEditorState(processingFile)
-        .then(async (characterEditorState) => {
-          const createdCharacter = await createCharacter(characterEditorState)
+      processFile(processingFile)
+        .then((characterCreatedInDB) => {
           setImportedFiles([
             ...importedFiles,
             {
               file: processingFile,
               status: 'success',
-              data: createdCharacter
+              data: characterCreatedInDB
             }
           ])
-          setProcessingFile(undefined)
         })
         .catch((error) => {
           if (error instanceof Error) {
@@ -65,14 +72,15 @@ const ImportCharacter: FC = () => {
               }
             ])
           }
+        })
+        .finally(() => {
           setProcessingFile(undefined)
         })
     }
   }, [processingFile])
-
   return (
     <>
-      <Typography variant="h1" align="center" gutterBottom>Import Characters</Typography>
+      <Typography variant="h1" align="center" gutterBottom>Import CharacterBooks</Typography>
       <Box
         sx={(theme) => ({
           display: 'grid',
@@ -106,6 +114,9 @@ const ImportCharacter: FC = () => {
             </Typography>
             <Typography variant="caption" align="center" gutterBottom>
               Supported file types: .png, .webp, .json
+            </Typography>
+            <Typography variant="caption" align="center" gutterBottom>
+              Supported formats: Character Book
             </Typography>
           </Drop>
         </div>
@@ -187,4 +198,4 @@ const ImportCharacter: FC = () => {
     </>
   )
 }
-export default ImportCharacter
+export default ImportCharacterBook

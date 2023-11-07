@@ -67,6 +67,9 @@ const Home: FC = () => {
             <CardActionArea
               component={Link}
               to="/character-editor"
+              sx={{
+                height: '100%'
+              }}
             >
               <CardContent>
                 <Typography variant="h3" align="center" gutterBottom>Character Editor</Typography>
@@ -80,11 +83,46 @@ const Home: FC = () => {
             <CardActionArea
               component={Link}
               to="/character-library"
+              sx={{
+                height: '100%'
+              }}
             >
               <CardContent>
                 <Typography variant="h3" align="center" gutterBottom>Character library</Typography>
                 <Typography variant="body1" align="center">
                   Manage your characters, make it easy to modify them, create copies and different versions
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card>
+            <CardActionArea
+              component={Link}
+              to="/characterbook-editor"
+              sx={{
+                height: '100%'
+              }}
+            >
+              <CardContent>
+                <Typography variant="h3" align="center" gutterBottom>CharacterBook editor</Typography>
+                <Typography variant="body1" align="center">
+                  Edit or create characterBooks, a really useful tool to give context about the world or the character.
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+          <Card>
+            <CardActionArea
+              component={Link}
+              to="/characterbook-library"
+              sx={{
+                height: '100%'
+              }}
+            >
+              <CardContent>
+                <Typography variant="h3" align="center" gutterBottom>CharacterBook library</Typography>
+                <Typography variant="body1" align="center">
+                  Manage your characterBooks, make it easy to modify them, create copies and different versions
                 </Typography>
               </CardContent>
             </CardActionArea>

@@ -1,4 +1,5 @@
-import { faBars, faHome, faUserPen, faUsersBetweenLines, type IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import Books from '@/components/icons/books'
+import { faBars, faBook, faHome, faUserPen, faUsersBetweenLines, type IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material'
 import { useState, type FC } from 'react'
@@ -13,7 +14,9 @@ interface MenuLink {
 const MenuLinks: MenuLink[] = [
   { label: 'Home', url: '/', icon: faHome },
   { label: 'Character Editor', url: '/character-editor', icon: faUserPen },
-  { label: 'Character Library', url: '/character-library', icon: faUsersBetweenLines }
+  { label: 'Character Library', url: '/character-library', icon: faUsersBetweenLines },
+  { label: 'CharacterBook Editor', url: '/characterbook-editor', icon: faBook },
+  { label: 'CharacterBook Library', url: '/characterbook-library', icon: Books }
 ]
 
 const NavigationMenu: FC = () => {

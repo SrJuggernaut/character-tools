@@ -66,39 +66,32 @@ const StateConsumer: FC<StateConsumerProps> = ({ children }) => {
         <Dialog
           open={openDialog}
           keepMounted={false}
+          maxWidth='sm'
         >
-          <DialogTitle>{dialog?.title}</DialogTitle>
+          <DialogTitle variant='subtitle1'>{dialog?.title}</DialogTitle>
           <DialogContent>
             {dialog?.content}
           </DialogContent>
-          <DialogActions>
-            <Button
-              type="button"
-              color="inherit"
-              variant='contained'
-              onClick={() => {
-                if (dialog?.onCancel !== undefined) {
-                  dialog?.onCancel()
-                }
-                dispatch(closeDialog())
-              }}
-            >
-              {dialog?.cancelText}
-            </Button>
-            <Button
-              type="button"
-              color="success"
-              variant='contained'
-              onClick={() => {
-                if (dialog?.onConfirm !== undefined) {
-                  dialog.onConfirm()
-                }
-                dispatch(closeDialog())
-              }}
-            >
-              {dialog?.confirmText}
-            </Button>
-          </DialogActions>
+          {dialog?.actions !== undefined && dialog?.actions.length > 0 && (
+            <DialogActions>
+              {dialog?.actions.map((action, index) => (
+                <Button
+                  key={index}
+                  type="button"
+                  color={action.severity}
+                  variant='contained'
+                  onClick={() => {
+                    if (action.onClick !== undefined) {
+                      action.onClick()
+                    }
+                    dispatch(closeDialog())
+                  }}
+                >
+                  {action.label}
+                </Button>
+              ))}
+            </DialogActions>
+          )}
         </Dialog>
       </ThemeProvider>
     </>
