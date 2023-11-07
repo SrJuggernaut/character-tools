@@ -24,14 +24,14 @@ export class CharacterToolsDatabase extends Dexie {
         severity: 'warning',
         message: 'The database is being updated to version 2, this update includes support for characterBooks, if any previous character has a characterBook it will be added to the database.'
       }))
-      return await transaction.table('characters').toCollection().modify(async (character) => {
+      return await transaction.table('characters').toCollection().modify(async (character: any) => {
         // 1. Get the character book from the character
         const characterBook = character.character_book
         // 2. If the character doesn't have a character book, do nothing
         if (characterBook === undefined) return
         if (!Array.isArray(characterBook.entries)) {
           //  Check if the characterBook.entries is an object, if it is, convert it to an array
-          characterBook.entries = Object.entries(characterBook.entries).map(([key, value]) => (value))
+          characterBook.entries = Object.entries(characterBook.entries).map(([_, value]) => (value))
         }
         // 3. Convert the character book to an editor state
         const characterBookEditorState = characterBookToCharacterEditor(characterBook)
