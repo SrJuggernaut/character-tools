@@ -7,11 +7,13 @@ Although it was originally intended to be a character card editor, the following
 - [x] Character Editor
   - [x] Import .json .png & .webp character card
   - [x] Export .png & .json character card
-- [ ] Character library: Save characters in a "on browser" library that use indexedDb
-- [ ] LoreBook support
-  - [ ] LoreBook Editor
-  - [ ] Character book embedding
-  - [ ] LoreBook library
-- [ ] JailBreak support
-  - [ ] JailBreak Editor: For Sillytavern like jailbreak
-  - [ ] JailBreak library
+- [x] Character library: Save characters in a "on browser" library that use indexedDb
+- [x] CharacterBook support
+  - [x] CharacterBook Editor
+  - [x] CharacterBook library
+  - [x] CharacterBook sharing
+- [ ] Response Formating
+  - [ ] Context template editor
+  - [ ] Instruct template editor
+  - [ ] Context template library
+  - [ ] Instruct template library
