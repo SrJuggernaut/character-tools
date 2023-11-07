@@ -1,7 +1,11 @@
 import Drop from '@/components/ui/Drop'
 import { createCharacter } from '@/services/character'
+import { createCharacterBook } from '@/services/characterBooks'
 import { type CharacterDatabaseData } from '@/types/character'
-import { FileToCharacterEditorState } from '@/utilities/characterUtilities'
+import { type CharacterBookDatabaseData } from '@/types/lorebook'
+import { characterBookToCharacterEditor, extractCharacterBookFromCharacter } from '@/utilities/characterBookUtilities'
+import { extractCharacterData, importedToCharacterEditorState } from '@/utilities/characterUtilities'
+import imageToPng from '@/utilities/imageToPng'
 import { faCheckCircle, faFileImport, faHourglass, faSpinner, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, List, ListItem, ListItemIcon, ListItemText, ListSubheader, Typography } from '@mui/material'
@@ -15,7 +19,7 @@ type ImportedFile = {
   file: File
   status: 'success'
   data: CharacterDatabaseData
-
+  characterBook?: CharacterBookDatabaseData
 }
 const ImportCharacter: FC = () => {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
@@ -32,15 +36,24 @@ const ImportCharacter: FC = () => {
 
   useEffect(() => {
     if (processingFile !== undefined) {
-      FileToCharacterEditorState(processingFile)
-        .then(async (characterEditorState) => {
-          const createdCharacter = await createCharacter(characterEditorState)
+      extractCharacterData(processingFile)
+        .then(async (extracted) => {
+          const image = extracted.image !== undefined ? await imageToPng(extracted.image) : undefined
+          const characterEditorState = importedToCharacterEditorState(extracted.character)
+          const characterBook = extractCharacterBookFromCharacter(extracted.character)
+          let savedCharacterBook: CharacterBookDatabaseData | undefined
+          if (characterBook !== undefined) {
+            const characterBookEditor = characterBookToCharacterEditor(characterBook)
+            savedCharacterBook = await createCharacterBook(characterBookEditor)
+          }
+          const createdCharacter = await createCharacter({ ...characterEditorState, image })
           setImportedFiles([
             ...importedFiles,
             {
               file: processingFile,
               status: 'success',
-              data: createdCharacter
+              data: createdCharacter,
+              characterBook: savedCharacterBook
             }
           ])
           setProcessingFile(undefined)
@@ -135,7 +148,7 @@ const ImportCharacter: FC = () => {
                               >
                                 <FontAwesomeIcon icon={faCheckCircle} size='lg' />
                               </ListItemIcon>
-                              <ListItemText primary={importedFile.data.name} secondary={`Successfully imported ${importedFile.file.name}`} />
+                              <ListItemText primary={importedFile.data.name} secondary={`Successfully imported ${importedFile.file.name}${importedFile.characterBook !== undefined ? ` with characterBook named ${importedFile.characterBook.name}` : ''}`} />
                             </ListItem>
                           )
                         }
