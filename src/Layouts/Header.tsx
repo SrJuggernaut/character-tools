@@ -1,7 +1,7 @@
 import NavigationMenu from '@/Layouts/Header/NavigationMenu'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
-import { setTheme } from '@/state/appSlice'
+import { setOpenSettings, setTheme } from '@/state/appSlice'
 import { faBug, faMoon, faScrewdriverWrench, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, IconButton, Link as MuiLink, Typography } from '@mui/material'
@@ -49,6 +49,14 @@ const Header: FC = () => {
           target="_blank"
         >
           <FontAwesomeIcon icon={faBug} fixedWidth size="sm" />
+        </IconButton>
+        <IconButton
+          component="button"
+          onClick={() => {
+            dispatch(setOpenSettings(true))
+          }}
+        >
+          <FontAwesomeIcon icon={faScrewdriverWrench} fixedWidth size="sm" />
         </IconButton>
         <IconButton
           type="button"
