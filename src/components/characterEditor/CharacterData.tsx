@@ -1,5 +1,6 @@
 import CopyButton from '@/components/CopyButton'
 import ImageDrop from '@/components/ImageDrop'
+import MultilineTextField from '@/components/ui/form/MultilineTextField'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
@@ -32,7 +33,7 @@ const CharacterData: FC = () => {
         fullWidth
         margin="normal"
       />
-      <TextField
+      <MultilineTextField
         id="description"
         label="Description"
         value={characterEditorState.description}
@@ -42,8 +43,6 @@ const CharacterData: FC = () => {
         variant="outlined"
         fullWidth
         margin="normal"
-        multiline
-        minRows={4}
       />
       <TextField
         id="personality"
@@ -55,7 +54,7 @@ const CharacterData: FC = () => {
         fullWidth
         margin='normal'
       />
-      <TextField
+      <MultilineTextField
         id="mes_example"
         label="Message Example"
         value={characterEditorState.mes_example}
@@ -66,8 +65,6 @@ const CharacterData: FC = () => {
         variant='outlined'
         fullWidth
         margin='normal'
-        multiline
-        minRows={4}
       />
       <TextField
         id="scenario"
@@ -79,7 +76,7 @@ const CharacterData: FC = () => {
         fullWidth
         margin='normal'
       />
-      <TextField
+      <MultilineTextField
         id="first_mes"
         label="First Message"
         value={characterEditorState.first_mes}
@@ -88,15 +85,13 @@ const CharacterData: FC = () => {
         variant='outlined'
         fullWidth
         margin='normal'
-        multiline
-        minRows={4}
       />
       <Typography variant="h3" gutterBottom>Alternate Greetings</Typography>
       <Typography variant="caption" component="p" gutterBottom>
         You can add as many alternative greetings as you wish to your character. These greetings will be used as alternatives to the First Message.
       </Typography>
       {characterEditorState.alternate_greetings.length > 0 && characterEditorState.alternate_greetings.map((greeting, index) => (
-        <TextField
+        <MultilineTextField
           key={`alternate_greeting_${index}`}
           id={`alternate_greeting[${index}]`}
           label={`Alternate Greeting ${index + 1}`}
@@ -126,8 +121,6 @@ const CharacterData: FC = () => {
           variant='outlined'
           fullWidth
           margin='normal'
-          multiline
-          minRows={4}
         />
       ))}
       <Button

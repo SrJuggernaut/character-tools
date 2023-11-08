@@ -3,6 +3,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Checkbox, Chip, FormControlLabel, FormGroup, FormLabel, IconButton, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import { useState, type FC } from 'react'
+import MultilineTextField from '../ui/form/MultilineTextField'
 import NumberField from '../ui/form/NumberField'
 
 export interface EntryEditorProps {
@@ -278,14 +279,13 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
           />
         </div>
       </Box>
-      <TextField
+      <MultilineTextField
         id="content"
         label="Content"
         value={value.content ?? ''}
         onChange={(e) => {
           onChange({ ...value, content: e.target.value })
         }}
-        multiline
         variant="outlined"
         fullWidth
         margin="normal"
