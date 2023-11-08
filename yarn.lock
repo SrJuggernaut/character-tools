@@ -2175,8 +2175,10 @@ __metadata:
     eslint-plugin-react-refresh: ^0.4.3
     exifreader: ^4.13.0
     framer-motion: ^10.16.4
+    gpt-tokenizer: ^2.1.2
     husky: ^8.0.3
     json5: ^2.2.3
+    llama-tokenizer-js: ^1.1.3
     meta-png: ^1.0.6
     nanoid: ^4.0.2
     react: ^18.2.0
@@ -3514,6 +3516,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gpt-tokenizer@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "gpt-tokenizer@npm:2.1.2"
+  dependencies:
+    rfc4648: ^1.5.2
+  checksum: 04a53d5466d70d8b779a87c15db1390d5cefabb301ab9c4c0fe5d3b50f330e01da70567104879ad97fbd71c68dbe9b535eaaa9e8a7fae0d0e67cf846bdb5ee93
+  languageName: node
+  linkType: hard
+
 "graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.6":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
@@ -4142,6 +4153,13 @@ __metadata:
   version: 1.2.4
   resolution: "lines-and-columns@npm:1.2.4"
   checksum: 0c37f9f7fa212b38912b7145e1cd16a5f3cd34d782441c3e6ca653485d326f58b3caccda66efce1c5812bde4961bbde3374fae4b0d11bf1226152337f3894aa5
+  languageName: node
+  linkType: hard
+
+"llama-tokenizer-js@npm:^1.1.3":
+  version: 1.1.3
+  resolution: "llama-tokenizer-js@npm:1.1.3"
+  checksum: ff5dbc298dd8647456563a8e0ecce7281b03ddc0f1dcf4429027bf37efbd472aeb11dd8ce8baed0b8b758de18ad8660636858f2f640f0a315c956a73f7c1d481
   languageName: node
   linkType: hard
 
@@ -5303,6 +5321,13 @@ __metadata:
   version: 1.0.4
   resolution: "reusify@npm:1.0.4"
   checksum: c3076ebcc22a6bc252cb0b9c77561795256c22b757f40c0d8110b1300723f15ec0fc8685e8d4ea6d7666f36c79ccc793b1939c748bf36f18f542744a4e379fcc
+  languageName: node
+  linkType: hard
+
+"rfc4648@npm:^1.5.2":
+  version: 1.5.3
+  resolution: "rfc4648@npm:1.5.3"
+  checksum: 19c81d502582e377125b00fbd7a5cdb0e351f9a1e40182fa9f608b48e1ab852d211b75facb2f4f3fa17f7c6ebc2ef4acca61ae7eb7fbcfa4768f11d2db678116
   languageName: node
   linkType: hard
 
