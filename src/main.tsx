@@ -1,5 +1,5 @@
 import App from '@/App'
-import StateConsumer from '@/state/StateConsumer'
+import StateConsumer from '@/components/state/StateConsumer'
 import store from '@/state/store'
 import '@fontsource/roboto/latin-300.css'
 import '@fontsource/roboto/latin-400.css'
@@ -15,7 +15,6 @@ const Main: FC = () => {
   return (
     <React.StrictMode>
       <Provider store={store}>
-
         <StateConsumer>
           <CssBaseline />
           <App />
