@@ -6,7 +6,7 @@ import useAppSelector from '@/hooks/useAppSelector'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
+import { Box, Button, IconButton, InputAdornment, Link, TextField, Typography } from '@mui/material'
 import { type FC } from 'react'
 
 const CharacterData: FC = () => {
@@ -20,7 +20,7 @@ const CharacterData: FC = () => {
     <>
       <Typography variant="h2" align="center" gutterBottom>Character Data</Typography>
       <Typography variant="body1" gutterBottom>
-        In this section you can write the data about your character. All fields sent at the prompt should accept the macros <CopyButton textToCopy='{{char}}'>&#123;&#123;char&#125;&#125;</CopyButton> and <CopyButton textToCopy='{{user}}'>&#123;&#123;user&#125;&#125;</CopyButton> which will be replaced by the character and user name respectively, this is very useful to quickly change the character name without having to edit all the content.
+        General data about your character. All fields sent at the prompt should accept the macros <CopyButton textToCopy='{{char}}'>&#123;&#123;char&#125;&#125;</CopyButton> and <CopyButton textToCopy='{{user}}'>&#123;&#123;user&#125;&#125;</CopyButton> which will be replaced by the character and user name respectively, this is very useful to quickly change the character name without having to edit all the content. Specific tools such as <Link href="https://docs.sillytavern.app/usage/core-concepts/characterdesign/#replacement-tags-macros" target="_blank" rel="noreferrer">Silly Tavern have their own list of macros</Link> that can be used and it is advisable to take them into account if you use such tools.
       </Typography>
       <TextField
         id="name"
