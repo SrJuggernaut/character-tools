@@ -20,6 +20,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         id="name"
         label="Name"
         value={value.name ?? ''}
+        helperText="The name of your entry. This will be used to identify your entry in the entry list."
         onChange={(e) => {
           onChange({ ...value, name: e.target.value })
         }}
@@ -30,6 +31,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
       <TextField
         id="comment"
         label="Comment"
+        helperText="A comment for your entry."
         value={value.comment ?? ''}
         onChange={(e) => {
           onChange({ ...value, comment: e.target.value })
@@ -282,6 +284,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
       <MultilineTextField
         id="content"
         label="Content"
+        helperText="The content of the input, this is the information that will be sent to the language model, it generally accepts macros."
         value={value.content ?? ''}
         onChange={(e) => {
           onChange({ ...value, content: e.target.value })

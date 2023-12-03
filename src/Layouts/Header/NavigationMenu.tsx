@@ -1,7 +1,7 @@
 import Books from '@/components/icons/books'
 import { faBars, faBook, faHome, faUserPen, faUsersBetweenLines, type IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer } from '@mui/material'
+import { Box, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, Tooltip } from '@mui/material'
 import { useState, type FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -24,11 +24,13 @@ const NavigationMenu: FC = () => {
   const location = useLocation()
   return (
     <>
-      <IconButton
-        onClick={() => { setOpenDrawer(true) }}
-      >
-        <FontAwesomeIcon icon={faBars} fixedWidth size="sm" />
-      </IconButton>
+      <Tooltip title="Menu">
+        <IconButton
+          onClick={() => { setOpenDrawer(true) }}
+        >
+          <FontAwesomeIcon icon={faBars} fixedWidth size="sm" />
+        </IconButton>
+      </Tooltip>
       <SwipeableDrawer
         anchor="right"
         open={openDrawer}

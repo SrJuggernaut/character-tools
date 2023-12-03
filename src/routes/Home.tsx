@@ -21,7 +21,7 @@ const Home: FC = () => {
         }}
       >
         <Typography variant='h1' align="center">Character Tools</Typography>
-        <Typography variant='h2' component="div" align="center">A collection of tools for creating and managing characters for IA Roleplay</Typography>
+        <Typography variant='h2' component="div" align="center">A collection of tools for creating and managing characters for AI Roleplay</Typography>
         <IconButton
           aria-label="Scroll down"
           color="primary"
@@ -74,7 +74,7 @@ const Home: FC = () => {
               <CardContent>
                 <Typography variant="h3" align="center" gutterBottom>Character Editor</Typography>
                 <Typography variant="body1" align="center">
-                  Create and edit characters for IA Roleplay, with support for Image Cards, V1 and V2, and more!
+                  Create and edit characters for AI Roleplay, with support for Image Cards, V1 and V2, and more!
                 </Typography>
               </CardContent>
             </CardActionArea>

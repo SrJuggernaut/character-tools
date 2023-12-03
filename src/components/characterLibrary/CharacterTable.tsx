@@ -6,7 +6,7 @@ import { setAlert, setDialog } from '@/state/feedbackSlice'
 import { type CharacterDatabaseData } from '@/types/character'
 import { faPencil, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import { DataGrid, getGridStringOperators, type GridActionsColDef, type GridColDef, type GridFilterModel, type GridPaginationModel, type GridRenderCellParams, type GridSortModel } from '@mui/x-data-grid'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useCallback, useState, type FC } from 'react'
@@ -101,100 +101,106 @@ const CharacterTable: FC = () => {
   }, [paginationModel, sortModel, filterModel])
 
   const renderActions: GridActionsColDef<CharacterDatabaseData>['getActions'] = useCallback((params) => [
-    <IconButton key={`edit-${params.row.id}`} size='small' onClick={() => {
-      dispatch(setDialog({
-        title: 'Edit character?',
-        content: 'if you have unsaved information in the editor it will be lost.',
-        actions: [
-          {
-            label: 'Cancel',
-            onClick: () => {},
-            severity: 'inherit'
-          },
-          {
-            label: 'Edit',
-            onClick: () => {
-              dispatch(setCharacterEditor(params.row))
-              navigate('/character-editor?tab=character-data')
+    <Tooltip key={`edit-${params.row.id}`} title="Edit">
+      <IconButton size='small' onClick={() => {
+        dispatch(setDialog({
+          title: 'Edit character?',
+          content: 'if you have unsaved information in the editor it will be lost.',
+          actions: [
+            {
+              label: 'Cancel',
+              onClick: () => {},
+              severity: 'inherit'
             },
-            severity: 'success'
-          }
-        ]
-      }))
-    }}>
-      <FontAwesomeIcon icon={faPencil} fixedWidth size="sm" />
-    </IconButton>,
-    <IconButton key={`delete-${params.row.id}`} size='small' onClick={() => {
-      dispatch(setDialog({
-        title: 'Delete character?',
-        content: 'This action cannot be undone.',
-        actions: [
-          {
-            label: 'Cancel',
-            onClick: () => {},
-            severity: 'inherit'
-          },
-          {
-            label: 'Delete',
-            severity: 'error',
-            onClick: () => {
-              deleteCharacter(params.row.id)
-                .then(() => {
-                  dispatch(setAlert({
-                    title: 'Character deleted',
-                    message: `Character ${params.row.name} deleted`,
-                    severity: 'success'
-                  }))
-                })
-                .catch((error) => {
-                  if (error instanceof Error) {
+            {
+              label: 'Edit',
+              onClick: () => {
+                dispatch(setCharacterEditor(params.row))
+                navigate('/character-editor?tab=character-data')
+              },
+              severity: 'success'
+            }
+          ]
+        }))
+      }}>
+        <FontAwesomeIcon icon={faPencil} fixedWidth size="sm" />
+      </IconButton>
+    </Tooltip>,
+    <Tooltip key={`delete-${params.row.id}`} title="Delete">
+      <IconButton size='small' onClick={() => {
+        dispatch(setDialog({
+          title: 'Delete character?',
+          content: 'This action cannot be undone.',
+          actions: [
+            {
+              label: 'Cancel',
+              onClick: () => {},
+              severity: 'inherit'
+            },
+            {
+              label: 'Delete',
+              severity: 'error',
+              onClick: () => {
+                deleteCharacter(params.row.id)
+                  .then(() => {
+                    dispatch(setAlert({
+                      title: 'Character deleted',
+                      message: `Character ${params.row.name} deleted`,
+                      severity: 'success'
+                    }))
+                  })
+                  .catch((error) => {
+                    if (error instanceof Error) {
+                      dispatch(setAlert({
+                        title: 'Error deleting character',
+                        message: error.message,
+                        severity: 'error'
+                      }))
+                      return
+                    }
                     dispatch(setAlert({
                       title: 'Error deleting character',
-                      message: error.message,
+                      message: `Character ${params.row.name} could not be deleted`,
                       severity: 'error'
                     }))
-                    return
-                  }
-                  dispatch(setAlert({
-                    title: 'Error deleting character',
-                    message: `Character ${params.row.name} could not be deleted`,
-                    severity: 'error'
-                  }))
-                })
+                  })
+              }
             }
-          }
-        ]
-      }))
-    }}>
-      <FontAwesomeIcon icon={faTrashAlt} fixedWidth size="sm" />
-    </IconButton>,
-    <IconButton key={`edit-as-new-${params.row.id}`} size='small' onClick={() => {
-      dispatch(setDialog({
-        title: 'Edit as new character?',
-        content: 'if you have unsaved information in the editor it will be lost.',
-        actions: [
-          {
-            label: 'Cancel',
-            onClick: () => {},
-            severity: 'inherit'
-          },
-          {
-            label: 'Edit',
-            onClick: () => {
-              dispatch(setCharacterEditor({
-                ...params.row,
-                id: undefined
-              }))
-              navigate('/character-editor?tab=character-data')
+          ]
+        }))
+      }}>
+        <FontAwesomeIcon icon={faTrashAlt} fixedWidth size="sm" />
+      </IconButton>
+    </Tooltip>,
+    <Tooltip key={`edit-as-new-${params.row.id}`} title="Edit as new">
+      <IconButton size='small' onClick={() => {
+        dispatch(setDialog({
+          title: 'Edit as new character?',
+          content: 'if you have unsaved information in the editor it will be lost.',
+          actions: [
+            {
+              label: 'Cancel',
+              onClick: () => {},
+              severity: 'inherit'
             },
-            severity: 'success'
-          }
-        ]
-      }))
-    }
-    }>
-      <FontAwesomeIcon icon={faPlus} fixedWidth size="sm" />
-    </IconButton>
+            {
+              label: 'Edit',
+              onClick: () => {
+                dispatch(setCharacterEditor({
+                  ...params.row,
+                  id: undefined
+                }))
+                navigate('/character-editor?tab=character-data')
+              },
+              severity: 'success'
+            }
+          ]
+        }))
+      }
+      }>
+        <FontAwesomeIcon icon={faPlus} fixedWidth size="sm" />
+      </IconButton>
+    </Tooltip>
   ], [])
 
   const columns: Array<GridColDef<CharacterDatabaseData>> = [

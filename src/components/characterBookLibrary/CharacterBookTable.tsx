@@ -6,7 +6,7 @@ import { setAlert, setDialog } from '@/state/feedbackSlice'
 import { type CharacterBookDatabaseData } from '@/types/lorebook'
 import { faPencil, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconButton } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import { DataGrid, type GridActionsColDef, type GridColDef, type GridFilterModel, type GridPaginationModel, type GridSortModel } from '@mui/x-data-grid'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useCallback, useState, type FC } from 'react'
@@ -65,104 +65,110 @@ const CharacterBookTable: FC = () => {
   }, [paginationModel, filterModel, sortModel])
 
   const renderActions: GridActionsColDef<CharacterBookDatabaseData>['getActions'] = useCallback((params) => [
-    <IconButton key={`edit-${params.row.id}`} size='small' onClick={() => {
-      dispatch(setDialog({
-        title: 'Edit character?',
-        content: 'if you have unsaved information in the editor it will be lost.',
-        actions: [
-          {
-            label: 'Cancel',
-            severity: 'inherit',
-            onClick: () => {}
-          },
-          {
-            label: 'Edit',
-            severity: 'success',
-            onClick: () => {
-              dispatch(setCharacterBookEditor(params.row))
-              navigate('/characterbook-editor?tab=characterbook-data')
+    <Tooltip key={`edit-${params.row.id}`} title='Edit'>
+      <IconButton size='small' onClick={() => {
+        dispatch(setDialog({
+          title: 'Edit character?',
+          content: 'if you have unsaved information in the editor it will be lost.',
+          actions: [
+            {
+              label: 'Cancel',
+              severity: 'inherit',
+              onClick: () => {}
+            },
+            {
+              label: 'Edit',
+              severity: 'success',
+              onClick: () => {
+                dispatch(setCharacterBookEditor(params.row))
+                navigate('/characterbook-editor?tab=characterbook-data')
+              }
             }
-          }
-        ]
-      }))
-    }}>
-      <FontAwesomeIcon icon={faPencil} fixedWidth size="sm" />
-    </IconButton>,
-    <IconButton key={`delete-${params.row.id}`} size='small' onClick={() => {
-      dispatch(setDialog({
-        title: 'Delete character?',
-        content: 'This action cannot be undone.',
-        actions: [
-          {
-            label: 'Cancel',
-            severity: 'inherit',
-            onClick: () => {}
-          },
-          {
-            label: 'Delete',
-            severity: 'error',
-            onClick: () => {
-              deleteCharacterBook(params.row.id)
-                .then(() => {
-                  dispatch(setAlert({
-                    title: 'Character deleted',
-                    message: 'Character Book deleted',
-                    severity: 'success'
-                  }))
-                })
-                .catch((error) => {
-                  if (error instanceof Error) {
+          ]
+        }))
+      }}>
+        <FontAwesomeIcon icon={faPencil} fixedWidth size="sm" />
+      </IconButton>
+    </Tooltip>,
+    <Tooltip key={`delete-${params.row.id}`} title='Delete'>
+      <IconButton size='small' onClick={() => {
+        dispatch(setDialog({
+          title: 'Delete character?',
+          content: 'This action cannot be undone.',
+          actions: [
+            {
+              label: 'Cancel',
+              severity: 'inherit',
+              onClick: () => {}
+            },
+            {
+              label: 'Delete',
+              severity: 'error',
+              onClick: () => {
+                deleteCharacterBook(params.row.id)
+                  .then(() => {
+                    dispatch(setAlert({
+                      title: 'Character deleted',
+                      message: 'Character Book deleted',
+                      severity: 'success'
+                    }))
+                  })
+                  .catch((error) => {
+                    if (error instanceof Error) {
+                      dispatch(setAlert({
+                        title: 'Error deleting character',
+                        message: error.message,
+                        severity: 'error'
+                      }))
+                      return
+                    }
                     dispatch(setAlert({
                       title: 'Error deleting character',
-                      message: error.message,
+                      message: 'Character Book could not be deleted',
                       severity: 'error'
                     }))
-                    return
-                  }
-                  dispatch(setAlert({
-                    title: 'Error deleting character',
-                    message: 'Character Book could not be deleted',
-                    severity: 'error'
-                  }))
-                })
+                  })
+              }
             }
-          }
-        ]
-      }))
-    }}>
-      <FontAwesomeIcon icon={faTrashAlt} fixedWidth size="sm" />
-    </IconButton>,
-    <IconButton key={`edit-as-new-${params.row.id}`} size='small' onClick={() => {
-      dispatch(setDialog({
-        title: 'Edit as new character?',
-        content: 'if you have unsaved information in the editor it will be lost.',
-        // cancelText: 'Cancel',
-        // onCancel: () => { },
-        // confirmText: 'Edit',
-        // onConfirm: () => {
-        //   dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
-        //   navigate('/characterbook-editor?tab=characterbook-data')
-        // }
-        actions: [
-          {
-            label: 'Cancel',
-            severity: 'inherit',
-            onClick: () => {}
-          },
-          {
-            label: 'Edit',
-            severity: 'success',
-            onClick: () => {
-              dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
-              navigate('/characterbook-editor?tab=characterbook-data')
+          ]
+        }))
+      }}>
+        <FontAwesomeIcon icon={faTrashAlt} fixedWidth size="sm" />
+      </IconButton>
+    </Tooltip>,
+    <Tooltip key={`edit-as-new-${params.row.id}`} title='Edit as new'>
+      <IconButton key={`edit-as-new-${params.row.id}`} size='small' onClick={() => {
+        dispatch(setDialog({
+          title: 'Edit as new character?',
+          content: 'if you have unsaved information in the editor it will be lost.',
+          // cancelText: 'Cancel',
+          // onCancel: () => { },
+          // confirmText: 'Edit',
+          // onConfirm: () => {
+          //   dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
+          //   navigate('/characterbook-editor?tab=characterbook-data')
+          // }
+          actions: [
+            {
+              label: 'Cancel',
+              severity: 'inherit',
+              onClick: () => {}
+            },
+            {
+              label: 'Edit',
+              severity: 'success',
+              onClick: () => {
+                dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
+                navigate('/characterbook-editor?tab=characterbook-data')
+              }
             }
-          }
-        ]
-      }))
-    }
-    }>
-      <FontAwesomeIcon icon={faPlus} fixedWidth size="sm" />
-    </IconButton>
+          ]
+        }))
+      }
+      }>
+        <FontAwesomeIcon icon={faPlus} fixedWidth size="sm" />
+      </IconButton>
+    </Tooltip>
   ], [])
 
   const columns: Array<GridColDef<CharacterBookDatabaseData>> = [

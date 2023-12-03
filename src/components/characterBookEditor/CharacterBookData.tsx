@@ -32,7 +32,7 @@ const CharacterBookData: FC = () => {
         value={characterEditorState.description}
         onChange={handleChange}
         error={characterEditorState.description === ''}
-        helperText={characterEditorState.description === '' ? 'Description is required' : 'A description of your CharacterBook.'}
+        helperText={characterEditorState.description === '' ? 'Description is required' : 'A description of your CharacterBook should not be included in your prompt when it is sent to the language model.'}
         variant="outlined"
         fullWidth
         margin="normal"

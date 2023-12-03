@@ -1,6 +1,7 @@
 import { type CharacterBookEditorState } from '@/types/lorebook'
 import { v2, type CharacterBook, type V1, type V2 } from 'character-card-utils'
 import { z } from 'zod'
+import { replaceDateInTemplate } from './date'
 
 const characterBookEntrySchema = z.object({
   keys: z.array(z.string()),
@@ -75,4 +76,15 @@ export const characterBookToJSONUrl = (characterBook: CharacterBook): string => 
   const blob = new Blob([json], { type: 'application/json' })
   const url = URL.createObjectURL(blob)
   return url
+}
+
+export interface CharacterBookData {
+  name: string
+  id?: string
+}
+
+export const getCharacterBookExportName = (template: string, characterBookData: CharacterBookData): string => {
+  template = template.replace('{{name}}', characterBookData.name)
+  template = template.replace('{{id}}', characterBookData.id ?? '')
+  return replaceDateInTemplate(template)
 }
