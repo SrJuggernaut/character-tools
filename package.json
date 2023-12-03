@@ -26,6 +26,7 @@
     "@mui/x-data-grid": "^6.12.0",
     "@reduxjs/toolkit": "^1.9.5",
     "character-card-utils": "^2.0.3",
+    "date-fns": "^2.30.0",
     "dexie": "^3.2.4",
     "dexie-export-import": "^4.0.7",
     "dexie-react-hooks": "^1.1.6",

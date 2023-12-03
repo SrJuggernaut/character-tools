@@ -6,9 +6,10 @@ import { useEffect, useState, type FC, type ReactNode } from 'react'
 export interface CopyButtonProps {
   children?: ReactNode
   textToCopy: string
+  tooltip?: ReactNode
 }
 
-const CopyButton: FC<CopyButtonProps> = ({ children, textToCopy }) => {
+const CopyButton: FC<CopyButtonProps> = ({ children, textToCopy, tooltip }) => {
   const [copyState, setCopyState] = useState<'idle' | 'success' | 'error'>('idle')
   useEffect(() => {
     if (copyState === 'success' || copyState === 'error') {
@@ -22,11 +23,12 @@ const CopyButton: FC<CopyButtonProps> = ({ children, textToCopy }) => {
   }, [copyState])
 
   return (
-    <Tooltip title={'Clic to copy'}>
+    <Tooltip title={tooltip !== undefined ? tooltip : 'Copy to Clipboard'}>
       <Button
         size='small'
         variant='text'
         color={copyState === 'success' ? 'success' : copyState === 'error' ? 'error' : undefined}
+        sx={{ textTransform: 'none' }}
         onClick={() => {
           navigator.clipboard.writeText(textToCopy)
             .then(() => {

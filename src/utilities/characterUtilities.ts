@@ -7,6 +7,7 @@ import ExifReader, { type XmpTag } from 'exifreader'
 import json5 from 'json5'
 import { addMetadataFromBase64DataURI, getMetadata } from 'meta-png'
 import { characterEditorToCharacterBook } from './characterBookUtilities'
+import { replaceDateInTemplate } from './date'
 
 interface ExtractCharacterDataReturn {
   character: V1 | V2
@@ -113,4 +114,21 @@ export const exportCharacterAsJson = (characterData: V1 | V2): string => {
   const blob = new Blob([json], { type: 'application/json' })
   const url = URL.createObjectURL(blob)
   return url
+}
+
+export interface CharacterData {
+  name: string
+  spec: 'V1' | 'V2'
+  version?: string
+  id?: string
+  creator?: string
+}
+
+export const getCharacterExportName = (template: string, characterData: CharacterData): string => {
+  template = template.replace('{{name}}', characterData.name)
+  template = template.replace('{{spec}}', characterData.spec)
+  template = template.replace('{{version}}', characterData.version ?? '')
+  template = template.replace('{{id}}', characterData.id ?? '')
+  template = template.replace('{{creator}}', characterData.creator ?? '')
+  return replaceDateInTemplate(template)
 }

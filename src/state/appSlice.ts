@@ -4,7 +4,8 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 const initialState: AppState = {
   theme: window.localStorage.getItem('theme') as AppState['theme'] ?? 'dark',
   tokenizer: window.localStorage.getItem('tokenizer') as AppState['tokenizer'] ?? 'llama',
-  openSettings: false
+  openSettings: false,
+  characterCardExportNameTemplate: window.localStorage.getItem('characterCardExportNameTemplate') as AppState['characterCardExportNameTemplate'] ?? '{{name}}-spec{{spec}}'
 }
 
 const appSlice = createSlice({
@@ -30,10 +31,17 @@ const appSlice = createSlice({
         ...state,
         openSettings: action.payload
       }
+    },
+    setCharacterCardExportNameTemplate: (state, action: PayloadAction<AppState['characterCardExportNameTemplate']>) => {
+      window.localStorage.setItem('characterCardExportNameTemplate', action.payload)
+      return {
+        ...state,
+        characterCardExportNameTemplate: action.payload
+      }
     }
   }
 })
 
 export default appSlice
 
-export const { setTheme, setTokenizer, setOpenSettings } = appSlice.actions
+export const { setTheme, setTokenizer, setOpenSettings, setCharacterCardExportNameTemplate } = appSlice.actions
