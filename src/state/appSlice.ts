@@ -5,7 +5,8 @@ const initialState: AppState = {
   theme: window.localStorage.getItem('theme') as AppState['theme'] ?? 'dark',
   tokenizer: window.localStorage.getItem('tokenizer') as AppState['tokenizer'] ?? 'llama',
   openSettings: false,
-  characterCardExportNameTemplate: window.localStorage.getItem('characterCardExportNameTemplate') as AppState['characterCardExportNameTemplate'] ?? '{{name}}-spec{{spec}}'
+  characterCardExportNameTemplate: window.localStorage.getItem('characterCardExportNameTemplate') as AppState['characterCardExportNameTemplate'] ?? '{{name}}-spec{{spec}}',
+  characterBookExportNameTemplate: window.localStorage.getItem('characterBookExportNameTemplate') as AppState['characterBookExportNameTemplate'] ?? '{{name}}-characterBook'
 }
 
 const appSlice = createSlice({
@@ -38,10 +39,17 @@ const appSlice = createSlice({
         ...state,
         characterCardExportNameTemplate: action.payload
       }
+    },
+    setCharacterBookExportNameTemplate: (state, action: PayloadAction<AppState['characterBookExportNameTemplate']>) => {
+      window.localStorage.setItem('characterBookExportNameTemplate', action.payload)
+      return {
+        ...state,
+        characterBookExportNameTemplate: action.payload
+      }
     }
   }
 })
 
 export default appSlice
 
-export const { setTheme, setTokenizer, setOpenSettings, setCharacterCardExportNameTemplate } = appSlice.actions
+export const { setTheme, setTokenizer, setOpenSettings, setCharacterCardExportNameTemplate, setCharacterBookExportNameTemplate } = appSlice.actions

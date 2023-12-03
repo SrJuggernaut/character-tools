@@ -4,13 +4,16 @@ import { createCharacterBook, updateCharacterBook } from '@/services/characterBo
 import { setCharacterBookEditor } from '@/state/characterBookEditorSlice'
 import { setAlert } from '@/state/feedbackSlice'
 import { type CharacterBookDatabaseData, type CharacterBookEditorState } from '@/types/lorebook'
-import { characterBookToJSONUrl, characterEditorToCharacterBook } from '@/utilities/characterBookUtilities'
-import { Box, Button, Typography } from '@mui/material'
-import { useCallback, type FC } from 'react'
+import { characterBookToJSONUrl, characterEditorToCharacterBook, getCharacterBookExportName } from '@/utilities/characterBookUtilities'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material'
+import { useCallback, useState, type FC } from 'react'
+import ExportCharacterBookNameTemplate from './ExportCharacterBookNameTemplate'
 
 const ExportOrSave: FC = () => {
   const dispatch = useAppDispatch()
   const characterBookEditor = useAppSelector((theme) => theme.characterBookEditor)
+  const characterBookExportNameTemplate = useAppSelector((theme) => theme.app.characterBookExportNameTemplate)
+  const [openEditExportCharacterBookName, setOpenEditExportCharacterBookName] = useState(false)
 
   const handleCreate = useCallback(async (data: CharacterBookEditorState): Promise<CharacterBookDatabaseData> => {
     const createdCharacterBook = await createCharacterBook(data)
@@ -167,6 +170,46 @@ const ExportOrSave: FC = () => {
         >
           <Typography variant="h3" align="center" gutterBottom>Export</Typography>
           <Typography variant="h4" align="center" gutterBottom>Character Book</Typography>
+          <Button
+            type="button"
+            variant="contained"
+            color="success"
+            onClick={() => {
+              setOpenEditExportCharacterBookName(true)
+            }}
+          >
+            Edit Export Name Template
+          </Button>
+          <Dialog
+            open={openEditExportCharacterBookName}
+            keepMounted={false}
+            fullWidth
+            maxWidth='sm'
+            onClose={() => {
+              setOpenEditExportCharacterBookName(false)
+            }}
+          >
+            <DialogTitle
+              variant='subtitle1'
+            >
+              Edit Export Name Template
+            </DialogTitle>
+            <DialogContent>
+              <ExportCharacterBookNameTemplate />
+            </DialogContent>
+            <DialogActions>
+              <Button
+                type="button"
+                variant="contained"
+                color="success"
+                onClick={() => {
+                  setOpenEditExportCharacterBookName(false)
+                }}
+              >
+                Done
+              </Button>
+            </DialogActions>
+          </Dialog>
           <Typography variant="caption" sx={(theme) => ({ color: theme.palette.warning.main })}>
             This format is not intended to be imported into SillyTavern, because it will generate errors and bugs, it is intended only for backups and sharing character books.
           </Typography>
@@ -176,7 +219,8 @@ const ExportOrSave: FC = () => {
             onClick={() => {
               const CharacterBook = characterEditorToCharacterBook(characterBookEditor)
               const JSONUrl = characterBookToJSONUrl(CharacterBook)
-              handleDownload(JSONUrl, `${characterBookEditor.name}-characterBook.json`)
+              const fileName = getCharacterBookExportName(characterBookExportNameTemplate, characterBookEditor)
+              handleDownload(JSONUrl, `${fileName}.json`)
             }}
           >
             JSON

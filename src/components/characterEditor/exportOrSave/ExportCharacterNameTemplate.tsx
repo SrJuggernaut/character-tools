@@ -38,11 +38,13 @@ const ExportCharacterNameTemplate: FC = () => {
         </CopyButton>
         <CopyButton
           textToCopy='{{version}}'
+          tooltip='if the character has no version, this will be empty string'
         >
           {'{{version}}'}
         </CopyButton>
         <CopyButton
           textToCopy='{{creator}}'
+          tooltip='if the character has no creator, this will be empty string'
         >
           {'{{creator}}'}
         </CopyButton>
