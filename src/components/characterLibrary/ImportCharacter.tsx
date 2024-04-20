@@ -110,7 +110,7 @@ const ImportCharacter: FC = () => {
               multiple: true
             }}
           >
-            <FontAwesomeIcon icon={faFileImport} size='3x' />
+            <FontAwesomeIcon icon={faFileImport} size="3x" />
             <Typography variant="subtitle1" component="h2" align="center" gutterBottom>
               Upload character files
             </Typography>
@@ -123,77 +123,78 @@ const ImportCharacter: FC = () => {
           </Drop>
         </div>
         <div>
-          {uploadedFiles.length > 0 || importedFiles.length > 0 || processingFile !== undefined
-            ? (
-              <>
-                {uploadedFiles.length > 0 && (
-                  <Typography variant="subtitle1" component="h2" align="center" gutterBottom>
-                    Processing {uploadedFiles.length} files, do not close this page
-                  </Typography>
-                )}
-                <List>
-                  {importedFiles.length > 0 && (
-                    <>
-                      <ListSubheader>
-                        Processed files
-                      </ListSubheader>
-                      {importedFiles.map((importedFile, index) => {
-                        if (importedFile.status === 'success') {
+          {
+            uploadedFiles.length > 0 || importedFiles.length > 0 || processingFile !== undefined
+              ? (
+                <>
+                  {uploadedFiles.length > 0 && (
+                    <Typography variant="subtitle1" component="h2" align="center" gutterBottom>
+                      Processing {uploadedFiles.length} files, do not close this page
+                    </Typography>
+                  )}
+                  <List>
+                    {importedFiles.length > 0 && (
+                      <>
+                        <ListSubheader>
+                          Processed files
+                        </ListSubheader>
+                        {importedFiles.map((importedFile, index) => {
+                          if (importedFile.status === 'success') {
+                            return (
+                              <ListItem key={`imported-char-${importedFile.data.id}`} disablePadding>
+                                <ListItemIcon
+                                  sx={{
+                                    color: 'success.main'
+                                  }}
+                                >
+                                  <FontAwesomeIcon icon={faCheckCircle} size="lg" />
+                                </ListItemIcon>
+                                <ListItemText primary={importedFile.data.name} secondary={`Successfully imported ${importedFile.file.name}${importedFile.characterBook !== undefined ? ` with characterBook named ${importedFile.characterBook.name}` : ''}`} />
+                              </ListItem>
+                            )
+                          }
                           return (
-                            <ListItem key={`imported-char-${importedFile.data.id}`} disablePadding>
+                            <ListItem key={`imported-char-${index}`} disablePadding>
                               <ListItemIcon
                                 sx={{
-                                  color: 'success.main'
+                                  color: 'error.main'
                                 }}
                               >
-                                <FontAwesomeIcon icon={faCheckCircle} size='lg' />
+                                <FontAwesomeIcon icon={faTimesCircle} size="lg" />
                               </ListItemIcon>
-                              <ListItemText primary={importedFile.data.name} secondary={`Successfully imported ${importedFile.file.name}${importedFile.characterBook !== undefined ? ` with characterBook named ${importedFile.characterBook.name}` : ''}`} />
+                              <ListItemText primary={importedFile.file.name} secondary={`Error importing ${importedFile.file.name}: ${importedFile.message}`} />
                             </ListItem>
                           )
-                        }
-                        return (
-                          <ListItem key={`imported-char-${index}`} disablePadding>
-                            <ListItemIcon
-                              sx={{
-                                color: 'error.main'
-                              }}
-                            >
-                              <FontAwesomeIcon icon={faTimesCircle} size='lg' />
+                        })}
+                      </>
+                    )}
+                    {processingFile !== undefined && (
+                      <ListItem key={`imported-char-${processingFile.name}`} disablePadding>
+                        <ListItemIcon>
+                          <FontAwesomeIcon icon={faSpinner} spin size="lg" />
+                        </ListItemIcon>
+                        <ListItemText primary={processingFile.name} secondary="Processing..." />
+                      </ListItem>
+                    )}
+                    {uploadedFiles.length > 0 && (
+                      <>
+                        <ListSubheader>
+                          Uploaded files
+                        </ListSubheader>
+                        {uploadedFiles.map((file, index) => (
+                          <ListItem key={`uploaded-char-${index}`} disablePadding>
+                            <ListItemIcon>
+                              <FontAwesomeIcon icon={faHourglass} size="lg" />
                             </ListItemIcon>
-                            <ListItemText primary={importedFile.file.name} secondary={`Error importing ${importedFile.file.name}: ${importedFile.message}`} />
+                            <ListItemText primary={file.name} secondary="Processing..." />
                           </ListItem>
-                        )
-                      })}
-                    </>
-                  )}
-                  {processingFile !== undefined && (
-                    <ListItem key={`imported-char-${processingFile.name}`} disablePadding>
-                      <ListItemIcon>
-                        <FontAwesomeIcon icon={faSpinner} spin size='lg' />
-                      </ListItemIcon>
-                      <ListItemText primary={processingFile.name} secondary='Processing...' />
-                    </ListItem>
-                  )}
-                  {uploadedFiles.length > 0 && (
-                    <>
-                      <ListSubheader>
-                        Uploaded files
-                      </ListSubheader>
-                      {uploadedFiles.map((file, index) => (
-                        <ListItem key={`uploaded-char-${index}`} disablePadding>
-                          <ListItemIcon>
-                            <FontAwesomeIcon icon={faHourglass} size='lg' />
-                          </ListItemIcon>
-                          <ListItemText primary={file.name} secondary='Processing...' />
-                        </ListItem>
-                      ))}
-                    </>
-                  )}
-                </List>
-              </>
-            )
-            : (<></>)
+                        ))}
+                      </>
+                    )}
+                  </List>
+                </>
+                )
+              : (<></>)
           }
         </div>
       </Box>

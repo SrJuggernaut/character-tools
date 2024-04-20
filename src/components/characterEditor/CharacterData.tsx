@@ -20,7 +20,7 @@ const CharacterData: FC = () => {
     <>
       <Typography variant="h2" align="center" gutterBottom>Character Data</Typography>
       <Typography variant="body1" gutterBottom>
-        General data about your character. All fields sent at the prompt should accept the macros <CopyButton textToCopy='{{char}}'>&#123;&#123;char&#125;&#125;</CopyButton> and <CopyButton textToCopy='{{user}}'>&#123;&#123;user&#125;&#125;</CopyButton> which will be replaced by the character and user name respectively, this is very useful to quickly change the character name without having to edit all the content. Specific tools such as <Link href="https://docs.sillytavern.app/usage/core-concepts/characterdesign/#replacement-tags-macros" target="_blank" rel="noreferrer">Silly Tavern have their own list of macros</Link> that can be used and it is advisable to take them into account if you use such tools.
+        General data about your character. All fields sent at the prompt should accept the macros <CopyButton textToCopy="{{char}}">&#123;&#123;char&#125;&#125;</CopyButton> and <CopyButton textToCopy="{{user}}">&#123;&#123;user&#125;&#125;</CopyButton> which will be replaced by the character and user name respectively, this is very useful to quickly change the character name without having to edit all the content. Specific tools such as <Link href="https://docs.sillytavern.app/usage/core-concepts/characterdesign/#replacement-tags-macros" target="_blank" rel="noreferrer">Silly Tavern have their own list of macros</Link> that can be used and it is advisable to take them into account if you use such tools.
       </Typography>
       <TextField
         id="name"
@@ -50,9 +50,9 @@ const CharacterData: FC = () => {
         value={characterEditorState.personality}
         helperText="A brief description of the personality."
         onChange={handleChange}
-        variant='outlined'
+        variant="outlined"
         fullWidth
-        margin='normal'
+        margin="normal"
       />
       <MultilineTextField
         id="mes_example"
@@ -60,11 +60,11 @@ const CharacterData: FC = () => {
         value={characterEditorState.mes_example}
         onChange={handleChange}
         helperText={(
-          <>Describes how the character speaks. Before each example, you need to add the <CopyButton textToCopy='<START>'>&lt;START&gt;</CopyButton> macro.</>
+          <>Describes how the character speaks. Before each example, you need to add the <CopyButton textToCopy="<START>">&lt;START&gt;</CopyButton> macro.</>
         )}
-        variant='outlined'
+        variant="outlined"
         fullWidth
-        margin='normal'
+        margin="normal"
       />
       <TextField
         id="scenario"
@@ -72,9 +72,9 @@ const CharacterData: FC = () => {
         value={characterEditorState.scenario}
         onChange={handleChange}
         helperText="Circumstances and context of the dialogue."
-        variant='outlined'
+        variant="outlined"
         fullWidth
-        margin='normal'
+        margin="normal"
       />
       <MultilineTextField
         id="first_mes"
@@ -82,9 +82,9 @@ const CharacterData: FC = () => {
         value={characterEditorState.first_mes}
         onChange={handleChange}
         helperText="The First Message is an important thing that sets exactly how and in what style the character will communicate."
-        variant='outlined'
+        variant="outlined"
         fullWidth
-        margin='normal'
+        margin="normal"
       />
       <Typography variant="h3" gutterBottom>Alternate Greetings</Typography>
       <Typography variant="caption" component="p" gutterBottom>
@@ -105,7 +105,7 @@ const CharacterData: FC = () => {
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton
-                  size='small'
+                  size="small"
                   color="error"
                   onClick={() => {
                     const newAlternateGreetings = [...characterEditorState.alternate_greetings]
@@ -118,9 +118,9 @@ const CharacterData: FC = () => {
               </InputAdornment>
             )
           }}
-          variant='outlined'
+          variant="outlined"
           fullWidth
-          margin='normal'
+          margin="normal"
         />
       ))}
       <Button

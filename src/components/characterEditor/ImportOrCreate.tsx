@@ -127,8 +127,7 @@ const ImportOrCreate: FC = () => {
                 'application/json': ['.json']
               },
               multiple: false
-            }
-            }
+            }}
           >
             <FontAwesomeIcon icon={faFileUpload} size="3x" />
             <Typography variant="body1" align="center" gutterBottom>

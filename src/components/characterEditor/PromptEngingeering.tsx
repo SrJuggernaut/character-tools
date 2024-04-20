@@ -26,7 +26,7 @@ const PromptEngingeering: FC = () => {
     <>
       <Typography variant="h2" align="center" gutterBottom>Prompt Engineering</Typography>
       <Typography variant="body1" gutterBottom>
-        In this section you can control how you behave creating the prompt you will send. All fields sent in the prompt should accept the <CopyButton textToCopy='{{char}}'>&#123;&#123;char&#125;&#125;</CopyButton>, <CopyButton textToCopy='{{user}}'>&#123;&#123;user&#125;&#125;</CopyButton> and <CopyButton textToCopy='{{original}}'>&#123;&#123;original&#125;&#125;</CopyButton> macros. The <CopyButton textToCopy='{{original}}'>&#123;&#123;original&#125;&#125;</CopyButton> macro will be replaced by its counterpart configured in the tool.
+        In this section you can control how you behave creating the prompt you will send. All fields sent in the prompt should accept the <CopyButton textToCopy="{{char}}">&#123;&#123;char&#125;&#125;</CopyButton>, <CopyButton textToCopy="{{user}}">&#123;&#123;user&#125;&#125;</CopyButton> and <CopyButton textToCopy="{{original}}">&#123;&#123;original&#125;&#125;</CopyButton> macros. The <CopyButton textToCopy="{{original}}">&#123;&#123;original&#125;&#125;</CopyButton> macro will be replaced by its counterpart configured in the tool.
       </Typography>
       <MultilineTextField
         id="system_prompt"
@@ -46,43 +46,47 @@ const PromptEngingeering: FC = () => {
         fullWidth
         margin="normal"
       />
-      {characterBooks === undefined
-        ? <Typography variant="body1" gutterBottom>Loading character books...</Typography>
-        : <Autocomplete
-          value={
-            characterEditorState.character_book === undefined
-              ? null
-              : characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) !== undefined
-                ? characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book)
-                : { label: 'Not Found', value: characterEditorState.character_book }}
-          onChange={(_, value) => {
-            if (value !== null) {
-              dispatch(updateCharacterEditor({ character_book: value.value }))
-            } else {
-              dispatch(updateCharacterEditor({ character_book: undefined }))
-            }
-          }}
-          options={characterBooks ?? []}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              error={
-                characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
-              }
-              helperText={
-                characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
-                  ? `Character Book with id ${characterEditorState.character_book} not found, please select a valid Character Book. Or to leave it empty, delete the value.`
-                  : undefined
-              }
-              label="Character Book"
-              margin="normal"
-              fullWidth
+      {
+        characterBooks === undefined
+          ? <Typography variant="body1" gutterBottom>Loading character books...</Typography>
+          : (
+            <Autocomplete
+              value={
+              characterEditorState.character_book === undefined
+                ? null
+                : characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) !== undefined
+                  ? characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book)
+                  : { label: 'Not Found', value: characterEditorState.character_book }
+  }
+              onChange={(_, value) => {
+                if (value !== null) {
+                  dispatch(updateCharacterEditor({ character_book: value.value }))
+                } else {
+                  dispatch(updateCharacterEditor({ character_book: undefined }))
+                }
+              }}
+              options={characterBooks ?? []}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  error={
+                  characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
+                }
+                  helperText={
+                  characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
+                    ? `Character Book with id ${characterEditorState.character_book} not found, please select a valid Character Book. Or to leave it empty, delete the value.`
+                    : undefined
+                }
+                  label="Character Book"
+                  margin="normal"
+                  fullWidth
+                />
+              )}
+              clearIcon={(
+                <FontAwesomeIcon icon={faTimes} size="xs" fixedWidth />
+              )}
             />
-          )}
-          clearIcon={(
-            <FontAwesomeIcon icon={faTimes} size="xs" fixedWidth />
-          )}
-        />
+            )
       }
 
     </>

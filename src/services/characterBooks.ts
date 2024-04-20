@@ -36,7 +36,7 @@ export const deleteAllCharacterBooks = async (): Promise<void> => {
 
 export const exportCharacterBookCollection = async (): Promise<Blob> => {
   const blob = await dataBase.export({
-    filter (table) {
+    filter(table) {
       return table === 'characterBooks'
     }
   })
@@ -45,7 +45,7 @@ export const exportCharacterBookCollection = async (): Promise<Blob> => {
 
 export const importCharacterBookCollection = async (file: File): Promise<void> => {
   await dataBase.import(file, {
-    filter (table) {
+    filter(table) {
       return table === 'characterBooks'
     }
   })

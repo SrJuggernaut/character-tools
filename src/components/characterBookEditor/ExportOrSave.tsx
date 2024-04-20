@@ -184,13 +184,13 @@ const ExportOrSave: FC = () => {
             open={openEditExportCharacterBookName}
             keepMounted={false}
             fullWidth
-            maxWidth='sm'
+            maxWidth="sm"
             onClose={() => {
               setOpenEditExportCharacterBookName(false)
             }}
           >
             <DialogTitle
-              variant='subtitle1'
+              variant="subtitle1"
             >
               Edit Export Name Template
             </DialogTitle>

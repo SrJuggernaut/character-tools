@@ -72,7 +72,7 @@ const Header: FC = () => {
             }}
           >
             {theme === 'light' && <FontAwesomeIcon icon={faMoon} fixedWidth size="sm" />}
-            {theme === 'dark' && <FontAwesomeIcon icon={faSun} fixedWidth size="sm"/>}
+            {theme === 'dark' && <FontAwesomeIcon icon={faSun} fixedWidth size="sm" />}
           </IconButton>
         </Tooltip>
         <NavigationMenu />

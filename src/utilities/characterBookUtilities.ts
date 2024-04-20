@@ -42,7 +42,10 @@ export const extractCharacterBookFromCharacter = (character: V1 | V2): Character
 
 export const characterBookToCharacterEditor = (characterBook: CharacterBook): CharacterBookEditorState => {
   const result = characterBookSchema.safeParse(characterBook)
-  if (!result.success) throw new Error(`Invalid CharacterBook: ${result.error.errors.map(error => { return `${error.path.join('.')}: ${error.message}` }).join('; ')}`)
+  if (!result.success) throw new Error(`Invalid CharacterBook: ${result.error.errors.map((error) => {
+    return `${error.path.join('.')}: ${error.message}`
+  })
+    .join('; ')}`)
   const entries: CharacterBookEditorState['entries'] = characterBook.entries.map((entry) => ({
     ...entry,
     position: entry.position ?? 'before_char',
@@ -61,8 +64,9 @@ export const characterBookToCharacterEditor = (characterBook: CharacterBook): Ch
 }
 
 export const characterEditorToCharacterBook = (characterEditor: CharacterBookEditorState): CharacterBook => {
-  const { id, ...rest } = characterEditor
-  return rest
+  const characterBook = characterEditor
+  if (characterBook.id !== undefined) delete characterBook.id
+  return characterBook
 }
 
 export const JSONFileToCharacterBookEditor = async (file: File): Promise<CharacterBookEditorState> => {

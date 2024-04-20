@@ -6,7 +6,7 @@ import { forwardRef, type ForwardedRef } from 'react'
 
 export { type NumberInputProps } from '@mui/base/Unstable_NumberInput'
 
-const NumberInput = forwardRef(function CustomNumberInput (
+const NumberInput = forwardRef(function CustomNumberInput(
   props: NumberInputProps,
   ref: ForwardedRef<HTMLDivElement>
 ) {
@@ -21,12 +21,12 @@ const NumberInput = forwardRef(function CustomNumberInput (
       slotProps={{
         incrementButton: {
           children: (
-            <FontAwesomeIcon icon={faChevronUp} size='sm' />
+            <FontAwesomeIcon icon={faChevronUp} size="sm" />
           )
         },
         decrementButton: {
           children: (
-            <FontAwesomeIcon icon={faChevronDown} size='sm' />
+            <FontAwesomeIcon icon={faChevronDown} size="sm" />
           )
         }
       }}

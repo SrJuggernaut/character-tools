@@ -46,13 +46,13 @@ const CharacterBookTable: FC = () => {
         case 'endsWith':
           return characterBook[fieldToFilter]?.toLowerCase().endsWith(filterValue.toLowerCase()) ?? false
         case 'equals':
-          return characterBook[fieldToFilter]?.toLowerCase() === filterValue.toLowerCase() ?? false
+          return characterBook[fieldToFilter]?.toLowerCase() === filterValue.toLowerCase()
         case 'notEquals':
-          return characterBook[fieldToFilter]?.toLowerCase() !== filterValue.toLowerCase() ?? false
+          return characterBook[fieldToFilter]?.toLowerCase() !== filterValue.toLowerCase()
         case 'is':
-          return characterBook[fieldToFilter]?.toLowerCase() === filterValue.toLowerCase() ?? false
+          return characterBook[fieldToFilter]?.toLowerCase() === filterValue.toLowerCase()
         case 'isNot':
-          return characterBook[fieldToFilter]?.toLowerCase() !== filterValue.toLowerCase() ?? false
+          return characterBook[fieldToFilter]?.toLowerCase() !== filterValue.toLowerCase()
         default:
           return true
       }
@@ -65,107 +65,116 @@ const CharacterBookTable: FC = () => {
   }, [paginationModel, filterModel, sortModel])
 
   const renderActions: GridActionsColDef<CharacterBookDatabaseData>['getActions'] = useCallback((params) => [
-    <Tooltip key={`edit-${params.row.id}`} title='Edit'>
-      <IconButton size='small' onClick={() => {
-        dispatch(setDialog({
-          title: 'Edit character?',
-          content: 'if you have unsaved information in the editor it will be lost.',
-          actions: [
-            {
-              label: 'Cancel',
-              severity: 'inherit',
-              onClick: () => {}
-            },
-            {
-              label: 'Edit',
-              severity: 'success',
-              onClick: () => {
-                dispatch(setCharacterBookEditor(params.row))
-                navigate('/characterbook-editor?tab=characterbook-data')
+    <Tooltip key={`edit-${params.row.id}`} title="Edit">
+      <IconButton
+        size="small"
+        onClick={() => {
+          dispatch(setDialog({
+            title: 'Edit character?',
+            content: 'if you have unsaved information in the editor it will be lost.',
+            actions: [
+              {
+                label: 'Cancel',
+                severity: 'inherit',
+                onClick: () => {}
+              },
+              {
+                label: 'Edit',
+                severity: 'success',
+                onClick: () => {
+                  dispatch(setCharacterBookEditor(params.row))
+                  navigate('/characterbook-editor?tab=characterbook-data')
+                }
               }
-            }
-          ]
-        }))
-      }}>
+            ]
+          }))
+        }}
+      >
         <FontAwesomeIcon icon={faPencil} fixedWidth size="sm" />
       </IconButton>
     </Tooltip>,
-    <Tooltip key={`delete-${params.row.id}`} title='Delete'>
-      <IconButton size='small' onClick={() => {
-        dispatch(setDialog({
-          title: 'Delete character?',
-          content: 'This action cannot be undone.',
-          actions: [
-            {
-              label: 'Cancel',
-              severity: 'inherit',
-              onClick: () => {}
-            },
-            {
-              label: 'Delete',
-              severity: 'error',
-              onClick: () => {
-                deleteCharacterBook(params.row.id)
-                  .then(() => {
-                    dispatch(setAlert({
-                      title: 'Character deleted',
-                      message: 'Character Book deleted',
-                      severity: 'success'
-                    }))
-                  })
-                  .catch((error) => {
-                    if (error instanceof Error) {
+    <Tooltip key={`delete-${params.row.id}`} title="Delete">
+      <IconButton
+        size="small"
+        onClick={() => {
+          dispatch(setDialog({
+            title: 'Delete character?',
+            content: 'This action cannot be undone.',
+            actions: [
+              {
+                label: 'Cancel',
+                severity: 'inherit',
+                onClick: () => {}
+              },
+              {
+                label: 'Delete',
+                severity: 'error',
+                onClick: () => {
+                  deleteCharacterBook(params.row.id)
+                    .then(() => {
+                      dispatch(setAlert({
+                        title: 'Character deleted',
+                        message: 'Character Book deleted',
+                        severity: 'success'
+                      }))
+                    })
+                    .catch((error) => {
+                      if (error instanceof Error) {
+                        dispatch(setAlert({
+                          title: 'Error deleting character',
+                          message: error.message,
+                          severity: 'error'
+                        }))
+                        return
+                      }
                       dispatch(setAlert({
                         title: 'Error deleting character',
-                        message: error.message,
+                        message: 'Character Book could not be deleted',
                         severity: 'error'
                       }))
-                      return
-                    }
-                    dispatch(setAlert({
-                      title: 'Error deleting character',
-                      message: 'Character Book could not be deleted',
-                      severity: 'error'
-                    }))
-                  })
+                    })
+                }
               }
-            }
-          ]
-        }))
-      }}>
+            ]
+          }))
+        }}
+      >
         <FontAwesomeIcon icon={faTrashAlt} fixedWidth size="sm" />
       </IconButton>
     </Tooltip>,
-    <Tooltip key={`edit-as-new-${params.row.id}`} title='Edit as new'>
-      <IconButton key={`edit-as-new-${params.row.id}`} size='small' onClick={() => {
-        dispatch(setDialog({
-          title: 'Edit as new character?',
-          content: 'if you have unsaved information in the editor it will be lost.',
-          // cancelText: 'Cancel',
-          // onCancel: () => { },
-          // confirmText: 'Edit',
-          // onConfirm: () => {
-          //   dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
-          //   navigate('/characterbook-editor?tab=characterbook-data')
-          // }
-          actions: [
-            {
-              label: 'Cancel',
-              severity: 'inherit',
-              onClick: () => {}
-            },
-            {
-              label: 'Edit',
-              severity: 'success',
-              onClick: () => {
-                dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
-                navigate('/characterbook-editor?tab=characterbook-data')
+    <Tooltip key={`edit-as-new-${params.row.id}`} title="Edit as new">
+      <IconButton
+        key={`edit-as-new-${params.row.id}`}
+        size="small"
+        onClick={() => {
+          dispatch(setDialog({
+            title: 'Edit as new character?',
+            content: 'if you have unsaved information in the editor it will be lost.',
+            // cancelText: 'Cancel',
+            // onCancel: () => { },
+            // confirmText: 'Edit',
+            // onConfirm: () => {
+            //   dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
+            //   navigate('/characterbook-editor?tab=characterbook-data')
+            // }
+            actions: [
+              {
+                label: 'Cancel',
+                severity: 'inherit',
+                onClick: () => {}
+              },
+              {
+                label: 'Edit',
+                severity: 'success',
+                onClick: () => {
+                  dispatch(setCharacterBookEditor({ ...params.row, id: undefined }))
+                  navigate('/characterbook-editor?tab=characterbook-data')
+                }
               }
-            }
-          ]
-        }))
-      }
-      }>
+            ]
+          }))
+        }}
+      >
         <FontAwesomeIcon icon={faPlus} fixedWidth size="sm" />
       </IconButton>
     </Tooltip>
@@ -201,13 +210,13 @@ const CharacterBookTable: FC = () => {
         rowCount={totalCharacterBooks}
         columns={columns}
         rowSelection={false}
-        paginationMode='server'
+        paginationMode="server"
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
-        filterMode='server'
+        filterMode="server"
         filterModel={filterModel}
         onFilterModelChange={setFilterModel}
-        sortingMode='server'
+        sortingMode="server"
         sortModel={sortModel}
         onSortModelChange={setSortModel}
         autoPageSize={true}

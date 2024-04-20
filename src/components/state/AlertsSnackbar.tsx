@@ -13,7 +13,9 @@ const AlertsSnackbar: FC = () => {
       const timeout = setTimeout(() => {
         dispatch(clearAlert())
       }, 500)
-      return () => { clearTimeout(timeout) }
+      return () => {
+        clearTimeout(timeout)
+      }
     }
   }, [openAlert])
 
@@ -35,7 +37,7 @@ const AlertsSnackbar: FC = () => {
         sx={{
           width: '100%'
         }}
-        variant='filled'
+        variant="filled"
       >
         <AlertTitle>{alert?.title}</AlertTitle>
         {alert?.message}

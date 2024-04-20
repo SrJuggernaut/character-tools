@@ -105,7 +105,7 @@ const ImportCharacterBook: FC = () => {
               multiple: true
             }}
           >
-            <FontAwesomeIcon icon={faFileImport} size='3x' />
+            <FontAwesomeIcon icon={faFileImport} size="3x" />
             <Typography variant="subtitle1" component="h2" align="center" gutterBottom>
               Upload character files
             </Typography>
@@ -144,7 +144,7 @@ const ImportCharacterBook: FC = () => {
                                   color: 'success.main'
                                 }}
                               >
-                                <FontAwesomeIcon icon={faCheckCircle} size='lg' />
+                                <FontAwesomeIcon icon={faCheckCircle} size="lg" />
                               </ListItemIcon>
                               <ListItemText primary={importedFile.data.name} secondary={`Successfully imported ${importedFile.file.name}`} />
                             </ListItem>
@@ -157,7 +157,7 @@ const ImportCharacterBook: FC = () => {
                                 color: 'error.main'
                               }}
                             >
-                              <FontAwesomeIcon icon={faTimesCircle} size='lg' />
+                              <FontAwesomeIcon icon={faTimesCircle} size="lg" />
                             </ListItemIcon>
                             <ListItemText primary={importedFile.file.name} secondary={`Error importing ${importedFile.file.name}: ${importedFile.message}`} />
                           </ListItem>
@@ -168,9 +168,9 @@ const ImportCharacterBook: FC = () => {
                   {processingFile !== undefined && (
                     <ListItem key={`imported-char-${processingFile.name}`} disablePadding>
                       <ListItemIcon>
-                        <FontAwesomeIcon icon={faSpinner} spin size='lg' />
+                        <FontAwesomeIcon icon={faSpinner} spin size="lg" />
                       </ListItemIcon>
-                      <ListItemText primary={processingFile.name} secondary='Processing...' />
+                      <ListItemText primary={processingFile.name} secondary="Processing..." />
                     </ListItem>
                   )}
                   {uploadedFiles.length > 0 && (
@@ -181,18 +181,17 @@ const ImportCharacterBook: FC = () => {
                       {uploadedFiles.map((file, index) => (
                         <ListItem key={`uploaded-char-${index}`} disablePadding>
                           <ListItemIcon>
-                            <FontAwesomeIcon icon={faHourglass} size='lg' />
+                            <FontAwesomeIcon icon={faHourglass} size="lg" />
                           </ListItemIcon>
-                          <ListItemText primary={file.name} secondary='Processing...' />
+                          <ListItemText primary={file.name} secondary="Processing..." />
                         </ListItem>
                       ))}
                     </>
                   )}
                 </List>
               </>
-            )
-            : (<></>)
-          }
+              )
+            : (<></>)}
         </div>
       </Box>
     </>

@@ -21,8 +21,8 @@ const Error: FC = () => {
           }}
         >
           <Typography
-            variant='h1'
-            align='center'
+            variant="h1"
+            align="center"
             gutterBottom
           >
             {error.status}
@@ -30,10 +30,10 @@ const Error: FC = () => {
             {error.statusText}
           </Typography>
           <Button
-            variant='contained'
+            variant="contained"
             component={Link}
             to="/"
-            size='large'
+            size="large"
             css={{
               marginBlock: '1rem'
             }}

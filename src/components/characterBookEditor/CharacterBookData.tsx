@@ -44,7 +44,7 @@ const CharacterBookData: FC = () => {
         label="Scan Depth"
         value={characterEditorState.scan_depth}
         onChange={(_, value) => {
-          dispatch(updateCharacterBookEditor({ scan_depth: value }))
+          dispatch(updateCharacterBookEditor({ scan_depth: value ?? undefined }))
         }}
         error={characterEditorState.scan_depth === undefined}
         helperText={characterEditorState.scan_depth === undefined ? 'Scan Depth is required' : 'The number of messages to scan for keywords.'}
@@ -56,7 +56,7 @@ const CharacterBookData: FC = () => {
         label="Token Budget"
         value={characterEditorState.token_budget}
         onChange={(_, value) => {
-          dispatch(updateCharacterBookEditor({ token_budget: value }))
+          dispatch(updateCharacterBookEditor({ token_budget: value ?? undefined }))
         }}
         error={characterEditorState.token_budget === undefined}
         helperText={characterEditorState.token_budget === undefined ? 'Token Budget is required' : 'The number of tokens to spend with data from the CharacterBook.'}

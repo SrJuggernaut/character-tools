@@ -11,7 +11,7 @@ const store = configureStore({
     characterEditor: characterEditorSlice.reducer,
     characterBookEditor: characterBookEditorSlice.reducer
   },
-  middleware (getDefaultMiddleware) {
+  middleware(getDefaultMiddleware) {
     return getDefaultMiddleware({
       serializableCheck: {
         ignoredPaths: ['feedback.dialog'],

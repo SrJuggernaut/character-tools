@@ -48,10 +48,10 @@ const CharacterBookEditorPage: FC = () => {
             allowScrollButtonsMobile
             onChange={(_, newValue) => { setCurrentTab(newValue) }}
           >
-            <Tab icon={<FontAwesomeIcon icon={faFileImport}/>} label="Import or Create" value="import-create" />
-            <Tab icon={<FontAwesomeIcon icon={faBook}/>} label="Character Book Data" value="characterbook-data" />
-            <Tab icon={<FontAwesomeIcon icon={BookFont}/>} label="Entries" value="entries" />
-            <Tab icon={<FontAwesomeIcon icon={faFileExport}/>} label="Export or Save" value="export-or-save" />
+            <Tab icon={<FontAwesomeIcon icon={faFileImport} />} label="Import or Create" value="import-create" />
+            <Tab icon={<FontAwesomeIcon icon={faBook} />} label="Character Book Data" value="characterbook-data" />
+            <Tab icon={<FontAwesomeIcon icon={BookFont} />} label="Entries" value="entries" />
+            <Tab icon={<FontAwesomeIcon icon={faFileExport} />} label="Export or Save" value="export-or-save" />
           </TabList>
         </Box>
         <div

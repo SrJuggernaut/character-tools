@@ -27,21 +27,24 @@ const MultilineTextField: FC<MultilineTextFieldProps> = ({ value, helperText, ..
         value={value}
         multiline
         minRows={4}
-        helperText={
+        helperText={(
           <>
             {tokenCount !== undefined && (
-              <Tooltip title={(<>
-                <b>Token count:</b> {tokenCount}
-                <br />
-                <small>Token count may not be accurate due to macro replacement and other factors.</small>
-              </>)}>
-                <Chip label={tokenCount} size="small" color="info"/>
+              <Tooltip title={(
+                <>
+                  <b>Token count:</b> {tokenCount}
+                  <br />
+                  <small>Token count may not be accurate due to macro replacement and other factors.</small>
+                </>
+              )}
+              >
+                <Chip label={tokenCount} size="small" color="info" />
               </Tooltip>
             )}
             &nbsp;
             {helperText}
           </>
-        }
+        )}
       />
     </>
   )

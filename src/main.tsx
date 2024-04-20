@@ -20,7 +20,8 @@ const Main: FC = () => {
           <App />
         </StateConsumer>
       </Provider>
-    </React.StrictMode>)
+    </React.StrictMode>
+  )
 }
 
 ReactDOM.createRoot(

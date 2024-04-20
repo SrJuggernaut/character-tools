@@ -25,8 +25,8 @@ const CopyButton: FC<CopyButtonProps> = ({ children, textToCopy, tooltip }) => {
   return (
     <Tooltip title={tooltip !== undefined ? tooltip : 'Copy to Clipboard'}>
       <Button
-        size='small'
-        variant='text'
+        size="small"
+        variant="text"
         color={copyState === 'success' ? 'success' : copyState === 'error' ? 'error' : undefined}
         sx={{ textTransform: 'none' }}
         onClick={() => {

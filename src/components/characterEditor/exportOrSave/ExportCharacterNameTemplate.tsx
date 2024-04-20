@@ -12,7 +12,7 @@ const ExportCharacterNameTemplate: FC = () => {
   const dispatch = useAppDispatch()
   return (
     <>
-      <Typography variant='body2'>
+      <Typography variant="body2">
         The template used to name exported character cards. The following variables are available:
       </Typography>
       <div
@@ -26,42 +26,42 @@ const ExportCharacterNameTemplate: FC = () => {
         }}
       >
         <CopyButton
-          textToCopy='{{name}}'
+          textToCopy="{{name}}"
         >
           {'{{name}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{id}}'
-          tooltip='if the character has no id, this will be empty string'
+          textToCopy="{{id}}"
+          tooltip="if the character has no id, this will be empty string"
         >
           {'{{id}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{version}}'
-          tooltip='if the character has no version, this will be empty string'
+          textToCopy="{{version}}"
+          tooltip="if the character has no version, this will be empty string"
         >
           {'{{version}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{creator}}'
-          tooltip='if the character has no creator, this will be empty string'
+          textToCopy="{{creator}}"
+          tooltip="if the character has no creator, this will be empty string"
         >
           {'{{creator}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{date}}'
-          tooltip='{{date}} is equivalent to {{date yyyy-MM-dd-HH-mm}}'
+          textToCopy="{{date}}"
+          tooltip="{{date}} is equivalent to {{date yyyy-MM-dd-HH-mm}}"
         >
           {'{{date [formatString]}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{spec}}'
+          textToCopy="{{spec}}"
         >
           {'{{spec}}'}
         </CopyButton>
       </div>
-      <Typography variant='caption' component='div'>
-        The format string is optional and defaults to yyyy-MM-dd-HH-mm. See <Link target="_blank" rel="noopener noreferrer" href='https://date-fns.org/docs/format'>date-fns format documentation</Link> for more information.
+      <Typography variant="caption" component="div">
+        The format string is optional and defaults to yyyy-MM-dd-HH-mm. See <Link target="_blank" rel="noopener noreferrer" href="https://date-fns.org/docs/format">date-fns format documentation</Link> for more information.
       </Typography>
       <TextField
         id="character-card-export-name-template"
@@ -75,7 +75,7 @@ const ExportCharacterNameTemplate: FC = () => {
         InputProps={{
           endAdornment: (
             <>
-              <Tooltip title='Reset to Default'>
+              <Tooltip title="Reset to Default">
                 <IconButton
                   onClick={() => {
                     dispatch(setCharacterCardExportNameTemplate('{{name}}-spec{{spec}}'))

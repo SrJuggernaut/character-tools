@@ -34,9 +34,9 @@ const CharacterBookLibrary: FC = () => {
             allowScrollButtonsMobile
             onChange={(_, newValue) => { setCurrentTab(newValue) }}
           >
-            <Tab icon={<FontAwesomeIcon icon={Books}/>} label="Character Book Library" value="Library" />
-            <Tab icon={<FontAwesomeIcon icon={bookArrowUp}/>} label="Import Character Book" value="Import" />
-            <Tab icon={<FontAwesomeIcon icon={Books}/>} label="Manage Library" value="Manage" />
+            <Tab icon={<FontAwesomeIcon icon={Books} />} label="Character Book Library" value="Library" />
+            <Tab icon={<FontAwesomeIcon icon={bookArrowUp} />} label="Import Character Book" value="Import" />
+            <Tab icon={<FontAwesomeIcon icon={Books} />} label="Manage Library" value="Manage" />
           </TabList>
         </Box>
 
