@@ -38,7 +38,7 @@ const MultilineTextField: FC<MultilineTextFieldProps> = ({ value, helperText, ..
                 </>
               )}
               >
-                <Chip label={tokenCount} size="small" color="info" />
+                <Chip component="span" label={tokenCount} size="small" color="info" />
               </Tooltip>
             )}
             &nbsp;

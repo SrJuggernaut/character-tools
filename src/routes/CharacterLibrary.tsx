@@ -38,7 +38,6 @@ const CharacterLibrary: FC = () => {
             <Tab icon={<FontAwesomeIcon icon={faUsersBetweenLines} />} label="Manage Library" value="Manage" />
           </TabList>
         </Box>
-
         <div
           css={{
             marginBottom: '72px'
