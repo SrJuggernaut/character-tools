@@ -44,8 +44,10 @@ const SettingsDialog: FC = () => {
               dispatch(setTokenizer(event.target.value as AppState['tokenizer']))
             }}
           >
-            <MenuItem value="cl100k_base">GPT Tokenizer</MenuItem>
+            <MenuItem value="cl100k_base">GPT-3, GPT-3.5, GPT-4</MenuItem>
+            <MenuItem value="o200k_base">GPT-4o</MenuItem>
             <MenuItem value="llama">LLAMA Tokenizer</MenuItem>
+            <MenuItem value="llama3">LLAMA3 Tokenizer</MenuItem>
           </Select>
           <FormHelperText
             id="tokenizer-helper-text"

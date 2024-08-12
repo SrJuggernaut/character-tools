@@ -1,6 +1,6 @@
 import CopyButton from '@/components/CopyButton'
 import ImageDrop from '@/components/ImageDrop'
-import MultilineTextField from '@/components/ui/form/MultilineTextField'
+import TextFieldWithTokenCounter from '@/components/ui/form/TextFieldWithTokenCounter'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
@@ -33,7 +33,7 @@ const CharacterData: FC = () => {
         fullWidth
         margin="normal"
       />
-      <MultilineTextField
+      <TextFieldWithTokenCounter
         id="description"
         label="Description"
         value={characterEditorState.description}
@@ -41,10 +41,12 @@ const CharacterData: FC = () => {
         error={characterEditorState.description === ''}
         helperText={characterEditorState.description === '' ? 'Description is required' : 'Used to add the character description and the rest that the AI should know. This will always be present in the prompt, so all the important facts should be included here.'}
         variant="outlined"
+        multiline
+        minRows={3}
         fullWidth
         margin="normal"
       />
-      <TextField
+      <TextFieldWithTokenCounter
         id="personality"
         label="Personality"
         value={characterEditorState.personality}
@@ -54,7 +56,7 @@ const CharacterData: FC = () => {
         fullWidth
         margin="normal"
       />
-      <MultilineTextField
+      <TextFieldWithTokenCounter
         id="mes_example"
         label="Message Example"
         value={characterEditorState.mes_example}
@@ -62,11 +64,13 @@ const CharacterData: FC = () => {
         helperText={(
           <>Describes how the character speaks. Before each example, you need to add the <CopyButton textToCopy="<START>">&lt;START&gt;</CopyButton> macro.</>
         )}
+        multiline
+        minRows={3}
         variant="outlined"
         fullWidth
         margin="normal"
       />
-      <TextField
+      <TextFieldWithTokenCounter
         id="scenario"
         label="Scenario"
         value={characterEditorState.scenario}
@@ -76,12 +80,14 @@ const CharacterData: FC = () => {
         fullWidth
         margin="normal"
       />
-      <MultilineTextField
+      <TextFieldWithTokenCounter
         id="first_mes"
         label="First Message"
         value={characterEditorState.first_mes}
         onChange={handleChange}
         helperText="The First Message is an important thing that sets exactly how and in what style the character will communicate."
+        multiline
+        minRows={3}
         variant="outlined"
         fullWidth
         margin="normal"
@@ -91,7 +97,7 @@ const CharacterData: FC = () => {
         You can add as many alternative greetings as you wish to your character. These greetings will be used as alternatives to the First Message.
       </Typography>
       {characterEditorState.alternate_greetings.length > 0 && characterEditorState.alternate_greetings.map((greeting, index) => (
-        <MultilineTextField
+        <TextFieldWithTokenCounter
           key={`alternate_greeting_${index}`}
           id={`alternate_greeting[${index}]`}
           label={`Alternate Greeting ${index + 1}`}
@@ -118,6 +124,8 @@ const CharacterData: FC = () => {
               </InputAdornment>
             )
           }}
+          multiline
+          minRows={2}
           variant="outlined"
           fullWidth
           margin="normal"
