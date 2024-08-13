@@ -12,6 +12,7 @@ export interface CharacterBookEntry {
   content: string
   insertion_order: number
   priority?: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Since an extension could use any type of value
   extensions: Record<string, any>
 }
 
@@ -21,6 +22,7 @@ export interface CharacterBookData {
   scan_depth?: number
   token_budget?: number
   recursive_scanning?: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Since an extension could use any type of value
   extensions: Record<string, any>
   entries: CharacterBookEntry[]
 }

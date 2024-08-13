@@ -1,6 +1,6 @@
 export const b64EncodeUnicode = (base64String: string): string => {
   return btoa(encodeURIComponent(base64String).replace(/%([0-9A-F]{2})/g,
-    function toSolidBytes (_, p1: string) {
+    function toSolidBytes(_, p1: string) {
       return String.fromCharCode(parseInt(p1, 16))
     })
   )

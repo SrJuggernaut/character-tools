@@ -13,7 +13,9 @@ const FeedbackDialog: FC = () => {
       const timeout = setTimeout(() => {
         dispatch(clearDialog())
       }, 500)
-      return () => { clearTimeout(timeout) }
+      return () => {
+        clearTimeout(timeout)
+      }
     }
   }, [openDialog])
 
@@ -21,9 +23,9 @@ const FeedbackDialog: FC = () => {
     <Dialog
       open={openDialog}
       keepMounted={false}
-      maxWidth='sm'
+      maxWidth="sm"
     >
-      <DialogTitle variant='subtitle1'>{dialog?.title}</DialogTitle>
+      <DialogTitle variant="subtitle1">{dialog?.title}</DialogTitle>
       <DialogContent>
         {dialog?.content}
       </DialogContent>
@@ -34,7 +36,7 @@ const FeedbackDialog: FC = () => {
               key={index}
               type="button"
               color={action.severity}
-              variant='contained'
+              variant="contained"
               onClick={() => {
                 if (action.onClick !== undefined) {
                   action.onClick()

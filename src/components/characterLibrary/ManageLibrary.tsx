@@ -87,8 +87,7 @@ const ManageLibrary: FC = () => {
                 message: error.message
               }))
             })
-        }
-        }
+        }}
       >
         Export library
       </Button>

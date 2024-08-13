@@ -14,16 +14,16 @@ const SettingsDialog: FC = () => {
       open={openSettings}
       keepMounted={false}
       fullWidth
-      maxWidth='sm'
+      maxWidth="sm"
       onClose={() => {
         dispatch(setOpenSettings(false))
       }}
     >
-      <DialogTitle variant='subtitle1'>
+      <DialogTitle variant="subtitle1">
         Settings
       </DialogTitle>
       <DialogContent>
-        <Typography variant='subtitle2'>
+        <Typography variant="subtitle2">
           Tokenizer
         </Typography>
         <FormControl
@@ -31,66 +31,68 @@ const SettingsDialog: FC = () => {
           margin="normal"
         >
           <InputLabel
-            id='tokenizer-label'
+            id="tokenizer-label"
           >
             Tokenizer
           </InputLabel>
           <Select
-            labelId='tokenizer-label'
-            id='tokenizer'
+            labelId="tokenizer-label"
+            id="tokenizer"
             value={tokenizer}
-            label='Tokenizer'
+            label="Tokenizer"
             onChange={(event) => {
               dispatch(setTokenizer(event.target.value as AppState['tokenizer']))
             }}
           >
-            <MenuItem value='cl100k_base'>GPT Tokenizer</MenuItem>
-            <MenuItem value='llama'>LLAMA Tokenizer</MenuItem>
+            <MenuItem value="cl100k_base">GPT-3, GPT-3.5, GPT-4</MenuItem>
+            <MenuItem value="o200k_base">GPT-4o</MenuItem>
+            <MenuItem value="llama">LLAMA Tokenizer</MenuItem>
+            <MenuItem value="llama3">LLAMA3 Tokenizer</MenuItem>
           </Select>
           <FormHelperText
-            id='tokenizer-helper-text'
+            id="tokenizer-helper-text"
           >
             Tokenizer used to estimate the number of tokens.
           </FormHelperText>
         </FormControl>
-        <Typography variant='subtitle2'>
+        <Typography variant="subtitle2">
           Character Card Export Name Template
         </Typography>
-        <Typography variant='body2'>
+        <Typography variant="body2">
           The template used to name exported character cards. The following variables are available:
         </Typography>
         <CopyButton
-          textToCopy='{{name}}'
+          textToCopy="{{name}}"
         >
           {'{{name}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{id}}'
+          textToCopy="{{id}}"
         >
           {'{{id}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{version}}'
+          textToCopy="{{version}}"
         >
           {'{{version}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{creator}}'
+          textToCopy="{{creator}}"
         >
           {'{{creator}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{date}}'
+          textToCopy="{{date}}"
         >
           {'{{date [formatString]}}'}
         </CopyButton>
         <CopyButton
-          textToCopy='{{spec}}'
+          textToCopy="{{spec}}"
         >
           {'{{spec}}'}
         </CopyButton>
-        <Typography variant='caption' component='div'>
-          The format string is optional and defaults to YYYY-MM-DD. See <a href='https://date-fns.org/v2.16.1/docs/format'>date-fns</a> for more information.
+        <Typography variant="caption" component="div">
+          The format string is optional and defaults to YYYY-MM-DD. See <a href="https://date-fns.org/v2.16.1/docs/format">date-fns</a> for more information.
         </Typography>
         <TextField
           id="character-card-export-name-template"

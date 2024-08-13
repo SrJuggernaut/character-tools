@@ -3,7 +3,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Checkbox, Chip, FormControlLabel, FormGroup, FormLabel, IconButton, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import { useState, type FC } from 'react'
-import MultilineTextField from '../ui/form/MultilineTextField'
 import NumberField from '../ui/form/NumberField'
 
 export interface EntryEditorProps {
@@ -46,7 +45,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         label="Priority"
         value={value.priority ?? 10}
         onChange={(_, newValue) => {
-          onChange({ ...value, priority: newValue })
+          onChange({ ...value, priority: newValue ?? undefined })
         }}
         error={value.priority === undefined}
         helperText="The higher the number, the higher the priority. The lower the number, the entry will be discarded first if token budget is exceeded."
@@ -58,7 +57,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         label="Insertion Order"
         value={value.insertion_order ?? 1}
         onChange={(_, newValue) => {
-          if (newValue === undefined) {
+          if (newValue === undefined || newValue === null) {
             onChange({ ...value, insertion_order: 0 })
           } else {
             onChange({ ...value, insertion_order: newValue })
@@ -88,7 +87,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         >
           <FormControlLabel
             value="before_char"
-            control={<Radio/>}
+            control={<Radio />}
             label="Before Character"
           />
           <FormControlLabel
@@ -105,7 +104,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         }}
       >
         <FormControlLabel
-          control={
+          control={(
             <Checkbox
               checked={value.enabled}
               onChange={(e) => {
@@ -113,11 +112,11 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
               }}
               name="enabled"
             />
-          }
+          )}
           label="Enabled"
         />
         <FormControlLabel
-          control={
+          control={(
             <Checkbox
               checked={value.case_sensitive ?? false}
               onChange={(e) => {
@@ -125,11 +124,11 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
               }}
               name="case_sensitive"
             />
-          }
+          )}
           label="Case Sensitive"
         />
         <FormControlLabel
-          control={
+          control={(
             <Checkbox
               checked={value.selective ?? false}
               onChange={(e) => {
@@ -137,11 +136,11 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
               }}
               name="selective"
             />
-          }
+          )}
           label="Selective"
         />
         <FormControlLabel
-          control={
+          control={(
             <Checkbox
               checked={value.constant ?? false}
               onChange={(e) => {
@@ -149,7 +148,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
               }}
               name="constant"
             />
-          }
+          )}
           label="Constant"
         />
       </FormGroup>
@@ -281,7 +280,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
           />
         </div>
       </Box>
-      <MultilineTextField
+      <TextField
         id="content"
         label="Content"
         helperText="The content of the input, this is the information that will be sent to the language model, it generally accepts macros."
@@ -289,6 +288,8 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         onChange={(e) => {
           onChange({ ...value, content: e.target.value })
         }}
+        multiline
+        minRows={3}
         variant="outlined"
         fullWidth
         margin="normal"

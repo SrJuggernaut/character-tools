@@ -61,7 +61,7 @@ export const FileToCharacterEditorState = async (file: File): Promise<CharacterE
   }
 }
 
-export const importedToCharacterEditorState = (data: any): CharacterEditorState => {
+export const importedToCharacterEditorState = (data: unknown): CharacterEditorState => {
   const v1Result = v1.safeParse(data)
   const v2Result = v2.safeParse(data)
   if (v2Result.success) {
@@ -85,7 +85,9 @@ export const characterEditorStateToV1 = (characterData: CharacterEditorState): V
 }
 
 export const characterEditorStateToV2 = async (characterData: CharacterEditorState): Promise<V2> => {
-  const { id, image, ...rest } = characterData
+  // const { id, image, ...rest } = characterData
+  delete characterData.id
+  delete characterData.image
   let characterBook: CharacterBook | undefined
   if (characterData.character_book !== undefined) {
     const characterBookEditor = await getCharacterBook(characterData.character_book)
@@ -96,7 +98,7 @@ export const characterEditorStateToV2 = async (characterData: CharacterEditorSta
     spec: 'chara_card_v2',
     spec_version: '2.0',
     data: {
-      ...rest,
+      ...characterData,
       character_book: characterBook
     }
   }

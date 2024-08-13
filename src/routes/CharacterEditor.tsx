@@ -48,11 +48,11 @@ const CharacterEditorPage: FC = () => {
             allowScrollButtonsMobile
             onChange={(_, newValue) => { setCurrentTab(newValue) }}
           >
-            <Tab icon={<FontAwesomeIcon icon={faFileImport}/>} label="Import or Create" value="import-create" />
-            <Tab icon={<FontAwesomeIcon icon={faUserCog}/>} label="Character Data" value="character-data" />
-            <Tab icon={<FontAwesomeIcon icon={faCircleInfo}/>} label="Character Metadata" value="character-metadata" />
-            <Tab icon={<FontAwesomeIcon icon={faUserGear}/>} label="Prompt Engineering" value="prompt-engineering" />
-            <Tab icon={<FontAwesomeIcon icon={faFileExport}/>} label="Export or Save" value="export-or-save" />
+            <Tab icon={<FontAwesomeIcon icon={faFileImport} />} label="Import or Create" value="import-create" />
+            <Tab icon={<FontAwesomeIcon icon={faUserCog} />} label="Character Data" value="character-data" />
+            <Tab icon={<FontAwesomeIcon icon={faCircleInfo} />} label="Character Metadata" value="character-metadata" />
+            <Tab icon={<FontAwesomeIcon icon={faUserGear} />} label="Prompt Engineering" value="prompt-engineering" />
+            <Tab icon={<FontAwesomeIcon icon={faFileExport} />} label="Export or Save" value="export-or-save" />
           </TabList>
         </Box>
         <div

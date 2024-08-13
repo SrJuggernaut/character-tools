@@ -9,7 +9,7 @@ import { nanoid } from 'nanoid'
 export class CharacterToolsDatabase extends Dexie {
   characters!: Table<CharacterDatabaseData>
   characterBooks!: Table<CharacterBookDatabaseData>
-  constructor () {
+  constructor() {
     super('CharacterToolsDatabase')
     this.version(1).stores({
       characters: 'id, name, creator, tags, character_version'
@@ -24,6 +24,7 @@ export class CharacterToolsDatabase extends Dexie {
         severity: 'warning',
         message: 'The database is being updated to version 2, this update includes support for characterBooks, if any previous character has a characterBook it will be added to the database.'
       }))
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Previous version type is no longer in the codebase, but migration requires it
       return await transaction.table('characters').toCollection().modify(async (character: any) => {
         // 1. Get the character book from the character
         const characterBook = character.character_book

@@ -20,8 +20,8 @@ const Home: FC = () => {
           zIndex: 'auto'
         }}
       >
-        <Typography variant='h1' align="center">Character Tools</Typography>
-        <Typography variant='h2' component="div" align="center">A collection of tools for creating and managing characters for AI Roleplay</Typography>
+        <Typography variant="h1" align="center">Character Tools</Typography>
+        <Typography variant="h2" component="div" align="center">A collection of tools for creating and managing characters for AI Roleplay</Typography>
         <IconButton
           aria-label="Scroll down"
           color="primary"
@@ -54,7 +54,7 @@ const Home: FC = () => {
         }}
         id="tools"
       >
-        <Typography variant='h2' component="div" align="center">Tools</Typography>
+        <Typography variant="h2" component="div" align="center">Tools</Typography>
         <div
           css={{
             display: 'grid',
