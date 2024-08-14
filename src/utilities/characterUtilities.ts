@@ -85,9 +85,6 @@ export const characterEditorStateToV1 = (characterData: CharacterEditorState): V
 }
 
 export const characterEditorStateToV2 = async (characterData: CharacterEditorState): Promise<V2> => {
-  // const { id, image, ...rest } = characterData
-  delete characterData.id
-  delete characterData.image
   let characterBook: CharacterBook | undefined
   if (characterData.character_book !== undefined) {
     const characterBookEditor = await getCharacterBook(characterData.character_book)
@@ -98,7 +95,20 @@ export const characterEditorStateToV2 = async (characterData: CharacterEditorSta
     spec: 'chara_card_v2',
     spec_version: '2.0',
     data: {
-      ...characterData,
+      name: characterData.name,
+      description: characterData.description,
+      first_mes: characterData.first_mes,
+      alternate_greetings: characterData.alternate_greetings,
+      mes_example: characterData.mes_example,
+      character_version: characterData.character_version,
+      creator: characterData.creator,
+      creator_notes: characterData.creator_notes,
+      personality: characterData.personality,
+      extensions: characterData.extensions,
+      post_history_instructions: characterData.post_history_instructions,
+      scenario: characterData.scenario,
+      system_prompt: characterData.system_prompt,
+      tags: characterData.tags,
       character_book: characterBook
     }
   }
