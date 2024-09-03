@@ -22,6 +22,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/lab": "^5.0.0-alpha.173",
     "@mui/material": "^5.16.7",
+    "@mui/styles": "^6.0.0",
     "@mui/x-data-grid": "^7.12.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@stylistic/eslint-plugin": "^2.6.2",

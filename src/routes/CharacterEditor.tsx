@@ -77,6 +77,7 @@ const CharacterEditorPage: FC = () => {
           </TabPanel>
         </div>
       </TabContext>
+
     </FluidLayout>
   )
 }
