@@ -1,3 +1,4 @@
+import ToolbarDial from '@/components/characterEditor/ToolbarDial'
 import CopyButton from '@/components/CopyButton'
 import TextFieldWithTokenCounter from '@/components/ui/form/TextFieldWithTokenCounter'
 import useAppDispatch from '@/hooks/useAppDispatch'
@@ -54,45 +55,45 @@ const PromptEngingeering: FC = () => {
         characterBooks === undefined
           ? <Typography variant="body1" gutterBottom>Loading character books...</Typography>
           : (
-            <Autocomplete
-              value={
-              characterEditorState.character_book === undefined
-                ? null
-                : characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) !== undefined
-                  ? characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book)
-                  : { label: 'Not Found', value: characterEditorState.character_book }
-  }
-              onChange={(_, value) => {
-                if (value !== null) {
-                  dispatch(updateCharacterEditor({ character_book: value.value }))
-                } else {
-                  dispatch(updateCharacterEditor({ character_book: undefined }))
+              <Autocomplete
+                value={
+                  characterEditorState.character_book === undefined
+                    ? null
+                    : characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) !== undefined
+                      ? characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book)
+                      : { label: 'Not Found', value: characterEditorState.character_book }
                 }
-              }}
-              options={characterBooks ?? []}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  error={
-                  characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
-                }
-                  helperText={
-                  characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
-                    ? `Character Book with id ${characterEditorState.character_book} not found, please select a valid Character Book. Or to leave it empty, delete the value.`
-                    : undefined
-                }
-                  label="Character Book"
-                  margin="normal"
-                  fullWidth
-                />
-              )}
-              clearIcon={(
-                <FontAwesomeIcon icon={faTimes} size="xs" fixedWidth />
-              )}
-            />
+                onChange={(_, value) => {
+                  if (value !== null) {
+                    dispatch(updateCharacterEditor({ character_book: value.value }))
+                  } else {
+                    dispatch(updateCharacterEditor({ character_book: undefined }))
+                  }
+                }}
+                options={characterBooks ?? []}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    error={
+                      characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
+                    }
+                    helperText={
+                      characterEditorState.character_book !== undefined && characterBooks?.find((characterBook) => characterBook.value === characterEditorState.character_book) === undefined
+                        ? `Character Book with id ${characterEditorState.character_book} not found, please select a valid Character Book. Or to leave it empty, delete the value.`
+                        : undefined
+                    }
+                    label="Character Book"
+                    margin="normal"
+                    fullWidth
+                  />
+                )}
+                clearIcon={(
+                  <FontAwesomeIcon icon={faTimes} size="xs" fixedWidth />
+                )}
+              />
             )
       }
-
+      <ToolbarDial />
     </>
   )
 }

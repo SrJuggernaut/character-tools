@@ -1,3 +1,4 @@
+import ToolbarDial from '@/components/characterEditor/ToolbarDial'
 import CopyButton from '@/components/CopyButton'
 import ImageDrop from '@/components/ImageDrop'
 import TextFieldWithTokenCounter from '@/components/ui/form/TextFieldWithTokenCounter'
@@ -184,6 +185,7 @@ const CharacterData: FC = () => {
           )}
         </div>
       </Box>
+      <ToolbarDial />
     </>
   )
 }
