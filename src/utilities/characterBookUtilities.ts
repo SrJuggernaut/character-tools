@@ -64,7 +64,7 @@ export const characterBookToCharacterEditor = (characterBook: CharacterBook): Ch
 }
 
 export const characterEditorToCharacterBook = (characterEditor: CharacterBookEditorState): CharacterBook => {
-  const characterBook = characterEditor
+  const characterBook = { ...characterEditor }
   if (characterBook.id !== undefined) delete characterBook.id
   return characterBook
 }
