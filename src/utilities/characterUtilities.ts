@@ -35,14 +35,16 @@ export const extractCharacterData = async (file: File): Promise<ExtractCharacter
     case 'image/webp':{
       const arrayBuffer = await file.arrayBuffer()
       const exifData = ExifReader.load(arrayBuffer)
-      const userComment = exifData?.UserComment?.value as XmpTag[]
+      if (exifData === undefined || exifData.UserComment === undefined || exifData.UserComment === null) throw new Error('Invalid character card, Webp image does not contain metadata')
+      const userComment = exifData.UserComment as XmpTag
+      const userCommentValue = userComment.value as XmpTag[]
       const image = `data:image/webp;base64,${btoa(String.fromCharCode(...new Uint8Array(arrayBuffer)))}`
-      if (userComment !== undefined && userComment.length === 1 && typeof userComment[0] === 'string') {
-        const charPreParse = userComment[0]
+      if (userCommentValue !== undefined && userCommentValue.length === 1 && typeof userCommentValue[0] === 'string') {
+        const charPreParse = userCommentValue[0]
         const character = json5.parse(charPreParse)
         return { character, image }
       }
-      const character = json5.parse(exifData.UserComment?.description as string)
+      const character = json5.parse(userComment.description as string)
       return { character, image }
     }
     default:
