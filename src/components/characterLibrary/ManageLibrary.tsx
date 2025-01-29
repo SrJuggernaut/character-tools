@@ -4,7 +4,8 @@ import { deleteAllCharacters, exportCharacterCollection, importCharacterCollecti
 import { setAlert, setDialog } from '@/state/feedbackSlice'
 import { faFileImport } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Link as MuiLink, Typography } from '@mui/material'
+import { Link as ReactRouterLink } from 'react-router-dom'
 import { type FC } from 'react'
 
 const ManageLibrary: FC = () => {
@@ -67,6 +68,9 @@ const ManageLibrary: FC = () => {
       <Typography variant="h2" gutterBottom>Export Library</Typography>
       <Typography variant="body1" gutterBottom>
         Exporting the library will download a JSON file containing all characters in the library.
+      </Typography>
+      <Typography variant="caption" component="div" sx={{ color: 'warning.main' }}>
+        The 'characterbooks' will not be included in this file, if you want them to be included it is recommended to <MuiLink component={ReactRouterLink} to="/manage-database">export the entire database</MuiLink>
       </Typography>
       <Button
         type="button"
