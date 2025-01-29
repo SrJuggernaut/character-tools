@@ -1,5 +1,5 @@
 import Books from '@/components/icons/books'
-import { faBars, faBook, faHome, faUserPen, faUsersBetweenLines, type IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBook, faDatabase, faHome, faUserPen, faUsersBetweenLines, type IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, Tooltip } from '@mui/material'
 import { useState, type FC } from 'react'
@@ -16,7 +16,8 @@ const MenuLinks: MenuLink[] = [
   { label: 'Character Editor', url: '/character-editor', icon: faUserPen },
   { label: 'Character Library', url: '/character-library', icon: faUsersBetweenLines },
   { label: 'CharacterBook Editor', url: '/characterbook-editor', icon: faBook },
-  { label: 'CharacterBook Library', url: '/characterbook-library', icon: Books }
+  { label: 'CharacterBook Library', url: '/characterbook-library', icon: Books },
+  { label: 'Manage Database', url: '/manage-database', icon: faDatabase }
 ]
 
 const NavigationMenu: FC = () => {

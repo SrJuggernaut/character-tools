@@ -17,6 +17,7 @@ const Fluid: FC<FluidProps> = ({
         sx={(theme) => ({
           minHeight: 'calc(100vh - 70px)',
           padding: theme.spacing(2),
+          marginBlockStart: '70px',
           position: 'relative'
         })}
       >
