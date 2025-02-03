@@ -43,6 +43,7 @@ const ImportOrCreate: FC = () => {
             onClick: () => {
               createCharacterBook(characterBookEditor)
                 .then((characterBookAdded) => {
+                  character.character_book = characterBookAdded.id
                   dispatch(setCharacterEditor({
                     ...character,
                     character_book: characterBookAdded.id
