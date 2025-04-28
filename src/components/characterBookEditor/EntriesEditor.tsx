@@ -5,7 +5,7 @@ import { type CharacterBookEntry } from '@/types/lorebook'
 import { faArrowLeft, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, IconButton, Paper, Typography } from '@mui/material'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'motion/react'
 import { useState, type FC } from 'react'
 import EntryEditor from './EntryEditor'
 
