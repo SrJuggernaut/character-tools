@@ -1,7 +1,7 @@
 import { type CharacterBookEditorState } from '@/types/lorebook'
+import { replaceDateInTemplate } from '@/utilities/date'
 import { type CharacterBook, type V1, type V2, v2 } from 'character-card-utils'
 import { z } from 'zod'
-import { replaceDateInTemplate } from './date'
 
 const characterBookEntrySchema = z.object({
   keys: z.array(z.string()),

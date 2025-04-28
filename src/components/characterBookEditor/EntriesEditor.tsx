@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, IconButton, Paper, Typography } from '@mui/material'
 import { AnimatePresence, motion } from 'motion/react'
 import { type FC, useState } from 'react'
-import EntryEditor from './EntryEditor'
+import EntryEditor from '@/components/characterBookEditor/EntryEditor'
 
 const EntriesEditor: FC = () => {
   const [editingEntry, setEditingEntry] = useState<number | undefined>(

@@ -4,7 +4,7 @@ import useAppSelector from '@/hooks/useAppSelector'
 import { ThemeProvider, createTheme } from '@mui/material'
 import { type FC, type ReactNode, useMemo } from 'react'
 import { darkTheme, lightTheme } from 'srjuggernaut-mui-theme'
-import SettingsDialog from './SettingsDialog'
+import SettingsDialog from '@/components/state/SettingsDialog'
 
 export interface StateConsumerProps {
   children?: ReactNode
