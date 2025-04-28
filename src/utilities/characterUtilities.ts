@@ -6,6 +6,7 @@ import {
   b64DecodeUnicode,
   b64EncodeUnicode
 } from '@/utilities/stringConversion'
+import { zodErrorToString } from '@/utilities/zod'
 import {
   type CharacterBook,
   type V1,
@@ -99,11 +100,12 @@ export const FileToCharacterEditorState = async (
 export const importedToCharacterEditorState = (
   data: unknown
 ): CharacterEditorState => {
-  const v1Result = v1.safeParse(data)
   const v2Result = v2.safeParse(data)
   if (v2Result.success) {
     return { ...v2Result.data.data, character_book: undefined }
-  } else if (v1Result.success) {
+  }
+  const v1Result = v1.safeParse(data)
+  if (v1Result.success) {
     return {
       ...v1Result.data,
       alternate_greetings: [],
@@ -116,7 +118,15 @@ export const importedToCharacterEditorState = (
       extensions: {}
     }
   } else {
-    throw new Error('Imported data is not a valid character')
+    //@ts-expect-error Checking if data is trying to follow the V2 Spec
+    if (data.spec === ('chara_card_v2' as V2['spec'])) {
+      throw new Error(
+        `Imported data is not a valid character, ${zodErrorToString(v2Result.error)}`
+      )
+    }
+    throw new Error(
+      `Imported data is not a valid character, ${zodErrorToString(v1Result.error)}`
+    )
   }
 }
 
