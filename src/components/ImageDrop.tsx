@@ -42,7 +42,6 @@ const ImageDrop: FC<ImageDropProps> = ({ onDropedImage }) => {
           onDropedImage(imageUrl)
         })
         .catch((error) => {
-          console.error(error)
           if (error instanceof Error) {
             dispatch(
               setAlert({
@@ -51,14 +50,15 @@ const ImageDrop: FC<ImageDropProps> = ({ onDropedImage }) => {
                 severity: 'error'
               })
             )
+          } else {
+            dispatch(
+              setAlert({
+                title: 'Error while importing character',
+                message: 'The character could not be imported',
+                severity: 'error'
+              })
+            )
           }
-          dispatch(
-            setAlert({
-              title: 'Error while importing character',
-              message: 'The character could not be imported',
-              severity: 'error'
-            })
-          )
         })
     })
   }, [])

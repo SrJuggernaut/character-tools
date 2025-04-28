@@ -1,8 +1,8 @@
 import appSlice from '@/state/appSlice'
 import { configureStore } from '@reduxjs/toolkit'
-import characterBookEditorSlice from './characterBookEditorSlice'
-import characterEditorSlice from './characterEditorSlice'
-import feedbackSlice from './feedbackSlice'
+import characterBookEditorSlice from '@/state/characterBookEditorSlice'
+import characterEditorSlice from '@/state/characterEditorSlice'
+import feedbackSlice from '@/state/feedbackSlice'
 
 const store = configureStore({
   reducer: {

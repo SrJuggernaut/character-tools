@@ -85,14 +85,15 @@ const ImportOrCreate: FC = () => {
                             severity: 'error'
                           })
                         )
+                      } else {
+                        dispatch(
+                          setAlert({
+                            title: 'Error while importing character book',
+                            message: 'The character book could not be imported',
+                            severity: 'error'
+                          })
+                        )
                       }
-                      dispatch(
-                        setAlert({
-                          title: 'Error while importing character book',
-                          message: 'The character book could not be imported',
-                          severity: 'error'
-                        })
-                      )
                     })
                 }
               }
@@ -130,14 +131,15 @@ const ImportOrCreate: FC = () => {
                 severity: 'error'
               })
             )
+          } else {
+            dispatch(
+              setAlert({
+                title: 'Error while importing character',
+                message: 'The character could not be imported',
+                severity: 'error'
+              })
+            )
           }
-          dispatch(
-            setAlert({
-              title: 'Error while importing character',
-              message: 'The character could not be imported',
-              severity: 'error'
-            })
-          )
         })
     },
     [handleImport]

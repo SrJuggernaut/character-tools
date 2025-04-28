@@ -110,6 +110,14 @@ const SaveCharacter: FC = () => {
                       message: error.message
                     })
                   )
+                } else {
+                  dispatch(
+                    setAlert({
+                      severity: 'error',
+                      title: 'Error updating character',
+                      message: 'Unknown error while updating character'
+                    })
+                  )
                 }
               })
             }}
@@ -127,6 +135,14 @@ const SaveCharacter: FC = () => {
                       severity: 'error',
                       title: 'Error saving character',
                       message: error.message
+                    })
+                  )
+                } else {
+                  dispatch(
+                    setAlert({
+                      severity: 'error',
+                      title: 'Error saving character',
+                      message: 'Unknown error while saving character'
                     })
                   )
                 }
@@ -149,6 +165,14 @@ const SaveCharacter: FC = () => {
                     severity: 'error',
                     title: 'Error saving character',
                     message: error.message
+                  })
+                )
+              } else {
+                dispatch(
+                  setAlert({
+                    severity: 'error',
+                    title: 'Error saving character',
+                    message: 'Unknown error while saving character'
                   })
                 )
               }

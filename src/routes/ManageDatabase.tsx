@@ -99,13 +99,24 @@ const ManageDatabase: FC = () => {
               window.URL.revokeObjectURL(url)
             })
             .catch((error) => {
-              dispatch(
-                setAlert({
-                  title: 'Error exporting database',
-                  message: error.message,
-                  severity: 'error'
-                })
-              )
+              if (error instanceof Error) {
+                dispatch(
+                  setAlert({
+                    title: 'Error exporting database',
+                    message: error.message,
+                    severity: 'error'
+                  })
+                )
+              } else {
+                dispatch(
+                  setAlert({
+                    title: 'Error exporting database',
+                    message:
+                      'An unknown error occurred while exporting the database',
+                    severity: 'error'
+                  })
+                )
+              }
             })
         }}
       >
@@ -152,13 +163,24 @@ const ManageDatabase: FC = () => {
                     )
                   })
                   .catch((error) => {
-                    dispatch(
-                      setAlert({
-                        title: 'Error importing database',
-                        message: error.message,
-                        severity: 'error'
-                      })
-                    )
+                    if (error instanceof Error) {
+                      dispatch(
+                        setAlert({
+                          title: 'Error importing database',
+                          message: error.message,
+                          severity: 'error'
+                        })
+                      )
+                    } else {
+                      dispatch(
+                        setAlert({
+                          title: 'Error importing database',
+                          message:
+                            'An unknown error occurred while importing the database',
+                          severity: 'error'
+                        })
+                      )
+                    }
                   })
               }
             }}

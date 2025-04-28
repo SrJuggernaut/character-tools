@@ -25,7 +25,7 @@ import {
   Typography
 } from '@mui/material'
 import { type FC, useCallback, useState } from 'react'
-import ExportCharacterBookNameTemplate from './ExportCharacterBookNameTemplate'
+import ExportCharacterBookNameTemplate from '@/components/characterBookEditor/ExportCharacterBookNameTemplate'
 
 const ExportOrSave: FC = () => {
   const dispatch = useAppDispatch()

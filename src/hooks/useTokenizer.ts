@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import useAppSelector from './useAppSelector'
+import useAppSelector from '@/hooks/useAppSelector'
 
 const useTokenizer = () => {
   const tokenizerID = useAppSelector((state) => state.app.tokenizer)

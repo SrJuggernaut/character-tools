@@ -1,10 +1,12 @@
 import { getCharacterBook } from '@/services/characterBooks'
 import { type CharacterEditorState } from '@/types/character'
+import { replaceDateInTemplate } from '@/utilities/date'
 import imageToPng from '@/utilities/imageToPng'
 import {
   b64DecodeUnicode,
   b64EncodeUnicode
 } from '@/utilities/stringConversion'
+import { zodErrorToString } from '@/utilities/zod'
 import {
   type CharacterBook,
   type V1,
@@ -15,8 +17,7 @@ import {
 import ExifReader, { type XmpTag } from 'exifreader'
 import json5 from 'json5'
 import { addMetadataFromBase64DataURI, getMetadata } from 'meta-png'
-import { characterEditorToCharacterBook } from './characterBookUtilities'
-import { replaceDateInTemplate } from './date'
+import { characterEditorToCharacterBook } from '@/utilities/characterBookUtilities'
 
 interface ExtractCharacterDataReturn {
   character: V1 | V2
@@ -99,11 +100,12 @@ export const FileToCharacterEditorState = async (
 export const importedToCharacterEditorState = (
   data: unknown
 ): CharacterEditorState => {
-  const v1Result = v1.safeParse(data)
   const v2Result = v2.safeParse(data)
   if (v2Result.success) {
     return { ...v2Result.data.data, character_book: undefined }
-  } else if (v1Result.success) {
+  }
+  const v1Result = v1.safeParse(data)
+  if (v1Result.success) {
     return {
       ...v1Result.data,
       alternate_greetings: [],
@@ -116,7 +118,15 @@ export const importedToCharacterEditorState = (
       extensions: {}
     }
   } else {
-    throw new Error('Imported data is not a valid character')
+    //@ts-expect-error Checking if data is trying to follow the V2 Spec
+    if (data.spec === ('chara_card_v2' as V2['spec'])) {
+      throw new Error(
+        `Imported data is not a valid character, ${zodErrorToString(v2Result.error)}`
+      )
+    }
+    throw new Error(
+      `Imported data is not a valid character, ${zodErrorToString(v1Result.error)}`
+    )
   }
 }
 

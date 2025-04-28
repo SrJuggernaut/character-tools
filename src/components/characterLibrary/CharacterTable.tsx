@@ -213,15 +213,15 @@ const CharacterTable: FC = () => {
                                   severity: 'error'
                                 })
                               )
-                              return
+                            } else {
+                              dispatch(
+                                setAlert({
+                                  title: 'Error deleting character',
+                                  message: `Character ${params.row.name} could not be deleted`,
+                                  severity: 'error'
+                                })
+                              )
                             }
-                            dispatch(
-                              setAlert({
-                                title: 'Error deleting character',
-                                message: `Character ${params.row.name} could not be deleted`,
-                                severity: 'error'
-                              })
-                            )
                           })
                       }
                     }
