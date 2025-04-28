@@ -3,7 +3,7 @@ import { Button, Typography } from '@mui/material'
 import { type FC } from 'react'
 import { Link, isRouteErrorResponse, useRouteError } from 'react-router-dom'
 
-const Error: FC = () => {
+const ErrorRoute: FC = () => {
   const error = useRouteError()
   if (isRouteErrorResponse(error)) {
     return (
@@ -46,4 +46,4 @@ const Error: FC = () => {
   }
 }
 
-export default Error
+export default ErrorRoute

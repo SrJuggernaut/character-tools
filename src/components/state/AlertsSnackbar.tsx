@@ -2,7 +2,7 @@ import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { clearAlert, closeAlert } from '@/state/feedbackSlice'
 import { Alert, AlertTitle, Snackbar } from '@mui/material'
-import { useEffect, type FC } from 'react'
+import { type FC, useEffect } from 'react'
 
 const AlertsSnackbar: FC = () => {
   const { alert, openAlert } = useAppSelector((state) => state.feedback)

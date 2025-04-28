@@ -1,3 +1,4 @@
+import CopyButton from '@/components/CopyButton'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { setCharacterBookExportNameTemplate } from '@/state/appSlice'
@@ -5,16 +6,18 @@ import { faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconButton, Link, TextField, Tooltip, Typography } from '@mui/material'
 import { type FC } from 'react'
-import CopyButton from '../CopyButton'
 
 const ExportCharacterBookNameTemplate: FC = () => {
-  const characterBookExportNameTemplate = useAppSelector((state) => state.app.characterBookExportNameTemplate)
+  const characterBookExportNameTemplate = useAppSelector(
+    (state) => state.app.characterBookExportNameTemplate
+  )
   const dispatch = useAppDispatch()
 
   return (
     <>
       <Typography variant="body2">
-        The template used to name exported Character Book. The following variables are available:
+        The template used to name exported Character Book. The following
+        variables are available:
       </Typography>
       <div
         css={{
@@ -26,11 +29,7 @@ const ExportCharacterBookNameTemplate: FC = () => {
           gap: '1rem'
         }}
       >
-        <CopyButton
-          textToCopy="{{name}}"
-        >
-          {'{{name}}'}
-        </CopyButton>
+        <CopyButton textToCopy="{{name}}">{'{{name}}'}</CopyButton>
         <CopyButton
           textToCopy="{{id}}"
           tooltip="if the character has no id, this will be empty string"
@@ -43,8 +42,19 @@ const ExportCharacterBookNameTemplate: FC = () => {
         >
           {'{{date [formatString]}}'}
         </CopyButton>
-        <Typography variant="caption" component="div">
-          The format string is optional and defaults to yyyy-MM-dd-HH-mm. See <Link target="_blank" rel="noopener noreferrer" href="https://date-fns.org/docs/format">date-fns format documentation</Link>  for more information.
+        <Typography
+          variant="caption"
+          component="div"
+        >
+          The format string is optional and defaults to yyyy-MM-dd-HH-mm. See{' '}
+          <Link
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://date-fns.org/docs/format"
+          >
+            date-fns format documentation
+          </Link>{' '}
+          for more information.
         </Typography>
         <TextField
           id="character-card-export-name-template"
@@ -61,10 +71,17 @@ const ExportCharacterBookNameTemplate: FC = () => {
                 <Tooltip title="Reset to Default">
                   <IconButton
                     onClick={() => {
-                      dispatch(setCharacterBookExportNameTemplate('{{name}}-characterBook'))
+                      dispatch(
+                        setCharacterBookExportNameTemplate(
+                          '{{name}}-characterBook'
+                        )
+                      )
                     }}
                   >
-                    <FontAwesomeIcon icon={faUndo} size="sm" />
+                    <FontAwesomeIcon
+                      icon={faUndo}
+                      size="sm"
+                    />
                   </IconButton>
                 </Tooltip>
               </>

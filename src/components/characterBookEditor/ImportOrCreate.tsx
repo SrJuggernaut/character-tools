@@ -1,12 +1,16 @@
 import Drop from '@/components/ui/Drop'
 import useAppDispatch from '@/hooks/useAppDispatch'
-import { clearCharacterBookEditor, setCharacterBookEditor, setExampleCharacterBookEditor } from '@/state/characterBookEditorSlice'
+import {
+  clearCharacterBookEditor,
+  setCharacterBookEditor,
+  setExampleCharacterBookEditor
+} from '@/state/characterBookEditorSlice'
 import { setAlert } from '@/state/feedbackSlice'
 import { characterBookToCharacterEditor } from '@/utilities/characterBookUtilities'
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Button, Typography } from '@mui/material'
-import { useCallback, type FC } from 'react'
+import { type FC, useCallback } from 'react'
 
 const ImportOrCreate: FC = () => {
   const dispatch = useAppDispatch()
@@ -19,7 +23,13 @@ const ImportOrCreate: FC = () => {
   }, [])
   return (
     <>
-      <Typography variant="h2" align="center" gutterBottom>Import or Create</Typography>
+      <Typography
+        variant="h2"
+        align="center"
+        gutterBottom
+      >
+        Import or Create
+      </Typography>
       <Box
         sx={(theme) => ({
           display: 'grid',
@@ -40,38 +50,60 @@ const ImportOrCreate: FC = () => {
               onDropAccepted: (acceptedFiles: File[]) => {
                 handleDrop(acceptedFiles[0])
                   .then(() => {
-                    dispatch(setAlert({
-                      title: 'Character book imported',
-                      message: 'The character book has been imported successfully',
-                      severity: 'success'
-                    }))
+                    dispatch(
+                      setAlert({
+                        title: 'Character book imported',
+                        message:
+                          'The character book has been imported successfully',
+                        severity: 'success'
+                      })
+                    )
                   })
                   .catch((error) => {
                     if (error instanceof Error) {
-                      dispatch(setAlert({
-                        title: 'Error while importing character book',
-                        message: error.message,
-                        severity: 'error'
-                      }))
+                      dispatch(
+                        setAlert({
+                          title: 'Error while importing character book',
+                          message: error.message,
+                          severity: 'error'
+                        })
+                      )
                     } else {
-                      dispatch(setAlert({
-                        title: 'Error while importing character book',
-                        message: 'The character book could not be imported',
-                        severity: 'error'
-                      }))
+                      dispatch(
+                        setAlert({
+                          title: 'Error while importing character book',
+                          message: 'The character book could not be imported',
+                          severity: 'error'
+                        })
+                      )
                     }
                   })
               }
             }}
           >
-            <FontAwesomeIcon icon={faFileUpload} size="3x" />
-            <Typography variant="body1" align="center" gutterBottom>
-              Drag &amp; drop your character book file here, or click to select file
+            <FontAwesomeIcon
+              icon={faFileUpload}
+              size="3x"
+            />
+            <Typography
+              variant="body1"
+              align="center"
+              gutterBottom
+            >
+              Drag &amp; drop your character book file here, or click to select
+              file
             </Typography>
-            <Typography variant="caption" align="center" gutterBottom>
+            <Typography
+              variant="caption"
+              align="center"
+              gutterBottom
+            >
               Supported file types: .json
             </Typography>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+            >
               Upload
             </Button>
           </Drop>
@@ -85,7 +117,12 @@ const ImportOrCreate: FC = () => {
             alignItems: 'center'
           }}
         >
-          <Typography variant="subtitle1" component="h2" align="center" gutterBottom>
+          <Typography
+            variant="subtitle1"
+            component="h2"
+            align="center"
+            gutterBottom
+          >
             Create a new character book
           </Typography>
           <Button

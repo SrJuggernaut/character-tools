@@ -1,9 +1,21 @@
+import NumberField from '@/components/ui/form/NumberField'
 import { type CharacterBookEntry } from '@/types/lorebook'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, Checkbox, Chip, FormControlLabel, FormGroup, FormLabel, IconButton, Radio, RadioGroup, TextField, Typography } from '@mui/material'
-import { useState, type FC } from 'react'
-import NumberField from '../ui/form/NumberField'
+import {
+  Box,
+  Checkbox,
+  Chip,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  IconButton,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography
+} from '@mui/material'
+import { type FC, useState } from 'react'
 
 export interface EntryEditorProps {
   value: CharacterBookEntry
@@ -73,15 +85,14 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
           paddingBlock: '16px'
         }}
       >
-        <FormLabel
-          id="position"
-        >
-          Position
-        </FormLabel>
+        <FormLabel id="position">Position</FormLabel>
         <RadioGroup
           value={value.position ?? 'before_char'}
           onChange={(_, RadioValue) => {
-            onChange({ ...value, position: RadioValue as 'before_char' | 'after_char' })
+            onChange({
+              ...value,
+              position: RadioValue as 'before_char' | 'after_char'
+            })
           }}
           row
         >
@@ -104,7 +115,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         }}
       >
         <FormControlLabel
-          control={(
+          control={
             <Checkbox
               checked={value.enabled}
               onChange={(e) => {
@@ -112,11 +123,11 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
               }}
               name="enabled"
             />
-          )}
+          }
           label="Enabled"
         />
         <FormControlLabel
-          control={(
+          control={
             <Checkbox
               checked={value.case_sensitive ?? false}
               onChange={(e) => {
@@ -124,11 +135,11 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
               }}
               name="case_sensitive"
             />
-          )}
+          }
           label="Case Sensitive"
         />
         <FormControlLabel
-          control={(
+          control={
             <Checkbox
               checked={value.selective ?? false}
               onChange={(e) => {
@@ -136,11 +147,11 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
               }}
               name="selective"
             />
-          )}
+          }
           label="Selective"
         />
         <FormControlLabel
-          control={(
+          control={
             <Checkbox
               checked={value.constant ?? false}
               onChange={(e) => {
@@ -148,7 +159,7 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
               }}
               name="constant"
             />
-          )}
+          }
           label="Constant"
         />
       </FormGroup>
@@ -164,9 +175,17 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         })}
       >
         <div>
-          <Typography variant="h4" align="center">Keys</Typography>
+          <Typography
+            variant="h4"
+            align="center"
+          >
+            Keys
+          </Typography>
           {value.keys.length === 0 && (
-            <Typography variant="body1" color="text.secondary">
+            <Typography
+              variant="body1"
+              color="text.secondary"
+            >
               This entry has no keys.
             </Typography>
           )}
@@ -203,7 +222,10 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
                     setKeyToAdd('')
                   }}
                 >
-                  <FontAwesomeIcon icon={faPlus} size="sm" />
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    size="sm"
+                  />
                 </IconButton>
               )
             }}
@@ -222,9 +244,17 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
           />
         </div>
         <div>
-          <Typography variant="h4" align="center">Secondary Keys</Typography>
+          <Typography
+            variant="h4"
+            align="center"
+          >
+            Secondary Keys
+          </Typography>
           {value.secondary_keys.length === 0 && (
-            <Typography variant="body1" color="text.secondary">
+            <Typography
+              variant="body1"
+              color="text.secondary"
+            >
               This entry has no secondary keys.
             </Typography>
           )}
@@ -257,17 +287,29 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
               endAdornment: (
                 <IconButton
                   onClick={() => {
-                    onChange({ ...value, secondary_keys: [...value.secondary_keys, secondaryKeyToAdd] })
+                    onChange({
+                      ...value,
+                      secondary_keys: [
+                        ...value.secondary_keys,
+                        secondaryKeyToAdd
+                      ]
+                    })
                     setSecondaryKeyToAdd('')
                   }}
                 >
-                  <FontAwesomeIcon icon={faPlus} size="sm" />
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    size="sm"
+                  />
                 </IconButton>
               )
             }}
             onKeyUp={(e) => {
               if (e.key === 'Enter') {
-                onChange({ ...value, secondary_keys: [...value.secondary_keys, secondaryKeyToAdd] })
+                onChange({
+                  ...value,
+                  secondary_keys: [...value.secondary_keys, secondaryKeyToAdd]
+                })
                 setSecondaryKeyToAdd('')
               }
             }}

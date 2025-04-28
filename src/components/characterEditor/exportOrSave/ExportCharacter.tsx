@@ -2,15 +2,30 @@ import ExportCharacterNameTemplate from '@/components/characterEditor/exportOrSa
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { setAlert } from '@/state/feedbackSlice'
-import { characterEditorStateToV1, characterEditorStateToV2, exportCharacterAsJson, exportCharacterAsPng, getCharacterExportName } from '@/utilities/characterUtilities'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
-import { useState, type FC } from 'react'
+import {
+  characterEditorStateToV1,
+  characterEditorStateToV2,
+  exportCharacterAsJson,
+  exportCharacterAsPng,
+  getCharacterExportName
+} from '@/utilities/characterUtilities'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from '@mui/material'
+import { type FC, useState } from 'react'
 
 const ExportCharacter: FC = () => {
   const dispatch = useAppDispatch()
   const characterEditor = useAppSelector((theme) => theme.characterEditor)
-  const characterCardExportNameTemplate = useAppSelector((theme) => theme.app.characterCardExportNameTemplate)
-  const [openEditExportCharacterName, setOpenEditExportCharacterName] = useState(false)
+  const characterCardExportNameTemplate = useAppSelector(
+    (theme) => theme.app.characterCardExportNameTemplate
+  )
+  const [openEditExportCharacterName, setOpenEditExportCharacterName] =
+    useState(false)
 
   const handleDownload = (url: string, filename: string): void => {
     const link = document.createElement('a')
@@ -40,11 +55,7 @@ const ExportCharacter: FC = () => {
           setOpenEditExportCharacterName(false)
         }}
       >
-        <DialogTitle
-          variant="subtitle1"
-        >
-          Edit Export Name Template
-        </DialogTitle>
+        <DialogTitle variant="subtitle1">Edit Export Name Template</DialogTitle>
         <DialogContent>
           <ExportCharacterNameTemplate />
         </DialogContent>
@@ -67,13 +78,16 @@ const ExportCharacter: FC = () => {
         onClick={() => {
           const v1Character = characterEditorStateToV1(characterEditor)
           const JSONUrl = exportCharacterAsJson(v1Character)
-          const exportName = getCharacterExportName(characterCardExportNameTemplate, {
-            name: characterEditor.name,
-            spec: 'V1',
-            id: characterEditor.id,
-            creator: characterEditor.creator,
-            version: characterEditor.character_version
-          })
+          const exportName = getCharacterExportName(
+            characterCardExportNameTemplate,
+            {
+              name: characterEditor.name,
+              spec: 'V1',
+              id: characterEditor.id,
+              creator: characterEditor.creator,
+              version: characterEditor.character_version
+            }
+          )
           handleDownload(JSONUrl, `${exportName}.json`)
         }}
       >
@@ -86,28 +100,36 @@ const ExportCharacter: FC = () => {
           characterEditorStateToV2(characterEditor)
             .then((v2Character) => {
               const JSONUrl = exportCharacterAsJson(v2Character)
-              const exportName = getCharacterExportName(characterCardExportNameTemplate, {
-                name: characterEditor.name,
-                spec: 'V2',
-                id: characterEditor.id,
-                creator: characterEditor.creator,
-                version: characterEditor.character_version
-              })
+              const exportName = getCharacterExportName(
+                characterCardExportNameTemplate,
+                {
+                  name: characterEditor.name,
+                  spec: 'V2',
+                  id: characterEditor.id,
+                  creator: characterEditor.creator,
+                  version: characterEditor.character_version
+                }
+              )
               handleDownload(JSONUrl, `${exportName}.json`)
             })
             .catch((error) => {
               if (error instanceof Error) {
-                dispatch(setAlert({
-                  title: 'Error while exporting character',
-                  message: error.message,
-                  severity: 'error'
-                }))
+                dispatch(
+                  setAlert({
+                    title: 'Error while exporting character',
+                    message: error.message,
+                    severity: 'error'
+                  })
+                )
               } else {
-                dispatch(setAlert({
-                  title: 'Error while exporting character',
-                  message: 'An unknown error occurred while exporting the character',
-                  severity: 'error'
-                }))
+                dispatch(
+                  setAlert({
+                    title: 'Error while exporting character',
+                    message:
+                      'An unknown error occurred while exporting the character',
+                    severity: 'error'
+                  })
+                )
               }
             })
         }}
@@ -121,14 +143,20 @@ const ExportCharacter: FC = () => {
             variant="contained"
             onClick={() => {
               const v1Character = characterEditorStateToV1(characterEditor)
-              const PNGUrl = exportCharacterAsPng(v1Character, characterEditor.image as string)
-              const exportName = getCharacterExportName(characterCardExportNameTemplate, {
-                name: characterEditor.name,
-                spec: 'V1',
-                id: characterEditor.id,
-                creator: characterEditor.creator,
-                version: characterEditor.character_version
-              })
+              const PNGUrl = exportCharacterAsPng(
+                v1Character,
+                characterEditor.image as string
+              )
+              const exportName = getCharacterExportName(
+                characterCardExportNameTemplate,
+                {
+                  name: characterEditor.name,
+                  spec: 'V1',
+                  id: characterEditor.id,
+                  creator: characterEditor.creator,
+                  version: characterEditor.character_version
+                }
+              )
               handleDownload(PNGUrl, `${exportName}.png`)
             }}
           >
@@ -140,36 +168,46 @@ const ExportCharacter: FC = () => {
             onClick={() => {
               characterEditorStateToV2(characterEditor)
                 .then((v2Character) => {
-                  const PNGUrl = exportCharacterAsPng(v2Character, characterEditor.image as string)
-                  const exportName = getCharacterExportName(characterCardExportNameTemplate, {
-                    name: characterEditor.name,
-                    spec: 'V2',
-                    id: characterEditor.id,
-                    creator: characterEditor.creator,
-                    version: characterEditor.character_version
-                  })
+                  const PNGUrl = exportCharacterAsPng(
+                    v2Character,
+                    characterEditor.image as string
+                  )
+                  const exportName = getCharacterExportName(
+                    characterCardExportNameTemplate,
+                    {
+                      name: characterEditor.name,
+                      spec: 'V2',
+                      id: characterEditor.id,
+                      creator: characterEditor.creator,
+                      version: characterEditor.character_version
+                    }
+                  )
                   handleDownload(PNGUrl, `${exportName}.png`)
                 })
                 .catch((error) => {
                   if (error instanceof Error) {
-                    dispatch(setAlert({
-                      title: 'Error while exporting character',
-                      message: error.message,
-                      severity: 'error'
-                    }))
+                    dispatch(
+                      setAlert({
+                        title: 'Error while exporting character',
+                        message: error.message,
+                        severity: 'error'
+                      })
+                    )
                   } else {
-                    dispatch(setAlert({
-                      title: 'Error while exporting character',
-                      message: 'An unknown error occurred while exporting the character',
-                      severity: 'error'
-                    }))
+                    dispatch(
+                      setAlert({
+                        title: 'Error while exporting character',
+                        message:
+                          'An unknown error occurred while exporting the character',
+                        severity: 'error'
+                      })
+                    )
                   }
                 })
             }}
           >
             Export as PNG V2
           </Button>
-
         </>
       )}
     </>

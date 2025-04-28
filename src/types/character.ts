@@ -13,7 +13,7 @@ export interface CharacterData {
   system_prompt: string
   post_history_instructions: string
   character_book?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Since an extension could use any type of value
+  // biome-ignore lint/suspicious/noExplicitAny: Since an extension could use any type of value
   extensions: Record<string, any>
 }
 

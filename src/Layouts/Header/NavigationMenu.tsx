@@ -1,8 +1,26 @@
 import Books from '@/components/icons/books'
-import { faBars, faBook, faDatabase, faHome, faUserPen, faUsersBetweenLines, type IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import {
+  type IconDefinition,
+  faBars,
+  faBook,
+  faDatabase,
+  faHome,
+  faUserPen,
+  faUsersBetweenLines
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, Tooltip } from '@mui/material'
-import { useState, type FC } from 'react'
+import {
+  Box,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  SwipeableDrawer,
+  Tooltip
+} from '@mui/material'
+import { type FC, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 interface MenuLink {
@@ -14,9 +32,17 @@ interface MenuLink {
 const MenuLinks: MenuLink[] = [
   { label: 'Home', url: '/', icon: faHome },
   { label: 'Character Editor', url: '/character-editor', icon: faUserPen },
-  { label: 'Character Library', url: '/character-library', icon: faUsersBetweenLines },
+  {
+    label: 'Character Library',
+    url: '/character-library',
+    icon: faUsersBetweenLines
+  },
   { label: 'CharacterBook Editor', url: '/characterbook-editor', icon: faBook },
-  { label: 'CharacterBook Library', url: '/characterbook-library', icon: Books },
+  {
+    label: 'CharacterBook Library',
+    url: '/characterbook-library',
+    icon: Books
+  },
   { label: 'Manage Database', url: '/manage-database', icon: faDatabase }
 ]
 
@@ -27,16 +53,26 @@ const NavigationMenu: FC = () => {
     <>
       <Tooltip title="Menu">
         <IconButton
-          onClick={() => { setOpenDrawer(true) }}
+          onClick={() => {
+            setOpenDrawer(true)
+          }}
         >
-          <FontAwesomeIcon icon={faBars} fixedWidth size="sm" />
+          <FontAwesomeIcon
+            icon={faBars}
+            fixedWidth
+            size="sm"
+          />
         </IconButton>
       </Tooltip>
       <SwipeableDrawer
         anchor="right"
         open={openDrawer}
-        onClose={() => { setOpenDrawer(false) }}
-        onOpen={() => { setOpenDrawer(true) }}
+        onClose={() => {
+          setOpenDrawer(false)
+        }}
+        onOpen={() => {
+          setOpenDrawer(true)
+        }}
       >
         <Box
           sx={(theme) => ({
@@ -47,7 +83,9 @@ const NavigationMenu: FC = () => {
             }
           })}
           role="presentation"
-          onClick={() => { setOpenDrawer(false) }}
+          onClick={() => {
+            setOpenDrawer(false)
+          }}
         >
           <Box
             sx={(theme) => ({
@@ -55,9 +93,7 @@ const NavigationMenu: FC = () => {
               borderBottom: `1px solid ${theme.palette.divider}`
             })}
           />
-          <List
-            disablePadding
-          >
+          <List disablePadding>
             {MenuLinks.map((menuLink, index) => (
               <ListItem
                 disableGutters
@@ -70,7 +106,10 @@ const NavigationMenu: FC = () => {
                   selected={location.pathname === menuLink.url}
                 >
                   <ListItemIcon>
-                    <FontAwesomeIcon icon={menuLink.icon} fixedWidth />
+                    <FontAwesomeIcon
+                      icon={menuLink.icon}
+                      fixedWidth
+                    />
                   </ListItemIcon>
                   <ListItemText primary={menuLink.label} />
                 </ListItemButton>

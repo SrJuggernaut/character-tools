@@ -1,4 +1,4 @@
-import Error from '@/routes/Error'
+import ErrorRoute from '@/routes/Error'
 import Home from '@/routes/Home'
 import { type FC } from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
@@ -9,7 +9,7 @@ import CharacterLibrary from './routes/CharacterLibrary'
 import ManageDatabase from './routes/ManageDatabase'
 
 const router = createBrowserRouter([
-  { path: '/', element: <Home />, errorElement: <Error /> },
+  { path: '/', element: <Home />, errorElement: <ErrorRoute /> },
   { path: '/character-editor', element: <CharacterEditorPage /> },
   { path: '/character-library', element: <CharacterLibrary /> },
   { path: '/characterbook-editor', element: <CharacterBookEditorPage /> },

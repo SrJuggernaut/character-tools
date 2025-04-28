@@ -6,9 +6,7 @@ export interface FluidProps {
   children?: ReactNode
 }
 
-const Fluid: FC<FluidProps> = ({
-  children
-}) => {
+const Fluid: FC<FluidProps> = ({ children }) => {
   return (
     <>
       <Header />

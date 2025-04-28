@@ -1,13 +1,21 @@
-import ToolbarDial from '@/components/characterEditor/ToolbarDial'
 import CopyButton from '@/components/CopyButton'
 import ImageDrop from '@/components/ImageDrop'
+import ToolbarDial from '@/components/characterEditor/ToolbarDial'
 import TextFieldWithTokenCounter from '@/components/ui/form/TextFieldWithTokenCounter'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, Button, IconButton, InputAdornment, Link, TextField, Typography } from '@mui/material'
+import {
+  Box,
+  Button,
+  IconButton,
+  InputAdornment,
+  Link,
+  TextField,
+  Typography
+} from '@mui/material'
 import { type FC } from 'react'
 
 const CharacterData: FC = () => {
@@ -19,9 +27,38 @@ const CharacterData: FC = () => {
   }
   return (
     <>
-      <Typography variant="h2" align="center" gutterBottom>Character Data</Typography>
-      <Typography variant="body1" gutterBottom>
-        General data about your character. All fields sent at the prompt should accept the macros <CopyButton textToCopy="{{char}}">&#123;&#123;char&#125;&#125;</CopyButton> and <CopyButton textToCopy="{{user}}">&#123;&#123;user&#125;&#125;</CopyButton> which will be replaced by the character and user name respectively, this is very useful to quickly change the character name without having to edit all the content. Specific tools such as <Link href="https://docs.sillytavern.app/usage/core-concepts/characterdesign/#replacement-tags-macros" target="_blank" rel="noreferrer">Silly Tavern have their own list of macros</Link> that can be used and it is advisable to take them into account if you use such tools.
+      <Typography
+        variant="h2"
+        align="center"
+        gutterBottom
+      >
+        Character Data
+      </Typography>
+      <Typography
+        variant="body1"
+        gutterBottom
+      >
+        General data about your character. All fields sent at the prompt should
+        accept the macros{' '}
+        <CopyButton textToCopy="{{char}}">
+          &#123;&#123;char&#125;&#125;
+        </CopyButton>{' '}
+        and{' '}
+        <CopyButton textToCopy="{{user}}">
+          &#123;&#123;user&#125;&#125;
+        </CopyButton>{' '}
+        which will be replaced by the character and user name respectively, this
+        is very useful to quickly change the character name without having to
+        edit all the content. Specific tools such as{' '}
+        <Link
+          href="https://docs.sillytavern.app/usage/core-concepts/characterdesign/#replacement-tags-macros"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Silly Tavern have their own list of macros
+        </Link>{' '}
+        that can be used and it is advisable to take them into account if you
+        use such tools.
       </Typography>
       <TextField
         id="name"
@@ -29,7 +66,11 @@ const CharacterData: FC = () => {
         value={characterEditorState.name}
         onChange={handleChange}
         error={characterEditorState.name === ''}
-        helperText={characterEditorState.name === '' ? 'Name is required' : 'The name of your character, this is the only field where you should not use the {{char}} macro.'}
+        helperText={
+          characterEditorState.name === ''
+            ? 'Name is required'
+            : 'The name of your character, this is the only field where you should not use the {{char}} macro.'
+        }
         variant="outlined"
         fullWidth
         margin="normal"
@@ -40,7 +81,11 @@ const CharacterData: FC = () => {
         value={characterEditorState.description}
         onChange={handleChange}
         error={characterEditorState.description === ''}
-        helperText={characterEditorState.description === '' ? 'Description is required' : 'Used to add the character description and the rest that the AI should know. This will always be present in the prompt, so all the important facts should be included here.'}
+        helperText={
+          characterEditorState.description === ''
+            ? 'Description is required'
+            : 'Used to add the character description and the rest that the AI should know. This will always be present in the prompt, so all the important facts should be included here.'
+        }
         variant="outlined"
         multiline
         minRows={3}
@@ -62,9 +107,13 @@ const CharacterData: FC = () => {
         label="Message Example"
         value={characterEditorState.mes_example}
         onChange={handleChange}
-        helperText={(
-          <>Describes how the character speaks. Before each example, you need to add the <CopyButton textToCopy="<START>">&lt;START&gt;</CopyButton> macro.</>
-        )}
+        helperText={
+          <>
+            Describes how the character speaks. Before each example, you need to
+            add the <CopyButton textToCopy="<START>">&lt;START&gt;</CopyButton>{' '}
+            macro.
+          </>
+        }
         multiline
         minRows={3}
         variant="outlined"
@@ -93,49 +142,82 @@ const CharacterData: FC = () => {
         fullWidth
         margin="normal"
       />
-      <Typography variant="h3" gutterBottom>Alternate Greetings</Typography>
-      <Typography variant="caption" component="p" gutterBottom>
-        You can add as many alternative greetings as you wish to your character. These greetings will be used as alternatives to the First Message.
+      <Typography
+        variant="h3"
+        gutterBottom
+      >
+        Alternate Greetings
       </Typography>
-      {characterEditorState.alternate_greetings.length > 0 && characterEditorState.alternate_greetings.map((greeting, index) => (
-        <TextFieldWithTokenCounter
-          key={`alternate_greeting_${index}`}
-          id={`alternate_greeting[${index}]`}
-          label={`Alternate Greeting ${index + 1}`}
-          value={greeting}
-          onChange={(event) => {
-            const newAlternateGreetings = [...characterEditorState.alternate_greetings]
-            newAlternateGreetings[index] = event.target.value
-            dispatch(updateCharacterEditor({ alternate_greetings: newAlternateGreetings }))
-          }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  size="small"
-                  color="error"
-                  onClick={() => {
-                    const newAlternateGreetings = [...characterEditorState.alternate_greetings]
-                    newAlternateGreetings.splice(index, 1)
-                    dispatch(updateCharacterEditor({ alternate_greetings: newAlternateGreetings }))
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTrashAlt}size="sm" />
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
-          multiline
-          minRows={2}
-          variant="outlined"
-          fullWidth
-          margin="normal"
-        />
-      ))}
+      <Typography
+        variant="caption"
+        component="p"
+        gutterBottom
+      >
+        You can add as many alternative greetings as you wish to your character.
+        These greetings will be used as alternatives to the First Message.
+      </Typography>
+      {characterEditorState.alternate_greetings.length > 0 &&
+        characterEditorState.alternate_greetings.map((greeting, index) => (
+          <TextFieldWithTokenCounter
+            key={`alternate_greeting_${index}`}
+            id={`alternate_greeting[${index}]`}
+            label={`Alternate Greeting ${index + 1}`}
+            value={greeting}
+            onChange={(event) => {
+              const newAlternateGreetings = [
+                ...characterEditorState.alternate_greetings
+              ]
+              newAlternateGreetings[index] = event.target.value
+              dispatch(
+                updateCharacterEditor({
+                  alternate_greetings: newAlternateGreetings
+                })
+              )
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    size="small"
+                    color="error"
+                    onClick={() => {
+                      const newAlternateGreetings = [
+                        ...characterEditorState.alternate_greetings
+                      ]
+                      newAlternateGreetings.splice(index, 1)
+                      dispatch(
+                        updateCharacterEditor({
+                          alternate_greetings: newAlternateGreetings
+                        })
+                      )
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrashAlt}
+                      size="sm"
+                    />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
+            multiline
+            minRows={2}
+            variant="outlined"
+            fullWidth
+            margin="normal"
+          />
+        ))}
       <Button
         variant="contained"
         onClick={() => {
-          dispatch(updateCharacterEditor({ alternate_greetings: [...characterEditorState.alternate_greetings, 'Hello!'] }))
+          dispatch(
+            updateCharacterEditor({
+              alternate_greetings: [
+                ...characterEditorState.alternate_greetings,
+                'Hello!'
+              ]
+            })
+          )
         }}
         sx={{
           marginY: 2
@@ -143,7 +225,12 @@ const CharacterData: FC = () => {
       >
         Add Alternate Greeting
       </Button>
-      <Typography variant="h3" gutterBottom>Image</Typography>
+      <Typography
+        variant="h3"
+        gutterBottom
+      >
+        Image
+      </Typography>
       <Box
         sx={(theme) => ({
           display: 'grid',
@@ -179,7 +266,6 @@ const CharacterData: FC = () => {
                 width: '100%',
                 height: '100%',
                 objectFit: 'contain'
-
               }}
             />
           )}

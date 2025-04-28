@@ -3,8 +3,14 @@ import useAppSelector from '@/hooks/useAppSelector'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Chip, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
-import { useState, type FC } from 'react'
+import {
+  Chip,
+  IconButton,
+  InputAdornment,
+  TextField,
+  Typography
+} from '@mui/material'
+import { type FC, useState } from 'react'
 
 const CharacterMetadata: FC = () => {
   const characterEditorState = useAppSelector((state) => state.characterEditor)
@@ -26,9 +32,20 @@ const CharacterMetadata: FC = () => {
 
   return (
     <>
-      <Typography variant="h2" align="center" gutterBottom>Character Metadata</Typography>
-      <Typography variant="body1" gutterBottom>
-        In this section you can write information about this character card, none of this information should be sent inside the prompt and its main function is to keep a better organization of characters.
+      <Typography
+        variant="h2"
+        align="center"
+        gutterBottom
+      >
+        Character Metadata
+      </Typography>
+      <Typography
+        variant="body1"
+        gutterBottom
+      >
+        In this section you can write information about this character card,
+        none of this information should be sent inside the prompt and its main
+        function is to keep a better organization of characters.
       </Typography>
       <TextField
         id="creator"
@@ -63,9 +80,19 @@ const CharacterMetadata: FC = () => {
         margin="normal"
       />
 
-      <Typography variant="h3" gutterBottom>Tags</Typography>
-      <Typography variant="caption" component="p" gutterBottom>
-        Tags can be any text, preferably short, that helps to identify the character, such as gender, characteristics, etc.
+      <Typography
+        variant="h3"
+        gutterBottom
+      >
+        Tags
+      </Typography>
+      <Typography
+        variant="caption"
+        component="p"
+        gutterBottom
+      >
+        Tags can be any text, preferably short, that helps to identify the
+        character, such as gender, characteristics, etc.
       </Typography>
       {characterEditorState.tags.length > 0 && (
         <div
@@ -92,7 +119,9 @@ const CharacterMetadata: FC = () => {
         id="add-tag"
         label="Add Tag"
         value={addTagValue}
-        onChange={(event) => { setAddTagValue(event.target.value) }}
+        onChange={(event) => {
+          setAddTagValue(event.target.value)
+        }}
         onKeyUp={(event) => {
           if (event.key === 'Enter') {
             handleAddTag()

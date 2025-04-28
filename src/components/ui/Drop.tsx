@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { type FC, type ReactNode } from 'react'
-import { useDropzone, type DropzoneOptions } from 'react-dropzone'
+import { type DropzoneOptions, useDropzone } from 'react-dropzone'
 
 export interface DropProps {
   children?: ReactNode
@@ -8,7 +8,13 @@ export interface DropProps {
 }
 
 const Drop: FC<DropProps> = ({ dropzoneOptions, children }) => {
-  const { getRootProps, getInputProps, isDragAccept, isDragReject, isDragActive } = useDropzone(dropzoneOptions)
+  const {
+    getRootProps,
+    getInputProps,
+    isDragAccept,
+    isDragReject,
+    isDragActive
+  } = useDropzone(dropzoneOptions)
 
   return (
     <Box

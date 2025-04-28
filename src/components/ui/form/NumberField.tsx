@@ -1,6 +1,15 @@
-import NumberInput, { type NumberInputProps } from '@/components/ui/form/NumberInput'
-import { FormControl, FormHelperText, InputLabel, type FormControlProps, type FormHelperTextProps, type InputLabelProps } from '@mui/material'
-import { useId, type FC } from 'react'
+import NumberInput, {
+  type NumberInputProps
+} from '@/components/ui/form/NumberInput'
+import {
+  FormControl,
+  type FormControlProps,
+  FormHelperText,
+  type FormHelperTextProps,
+  InputLabel,
+  type InputLabelProps
+} from '@mui/material'
+import { type FC, useId } from 'react'
 
 export interface NumberFieldProps extends NumberInputProps {
   FormControlProps?: FormControlProps
@@ -12,7 +21,18 @@ export interface NumberFieldProps extends NumberInputProps {
   InputLabelProps?: Omit<InputLabelProps, 'htmlFor' & 'shrink'>
 }
 
-const NumberField: FC<NumberFieldProps> = ({ FormControlProps, helperText, HelperTextProps, fullWidth, onChange, id, margin, label, InputLabelProps, ...NumberInputProps }) => {
+const NumberField: FC<NumberFieldProps> = ({
+  FormControlProps,
+  helperText,
+  HelperTextProps,
+  fullWidth,
+  onChange,
+  id,
+  margin,
+  label,
+  InputLabelProps,
+  ...NumberInputProps
+}) => {
   const formalId = id ?? useId()
   return (
     <FormControl

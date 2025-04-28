@@ -8,8 +8,15 @@ export interface Alert {
 
 export interface DialogAction {
   label: ReactNode
-  severity?: 'success' | 'info' | 'warning' | 'error' | 'inherit' | 'primary' | 'secondary'
-  onClick: () => void
+  severity?:
+    | 'success'
+    | 'info'
+    | 'warning'
+    | 'error'
+    | 'inherit'
+    | 'primary'
+    | 'secondary'
+  onClick?: () => void
 }
 
 export interface Dialog {

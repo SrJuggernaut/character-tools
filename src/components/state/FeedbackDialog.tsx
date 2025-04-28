@@ -1,8 +1,14 @@
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { clearDialog, closeDialog } from '@/state/feedbackSlice'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
-import { useEffect, type FC } from 'react'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from '@mui/material'
+import { type FC, useEffect } from 'react'
 
 const FeedbackDialog: FC = () => {
   const { openDialog, dialog } = useAppSelector((state) => state.feedback)
@@ -26,9 +32,7 @@ const FeedbackDialog: FC = () => {
       maxWidth="sm"
     >
       <DialogTitle variant="subtitle1">{dialog?.title}</DialogTitle>
-      <DialogContent>
-        {dialog?.content}
-      </DialogContent>
+      <DialogContent>{dialog?.content}</DialogContent>
       {dialog?.actions !== undefined && dialog?.actions.length > 0 && (
         <DialogActions>
           {dialog?.actions.map((action, index) => (

@@ -1,29 +1,39 @@
 import Fluid from '@/Layouts/FluidLayout'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Card, CardActionArea, CardContent, IconButton, Typography } from '@mui/material'
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  IconButton,
+  Typography
+} from '@mui/material'
 import { type FC } from 'react'
 import { Link } from 'react-router-dom'
 
 const cardsInfo = [
   {
     title: 'Character Editor',
-    description: 'Create and edit characters for AI Roleplay, with support for Image Cards, V1 and V2, and more!',
+    description:
+      'Create and edit characters for AI Roleplay, with support for Image Cards, V1 and V2, and more!',
     link: '/character-editor'
   },
   {
     title: 'Character Library',
-    description: 'Manage your characters, make it easy to modify them, create copies and different versions',
+    description:
+      'Manage your characters, make it easy to modify them, create copies and different versions',
     link: '/character-library'
   },
   {
     title: 'CharacterBook editor',
-    description: ' Edit or create characterBooks, a really useful tool to give context about the world or the character.',
+    description:
+      ' Edit or create characterBooks, a really useful tool to give context about the world or the character.',
     link: '/characterbook-edito'
   },
   {
     title: 'CharacterBook library',
-    description: 'Manage your characterBooks, make it easy to modify them, create copies and different versions',
+    description:
+      'Manage your characterBooks, make it easy to modify them, create copies and different versions',
     link: '/characterbook-library'
   },
   {
@@ -48,8 +58,20 @@ const Home: FC = () => {
           zIndex: 'auto'
         }}
       >
-        <Typography variant="h1" align="center">Character Tools</Typography>
-        <Typography variant="h2" component="div" align="center">A collection of tools for creating and managing characters for AI Roleplay</Typography>
+        <Typography
+          variant="h1"
+          align="center"
+        >
+          Character Tools
+        </Typography>
+        <Typography
+          variant="h2"
+          component="div"
+          align="center"
+        >
+          A collection of tools for creating and managing characters for AI
+          Roleplay
+        </Typography>
         <IconButton
           aria-label="Scroll down"
           color="primary"
@@ -73,7 +95,10 @@ const Home: FC = () => {
           component="a"
           href="#tools"
         >
-          <FontAwesomeIcon icon={faChevronDown} size="lg" />
+          <FontAwesomeIcon
+            icon={faChevronDown}
+            size="lg"
+          />
         </IconButton>
       </div>
       <div
@@ -82,7 +107,13 @@ const Home: FC = () => {
         }}
         id="tools"
       >
-        <Typography variant="h2" component="div" align="center">Tools</Typography>
+        <Typography
+          variant="h2"
+          component="div"
+          align="center"
+        >
+          Tools
+        </Typography>
         <div
           css={{
             display: 'grid',
@@ -101,15 +132,23 @@ const Home: FC = () => {
                 }}
               >
                 <CardContent>
-                  <Typography variant="h3" align="center" gutterBottom>{card.title}</Typography>
-                  <Typography variant="body1" align="center">
+                  <Typography
+                    variant="h3"
+                    align="center"
+                    gutterBottom
+                  >
+                    {card.title}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    align="center"
+                  >
                     {card.description}
                   </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
           ))}
-
         </div>
       </div>
     </Fluid>

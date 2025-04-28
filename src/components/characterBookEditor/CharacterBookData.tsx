@@ -1,27 +1,48 @@
+import NumberField from '@/components/ui/form/NumberField'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { updateCharacterBookEditor } from '@/state/characterBookEditorSlice'
-import { Checkbox, FormControlLabel, FormGroup, FormHelperText, TextField, Typography } from '@mui/material'
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  TextField,
+  Typography
+} from '@mui/material'
 import { type FC } from 'react'
-import NumberField from '../ui/form/NumberField'
 
 const CharacterBookData: FC = () => {
-  const characterEditorState = useAppSelector((state) => state.characterBookEditor)
+  const characterEditorState = useAppSelector(
+    (state) => state.characterBookEditor
+  )
   const dispatch = useAppDispatch()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(updateCharacterBookEditor({ [event.target.id]: event.target.value }))
+    dispatch(
+      updateCharacterBookEditor({ [event.target.id]: event.target.value })
+    )
   }
   return (
     <>
-      <Typography variant="h2" align="center" gutterBottom>CharacterBook Data</Typography>
+      <Typography
+        variant="h2"
+        align="center"
+        gutterBottom
+      >
+        CharacterBook Data
+      </Typography>
       <TextField
         id="name"
         label="Name"
         value={characterEditorState.name}
         onChange={handleChange}
         error={characterEditorState.name === ''}
-        helperText={characterEditorState.name === '' ? 'Name is required' : 'The name of your CharacterBook. This will be used to identify your CharacterBook in the CharacterBook list.'}
+        helperText={
+          characterEditorState.name === ''
+            ? 'Name is required'
+            : 'The name of your CharacterBook. This will be used to identify your CharacterBook in the CharacterBook list.'
+        }
         variant="outlined"
         fullWidth
         margin="normal"
@@ -32,7 +53,11 @@ const CharacterBookData: FC = () => {
         value={characterEditorState.description}
         onChange={handleChange}
         error={characterEditorState.description === ''}
-        helperText={characterEditorState.description === '' ? 'Description is required' : 'A description of your CharacterBook should not be included in your prompt when it is sent to the language model.'}
+        helperText={
+          characterEditorState.description === ''
+            ? 'Description is required'
+            : 'A description of your CharacterBook should not be included in your prompt when it is sent to the language model.'
+        }
         variant="outlined"
         fullWidth
         margin="normal"
@@ -44,10 +69,16 @@ const CharacterBookData: FC = () => {
         label="Scan Depth"
         value={characterEditorState.scan_depth}
         onChange={(_, value) => {
-          dispatch(updateCharacterBookEditor({ scan_depth: value ?? undefined }))
+          dispatch(
+            updateCharacterBookEditor({ scan_depth: value ?? undefined })
+          )
         }}
         error={characterEditorState.scan_depth === undefined}
-        helperText={characterEditorState.scan_depth === undefined ? 'Scan Depth is required' : 'The number of messages to scan for keywords.'}
+        helperText={
+          characterEditorState.scan_depth === undefined
+            ? 'Scan Depth is required'
+            : 'The number of messages to scan for keywords.'
+        }
         fullWidth
         margin="normal"
       />
@@ -56,28 +87,37 @@ const CharacterBookData: FC = () => {
         label="Token Budget"
         value={characterEditorState.token_budget}
         onChange={(_, value) => {
-          dispatch(updateCharacterBookEditor({ token_budget: value ?? undefined }))
+          dispatch(
+            updateCharacterBookEditor({ token_budget: value ?? undefined })
+          )
         }}
         error={characterEditorState.token_budget === undefined}
-        helperText={characterEditorState.token_budget === undefined ? 'Token Budget is required' : 'The number of tokens to spend with data from the CharacterBook.'}
+        helperText={
+          characterEditorState.token_budget === undefined
+            ? 'Token Budget is required'
+            : 'The number of tokens to spend with data from the CharacterBook.'
+        }
         fullWidth
         margin="normal"
       />
       <FormGroup>
         <FormControlLabel
-          control={(
+          control={
             <Checkbox
               id="recursive_scan"
               checked={characterEditorState.recursive_scanning}
               onChange={(_, value) => {
-                dispatch(updateCharacterBookEditor({ recursive_scanning: value }))
+                dispatch(
+                  updateCharacterBookEditor({ recursive_scanning: value })
+                )
               }}
             />
-          )}
+          }
           label="Recursive Scan"
         />
         <FormHelperText>
-          When enabled, the data from the CharacterBook will be used to scan for keywords in the CharacterBook.
+          When enabled, the data from the CharacterBook will be used to scan for
+          keywords in the CharacterBook.
         </FormHelperText>
       </FormGroup>
     </>
