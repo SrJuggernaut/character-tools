@@ -133,13 +133,24 @@ const ManageLibrary: FC = () => {
               a.click()
             })
             .catch((error) => {
-              dispatch(
-                setAlert({
-                  title: 'Error while exporting library',
-                  severity: 'error',
-                  message: error.message
-                })
-              )
+              if (error instanceof Error) {
+                dispatch(
+                  setAlert({
+                    title: 'Error while exporting library',
+                    severity: 'error',
+                    message: error.message
+                  })
+                )
+              } else {
+                dispatch(
+                  setAlert({
+                    title: 'Error while exporting library',
+                    severity: 'error',
+                    message:
+                      'An unknown error occurred while exporting the library'
+                  })
+                )
+              }
             })
         }}
       >
