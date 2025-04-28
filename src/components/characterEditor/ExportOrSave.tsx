@@ -6,7 +6,13 @@ import { type FC } from 'react'
 const ExportOrSave: FC = () => {
   return (
     <>
-      <Typography variant="h2" align="center" gutterBottom>Export or Save</Typography>
+      <Typography
+        variant="h2"
+        align="center"
+        gutterBottom
+      >
+        Export or Save
+      </Typography>
       <Box
         sx={(theme) => ({
           display: 'grid',
@@ -26,7 +32,13 @@ const ExportOrSave: FC = () => {
             gap: '1rem'
           }}
         >
-          <Typography variant="h2" align="center" gutterBottom>Save</Typography>
+          <Typography
+            variant="h2"
+            align="center"
+            gutterBottom
+          >
+            Save
+          </Typography>
           <SaveCharacter />
         </div>
         <div
@@ -38,7 +50,13 @@ const ExportOrSave: FC = () => {
             gap: '1rem'
           }}
         >
-          <Typography variant="h2" align="center" gutterBottom>Export</Typography>
+          <Typography
+            variant="h2"
+            align="center"
+            gutterBottom
+          >
+            Export
+          </Typography>
           <Export />
         </div>
       </Box>

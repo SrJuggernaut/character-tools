@@ -2,20 +2,31 @@ import Fluid from '@/Layouts/FluidLayout'
 import CharacterTable from '@/components/characterLibrary/CharacterTable'
 import ImportCharacter from '@/components/characterLibrary/ImportCharacter'
 import ManageLibrary from '@/components/characterLibrary/ManageLibrary'
-import { faFileImport, faUsersBetweenLines } from '@fortawesome/free-solid-svg-icons'
+import {
+  faFileImport,
+  faUsersBetweenLines
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
-import { Box, Tab, Typography, useMediaQuery, type Theme } from '@mui/material'
-import { useState, type FC } from 'react'
+import { Box, Tab, type Theme, Typography, useMediaQuery } from '@mui/material'
+import { type FC, useState } from 'react'
 
 type Tabs = 'Library' | 'Manage' | 'Import'
 
 const CharacterLibrary: FC = () => {
-  const isMediumScreen = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
+  const isMediumScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.up('md')
+  )
   const [currentTab, setCurrentTab] = useState<Tabs>('Library')
   return (
     <Fluid>
-      <Typography variant="h1" align="center" gutterBottom>Character Editor</Typography>
+      <Typography
+        variant="h1"
+        align="center"
+        gutterBottom
+      >
+        Character Editor
+      </Typography>
       <TabContext value={currentTab}>
         <Box
           sx={(theme) => ({
@@ -31,11 +42,25 @@ const CharacterLibrary: FC = () => {
             variant={isMediumScreen ? 'fullWidth' : 'scrollable'}
             scrollButtons="auto"
             allowScrollButtonsMobile
-            onChange={(_, newValue) => { setCurrentTab(newValue) }}
+            onChange={(_, newValue) => {
+              setCurrentTab(newValue)
+            }}
           >
-            <Tab icon={<FontAwesomeIcon icon={faUsersBetweenLines} />} label="Character Library" value="Library" />
-            <Tab icon={<FontAwesomeIcon icon={faFileImport} />} label="Import Character" value="Import" />
-            <Tab icon={<FontAwesomeIcon icon={faUsersBetweenLines} />} label="Manage Library" value="Manage" />
+            <Tab
+              icon={<FontAwesomeIcon icon={faUsersBetweenLines} />}
+              label="Character Library"
+              value="Library"
+            />
+            <Tab
+              icon={<FontAwesomeIcon icon={faFileImport} />}
+              label="Import Character"
+              value="Import"
+            />
+            <Tab
+              icon={<FontAwesomeIcon icon={faUsersBetweenLines} />}
+              label="Manage Library"
+              value="Manage"
+            />
           </TabList>
         </Box>
         <div

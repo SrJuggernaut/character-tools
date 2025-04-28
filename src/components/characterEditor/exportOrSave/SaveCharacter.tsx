@@ -5,7 +5,7 @@ import { updateCharacterEditor } from '@/state/characterEditorSlice'
 import { setAlert } from '@/state/feedbackSlice'
 import { type CharacterDatabaseData } from '@/types/character'
 import { Button } from '@mui/material'
-import { useCallback, type FC } from 'react'
+import { type FC, useCallback } from 'react'
 
 const SaveCharacter: FC = () => {
   const characterEditor = useAppSelector((theme) => theme.characterEditor)
@@ -13,62 +13,84 @@ const SaveCharacter: FC = () => {
 
   const handleSave = useCallback(async () => {
     if (characterEditor.name === undefined || characterEditor.name === '') {
-      dispatch(setAlert({
-        severity: 'error',
-        title: 'Error saving character',
-        message: 'Character name is empty'
-      }))
+      dispatch(
+        setAlert({
+          severity: 'error',
+          title: 'Error saving character',
+          message: 'Character name is empty'
+        })
+      )
       return
     }
-    if (characterEditor.description === undefined || characterEditor.description === '') {
-      dispatch(setAlert({
-        severity: 'error',
-        title: 'Error saving character',
-        message: 'Character description is empty'
-      }))
+    if (
+      characterEditor.description === undefined ||
+      characterEditor.description === ''
+    ) {
+      dispatch(
+        setAlert({
+          severity: 'error',
+          title: 'Error saving character',
+          message: 'Character description is empty'
+        })
+      )
       return
     }
     const createdCharacter = await createCharacter(characterEditor)
     dispatch(updateCharacterEditor(createdCharacter))
-    dispatch(setAlert({
-      severity: 'success',
-      title: 'Character saved',
-      message: `Character ${characterEditor.name} saved with id ${createdCharacter.id}`
-    }))
+    dispatch(
+      setAlert({
+        severity: 'success',
+        title: 'Character saved',
+        message: `Character ${characterEditor.name} saved with id ${createdCharacter.id}`
+      })
+    )
   }, [])
 
   const handleUpdate = useCallback(async () => {
     if (characterEditor.id === undefined) {
-      dispatch(setAlert({
-        severity: 'error',
-        title: 'Error updating character',
-        message: 'Character id is undefined'
-      }))
+      dispatch(
+        setAlert({
+          severity: 'error',
+          title: 'Error updating character',
+          message: 'Character id is undefined'
+        })
+      )
       return
     }
     if (characterEditor.name === undefined || characterEditor.name === '') {
-      dispatch(setAlert({
-        severity: 'error',
-        title: 'Error updating character',
-        message: 'Character name is empty'
-      }))
+      dispatch(
+        setAlert({
+          severity: 'error',
+          title: 'Error updating character',
+          message: 'Character name is empty'
+        })
+      )
       return
     }
-    if (characterEditor.description === undefined || characterEditor.description === '') {
-      dispatch(setAlert({
-        severity: 'error',
-        title: 'Error updating character',
-        message: 'Character description is empty'
-      }))
+    if (
+      characterEditor.description === undefined ||
+      characterEditor.description === ''
+    ) {
+      dispatch(
+        setAlert({
+          severity: 'error',
+          title: 'Error updating character',
+          message: 'Character description is empty'
+        })
+      )
       return
     }
-    const updatedCharacter = await updateCharacter(characterEditor as CharacterDatabaseData)
+    const updatedCharacter = await updateCharacter(
+      characterEditor as CharacterDatabaseData
+    )
     dispatch(updateCharacterEditor(updatedCharacter))
-    dispatch(setAlert({
-      severity: 'success',
-      title: 'Character updated',
-      message: `Character ${characterEditor.name} updated`
-    }))
+    dispatch(
+      setAlert({
+        severity: 'success',
+        title: 'Character updated',
+        message: `Character ${characterEditor.name} updated`
+      })
+    )
   }, [])
 
   return (
@@ -79,16 +101,17 @@ const SaveCharacter: FC = () => {
             type="button"
             variant="contained"
             onClick={() => {
-              handleUpdate()
-                .catch((error) => {
-                  if (error instanceof Error) {
-                    dispatch(setAlert({
+              handleUpdate().catch((error) => {
+                if (error instanceof Error) {
+                  dispatch(
+                    setAlert({
                       severity: 'error',
                       title: 'Error updating character',
                       message: error.message
-                    }))
-                  }
-                })
+                    })
+                  )
+                }
+              })
             }}
           >
             Update
@@ -97,16 +120,17 @@ const SaveCharacter: FC = () => {
             type="button"
             variant="contained"
             onClick={() => {
-              handleSave()
-                .catch((error) => {
-                  if (error instanceof Error) {
-                    dispatch(setAlert({
+              handleSave().catch((error) => {
+                if (error instanceof Error) {
+                  dispatch(
+                    setAlert({
                       severity: 'error',
                       title: 'Error saving character',
                       message: error.message
-                    }))
-                  }
-                })
+                    })
+                  )
+                }
+              })
             }}
           >
             Save as new
@@ -118,16 +142,17 @@ const SaveCharacter: FC = () => {
           type="button"
           variant="contained"
           onClick={() => {
-            handleSave()
-              .catch((error) => {
-                if (error instanceof Error) {
-                  dispatch(setAlert({
+            handleSave().catch((error) => {
+              if (error instanceof Error) {
+                dispatch(
+                  setAlert({
                     severity: 'error',
                     title: 'Error saving character',
                     message: error.message
-                  }))
-                }
-              })
+                  })
+                )
+              }
+            })
           }}
         >
           Save

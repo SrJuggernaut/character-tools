@@ -1,29 +1,50 @@
 import { dataBase } from '@/lib/dexie'
-import { type CharacterBookDatabaseData, type CharacterBookEditorState } from '@/types/lorebook'
+import {
+  type CharacterBookDatabaseData,
+  type CharacterBookEditorState
+} from '@/types/lorebook'
 import 'dexie-export-import'
 import { nanoid } from 'nanoid'
 
-export const createCharacterBook = async (characterBook: CharacterBookEditorState): Promise<CharacterBookDatabaseData> => {
-  if (characterBook.name === undefined || characterBook.name === '') throw new Error('Character book name is required')
+export const createCharacterBook = async (
+  characterBook: CharacterBookEditorState
+): Promise<CharacterBookDatabaseData> => {
+  if (characterBook.name === undefined || characterBook.name === '')
+    throw new Error('Character book name is required')
   const id = nanoid()
   await dataBase.characterBooks.add({
     ...characterBook,
     id
   })
-  return await dataBase.characterBooks.where('id').equals(id).first() as CharacterBookDatabaseData
+  return (await dataBase.characterBooks
+    .where('id')
+    .equals(id)
+    .first()) as CharacterBookDatabaseData
 }
 
-export const getCharacterBook = async (id: string): Promise<CharacterBookDatabaseData> => {
-  return await dataBase.characterBooks.where('id').equals(id).first() as CharacterBookDatabaseData
+export const getCharacterBook = async (
+  id: string
+): Promise<CharacterBookDatabaseData> => {
+  return (await dataBase.characterBooks
+    .where('id')
+    .equals(id)
+    .first()) as CharacterBookDatabaseData
 }
 
-export const getAllCharacterBooks = async (): Promise<CharacterBookDatabaseData[]> => {
+export const getAllCharacterBooks = async (): Promise<
+  CharacterBookDatabaseData[]
+> => {
   return await dataBase.characterBooks.toArray()
 }
 
-export const updateCharacterBook = async (characterBook: CharacterBookDatabaseData): Promise<CharacterBookDatabaseData> => {
+export const updateCharacterBook = async (
+  characterBook: CharacterBookDatabaseData
+): Promise<CharacterBookDatabaseData> => {
   await dataBase.characterBooks.put(characterBook)
-  return await dataBase.characterBooks.where('id').equals(characterBook.id).first() as CharacterBookDatabaseData
+  return (await dataBase.characterBooks
+    .where('id')
+    .equals(characterBook.id)
+    .first()) as CharacterBookDatabaseData
 }
 
 export const deleteCharacterBook = async (id: string): Promise<void> => {
@@ -43,7 +64,9 @@ export const exportCharacterBookCollection = async (): Promise<Blob> => {
   return blob
 }
 
-export const importCharacterBookCollection = async (file: File): Promise<void> => {
+export const importCharacterBookCollection = async (
+  file: File
+): Promise<void> => {
   await dataBase.import(file, {
     filter(table) {
       return table === 'characterBooks'

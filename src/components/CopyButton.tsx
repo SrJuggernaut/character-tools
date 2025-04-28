@@ -1,7 +1,7 @@
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Tooltip } from '@mui/material'
-import { useEffect, useState, type FC, type ReactNode } from 'react'
+import { type FC, type ReactNode, useEffect, useState } from 'react'
 
 export interface CopyButtonProps {
   children?: ReactNode
@@ -10,7 +10,9 @@ export interface CopyButtonProps {
 }
 
 const CopyButton: FC<CopyButtonProps> = ({ children, textToCopy, tooltip }) => {
-  const [copyState, setCopyState] = useState<'idle' | 'success' | 'error'>('idle')
+  const [copyState, setCopyState] = useState<'idle' | 'success' | 'error'>(
+    'idle'
+  )
   useEffect(() => {
     if (copyState === 'success' || copyState === 'error') {
       const timer = setTimeout(() => {
@@ -27,10 +29,17 @@ const CopyButton: FC<CopyButtonProps> = ({ children, textToCopy, tooltip }) => {
       <Button
         size="small"
         variant="text"
-        color={copyState === 'success' ? 'success' : copyState === 'error' ? 'error' : undefined}
+        color={
+          copyState === 'success'
+            ? 'success'
+            : copyState === 'error'
+              ? 'error'
+              : undefined
+        }
         sx={{ textTransform: 'none' }}
         onClick={() => {
-          navigator.clipboard.writeText(textToCopy)
+          navigator.clipboard
+            .writeText(textToCopy)
             .then(() => {
               setCopyState('success')
             })
@@ -41,7 +50,10 @@ const CopyButton: FC<CopyButtonProps> = ({ children, textToCopy, tooltip }) => {
       >
         {children}
         &nbsp;
-        <FontAwesomeIcon icon={faCopy} size="sm" />
+        <FontAwesomeIcon
+          icon={faCopy}
+          size="sm"
+        />
       </Button>
     </Tooltip>
   )

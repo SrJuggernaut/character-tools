@@ -1,5 +1,5 @@
 import { type CharacterBookEditorState } from '@/types/lorebook'
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const initialState: CharacterBookEditorState = {
   name: '',
@@ -25,10 +25,16 @@ const characterBookEditorSlice = createSlice({
   name: 'characterBookEditor',
   initialState,
   reducers: {
-    setCharacterBookEditor: (_, action: PayloadAction<CharacterBookEditorState>) => {
+    setCharacterBookEditor: (
+      _,
+      action: PayloadAction<CharacterBookEditorState>
+    ) => {
       return action.payload
     },
-    updateCharacterBookEditor: (state, action: PayloadAction<Partial<CharacterBookEditorState>>) => {
+    updateCharacterBookEditor: (
+      state,
+      action: PayloadAction<Partial<CharacterBookEditorState>>
+    ) => {
       return { ...state, ...action.payload }
     },
     clearCharacterBookEditor: () => {
@@ -42,4 +48,9 @@ const characterBookEditorSlice = createSlice({
 
 export default characterBookEditorSlice
 
-export const { clearCharacterBookEditor, setCharacterBookEditor, setExampleCharacterBookEditor, updateCharacterBookEditor } = characterBookEditorSlice.actions
+export const {
+  clearCharacterBookEditor,
+  setCharacterBookEditor,
+  setExampleCharacterBookEditor,
+  updateCharacterBookEditor
+} = characterBookEditorSlice.actions

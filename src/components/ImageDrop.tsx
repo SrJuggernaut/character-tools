@@ -2,7 +2,7 @@ import useAppDispatch from '@/hooks/useAppDispatch'
 import { setAlert } from '@/state/feedbackSlice'
 import imageToPng from '@/utilities/imageToPng'
 import { Box, Button, Typography } from '@mui/material'
-import { useCallback, type FC } from 'react'
+import { type FC, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 export interface ImageDropProps {
@@ -44,21 +44,31 @@ const ImageDrop: FC<ImageDropProps> = ({ onDropedImage }) => {
         .catch((error) => {
           console.error(error)
           if (error instanceof Error) {
-            dispatch(setAlert({
-              title: 'Error while importing character',
-              message: error.message,
-              severity: 'error'
-            }))
+            dispatch(
+              setAlert({
+                title: 'Error while importing character',
+                message: error.message,
+                severity: 'error'
+              })
+            )
           }
-          dispatch(setAlert({
-            title: 'Error while importing character',
-            message: 'The character could not be imported',
-            severity: 'error'
-          }))
+          dispatch(
+            setAlert({
+              title: 'Error while importing character',
+              message: 'The character could not be imported',
+              severity: 'error'
+            })
+          )
         })
     })
   }, [])
-  const { getRootProps, getInputProps, isDragAccept, isDragReject, isDragActive } = useDropzone({
+  const {
+    getRootProps,
+    getInputProps,
+    isDragAccept,
+    isDragReject,
+    isDragActive
+  } = useDropzone({
     onDropAccepted,
     accept: {
       'image/png': ['.png'],
@@ -92,13 +102,25 @@ const ImageDrop: FC<ImageDropProps> = ({ onDropedImage }) => {
       })}
     >
       <input {...getInputProps()} />
-      <Typography variant="body1" align="center" gutterBottom>
+      <Typography
+        variant="body1"
+        align="center"
+        gutterBottom
+      >
         Drag &amp; drop your image here, or click to select file
       </Typography>
-      <Typography variant="caption" align="center" gutterBottom>
-        Accepted formats: .png, .jpg, .jpeg, .gif, .webp. Preferred aspect ratio is 2/3
+      <Typography
+        variant="caption"
+        align="center"
+        gutterBottom
+      >
+        Accepted formats: .png, .jpg, .jpeg, .gif, .webp. Preferred aspect ratio
+        is 2/3
       </Typography>
-      <Button variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+      >
         Upload
       </Button>
     </Box>

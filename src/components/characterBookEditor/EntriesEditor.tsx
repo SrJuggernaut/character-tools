@@ -5,16 +5,23 @@ import { type CharacterBookEntry } from '@/types/lorebook'
 import { faArrowLeft, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, IconButton, Paper, Typography } from '@mui/material'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useState, type FC } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
+import { type FC, useState } from 'react'
 import EntryEditor from './EntryEditor'
 
 const EntriesEditor: FC = () => {
-  const [editingEntry, setEditingEntry] = useState<number | undefined>(undefined)
-  const characterEditorState = useAppSelector((state) => state.characterBookEditor)
+  const [editingEntry, setEditingEntry] = useState<number | undefined>(
+    undefined
+  )
+  const characterEditorState = useAppSelector(
+    (state) => state.characterBookEditor
+  )
   const dispatch = useAppDispatch()
 
-  const handleUpdateEntry = (index: number, entry: CharacterBookEntry): void => {
+  const handleUpdateEntry = (
+    index: number,
+    entry: CharacterBookEntry
+  ): void => {
     const newEntries = [...characterEditorState.entries]
     newEntries[index] = entry
     dispatch(updateCharacterBookEditor({ entries: newEntries }))
@@ -26,7 +33,13 @@ const EntriesEditor: FC = () => {
         overflowX: 'hidden'
       }}
     >
-      <Typography variant="h2" align="center" gutterBottom>{editingEntry === undefined ? 'Entries' : 'Entry editor'}</Typography>
+      <Typography
+        variant="h2"
+        align="center"
+        gutterBottom
+      >
+        {editingEntry === undefined ? 'Entries' : 'Entry editor'}
+      </Typography>
       <AnimatePresence
         initial={false}
         mode="popLayout"
@@ -59,27 +72,47 @@ const EntriesEditor: FC = () => {
                     flexGrow: 1
                   }}
                 >
-                  <Typography variant="h3"><small>#{index + 1}</small>&nbsp;{entry.name === undefined || entry.name === '' ? `Unnamed entry ${index + 1}` : entry.name }</Typography>
-                  {
-                    entry.comment !== undefined || entry.comment !== ''
-                      ? <Typography variant="body1">{entry.comment}</Typography>
-                      : <Typography variant="body1" color="text.secondary">No comment</Typography>
-                  }
+                  <Typography variant="h3">
+                    <small>#{index + 1}</small>&nbsp;
+                    {entry.name === undefined || entry.name === ''
+                      ? `Unnamed entry ${index + 1}`
+                      : entry.name}
+                  </Typography>
+                  {entry.comment !== undefined || entry.comment !== '' ? (
+                    <Typography variant="body1">{entry.comment}</Typography>
+                  ) : (
+                    <Typography
+                      variant="body1"
+                      color="text.secondary"
+                    >
+                      No comment
+                    </Typography>
+                  )}
                 </div>
                 <div>
                   <IconButton
-                    onClick={() => { setEditingEntry(index) }}
+                    onClick={() => {
+                      setEditingEntry(index)
+                    }}
                   >
-                    <FontAwesomeIcon icon={faEdit} size="sm" />
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      size="sm"
+                    />
                   </IconButton>
                   <IconButton
                     onClick={() => {
                       const newEntries = [...characterEditorState.entries]
                       newEntries.splice(index, 1)
-                      dispatch(updateCharacterBookEditor({ entries: newEntries }))
+                      dispatch(
+                        updateCharacterBookEditor({ entries: newEntries })
+                      )
                     }}
                   >
-                    <FontAwesomeIcon icon={faTrash} size="sm" />
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      size="sm"
+                    />
                   </IconButton>
                 </div>
               </Paper>
@@ -88,23 +121,28 @@ const EntriesEditor: FC = () => {
               type="button"
               variant="contained"
               onClick={() => {
-                dispatch(updateCharacterBookEditor({
-                  entries: [...characterEditorState.entries, {
-                    name: '',
-                    content: '',
-                    enabled: true,
-                    extensions: {},
-                    insertion_order: 1,
-                    keys: [],
-                    case_sensitive: false,
-                    comment: '',
-                    constant: false,
-                    position: 'before_char',
-                    priority: 10,
-                    secondary_keys: [],
-                    selective: false
-                  }]
-                }))
+                dispatch(
+                  updateCharacterBookEditor({
+                    entries: [
+                      ...characterEditorState.entries,
+                      {
+                        name: '',
+                        content: '',
+                        enabled: true,
+                        extensions: {},
+                        insertion_order: 1,
+                        keys: [],
+                        case_sensitive: false,
+                        comment: '',
+                        constant: false,
+                        position: 'before_char',
+                        priority: 10,
+                        secondary_keys: [],
+                        selective: false
+                      }
+                    ]
+                  })
+                )
                 setEditingEntry(characterEditorState.entries.length)
               }}
             >
@@ -130,9 +168,14 @@ const EntriesEditor: FC = () => {
             >
               <IconButton
                 type="button"
-                onClick={() => { setEditingEntry(undefined) }}
+                onClick={() => {
+                  setEditingEntry(undefined)
+                }}
               >
-                <FontAwesomeIcon icon={faArrowLeft} size="sm" />
+                <FontAwesomeIcon
+                  icon={faArrowLeft}
+                  size="sm"
+                />
               </IconButton>
             </div>
             <EntryEditor

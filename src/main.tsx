@@ -24,6 +24,4 @@ const Main: FC = () => {
   )
 }
 
-ReactDOM.createRoot(
-  document.getElementById('root') as Element)
-  .render(<Main />)
+ReactDOM.createRoot(document.getElementById('root') as Element).render(<Main />)

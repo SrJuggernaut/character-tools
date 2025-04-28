@@ -1,5 +1,5 @@
 import { type CharacterEditorState } from '@/types/character'
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const initialState: CharacterEditorState = {
   name: '',
@@ -26,7 +26,7 @@ const exampleCharacterObject: CharacterEditorState = {
   first_mes: 'Hello, {{user}}! How can I help you today?',
   alternate_greetings: [
     'Hello, {{user}}!',
-    'Hi, i\'m {{char}}, your personal assistant.'
+    "Hi, i'm {{char}}, your personal assistant."
   ],
   mes_example: `<START>
 {{char}}: Hello, {{user}}! How can I help you today?
@@ -47,12 +47,10 @@ Please note that this regex assumes that the email addresses provided follow sta
 Remember to adjust the code according to your specific use case and programming language.
 `,
   creator: '@SrJuggernaut',
-  creator_notes: 'This is a simple assistant that can help you with your daily tasks, i write it to serve as a template for other characters.',
+  creator_notes:
+    'This is a simple assistant that can help you with your daily tasks, i write it to serve as a template for other characters.',
   character_version: '1.0.0',
-  tags: [
-    'assistant',
-    'template'
-  ],
+  tags: ['assistant', 'template'],
   system_prompt: '',
   post_history_instructions: '',
   extensions: {}
@@ -65,7 +63,10 @@ const characterEditorSlice = createSlice({
     setCharacterEditor: (_, action: PayloadAction<CharacterEditorState>) => {
       return action.payload
     },
-    updateCharacterEditor: (state, action: PayloadAction<Partial<CharacterEditorState>>) => {
+    updateCharacterEditor: (
+      state,
+      action: PayloadAction<Partial<CharacterEditorState>>
+    ) => {
       return { ...state, ...action.payload }
     },
     clearCharacterEditor: () => {
@@ -79,4 +80,9 @@ const characterEditorSlice = createSlice({
 
 export default characterEditorSlice
 
-export const { clearCharacterEditor, loadExampleCharacter, setCharacterEditor, updateCharacterEditor } = characterEditorSlice.actions
+export const {
+  clearCharacterEditor,
+  loadExampleCharacter,
+  setCharacterEditor,
+  updateCharacterEditor
+} = characterEditorSlice.actions

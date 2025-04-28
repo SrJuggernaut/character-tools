@@ -4,24 +4,39 @@ import EntriesEditor from '@/components/characterBookEditor/EntriesEditor'
 import ExportOrSave from '@/components/characterBookEditor/ExportOrSave'
 import ImportOrCreate from '@/components/characterBookEditor/ImportOrCreate'
 import BookFont from '@/components/icons/bookFont'
-import { faBook, faFileExport, faFileImport } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBook,
+  faFileExport,
+  faFileImport
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
-import { Box, Tab, Typography, useMediaQuery, type Theme } from '@mui/material'
-import { useEffect, useState, type FC } from 'react'
+import { Box, Tab, type Theme, Typography, useMediaQuery } from '@mui/material'
+import { type FC, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-type tabs = 'import-create' | 'characterbook-data' | 'entries' | 'export-or-save'
+type tabs =
+  | 'import-create'
+  | 'characterbook-data'
+  | 'entries'
+  | 'export-or-save'
 
 const CharacterBookEditorPage: FC = () => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const isMediumScreen = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
+  const isMediumScreen = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.up('md')
+  )
   const [currentTab, setCurrentTab] = useState<tabs>('import-create')
 
   useEffect(() => {
     if (searchParams.has('tab')) {
       const tab = searchParams.get('tab')
-      if (tab === 'import-create' || tab === 'characterbook-data' || tab === 'entries' || tab === 'export-or-save') {
+      if (
+        tab === 'import-create' ||
+        tab === 'characterbook-data' ||
+        tab === 'entries' ||
+        tab === 'export-or-save'
+      ) {
         setCurrentTab(tab)
       }
       setSearchParams({})
@@ -30,7 +45,13 @@ const CharacterBookEditorPage: FC = () => {
 
   return (
     <FluidLayout>
-      <Typography variant="h1" align="center" gutterBottom>Character Book Editor</Typography>
+      <Typography
+        variant="h1"
+        align="center"
+        gutterBottom
+      >
+        Character Book Editor
+      </Typography>
       <TabContext value={currentTab}>
         <Box
           sx={(theme) => ({
@@ -46,12 +67,30 @@ const CharacterBookEditorPage: FC = () => {
             variant={isMediumScreen ? 'fullWidth' : 'scrollable'}
             scrollButtons="auto"
             allowScrollButtonsMobile
-            onChange={(_, newValue) => { setCurrentTab(newValue) }}
+            onChange={(_, newValue) => {
+              setCurrentTab(newValue)
+            }}
           >
-            <Tab icon={<FontAwesomeIcon icon={faFileImport} />} label="Import or Create" value="import-create" />
-            <Tab icon={<FontAwesomeIcon icon={faBook} />} label="Character Book Data" value="characterbook-data" />
-            <Tab icon={<FontAwesomeIcon icon={BookFont} />} label="Entries" value="entries" />
-            <Tab icon={<FontAwesomeIcon icon={faFileExport} />} label="Export or Save" value="export-or-save" />
+            <Tab
+              icon={<FontAwesomeIcon icon={faFileImport} />}
+              label="Import or Create"
+              value="import-create"
+            />
+            <Tab
+              icon={<FontAwesomeIcon icon={faBook} />}
+              label="Character Book Data"
+              value="characterbook-data"
+            />
+            <Tab
+              icon={<FontAwesomeIcon icon={BookFont} />}
+              label="Entries"
+              value="entries"
+            />
+            <Tab
+              icon={<FontAwesomeIcon icon={faFileExport} />}
+              label="Export or Save"
+              value="export-or-save"
+            />
           </TabList>
         </Box>
         <div
