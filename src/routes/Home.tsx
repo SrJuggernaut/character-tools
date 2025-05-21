@@ -28,7 +28,7 @@ const cardsInfo = [
     title: 'CharacterBook editor',
     description:
       ' Edit or create characterBooks, a really useful tool to give context about the world or the character.',
-    link: '/characterbook-edito'
+    link: '/characterbook-editor'
   },
   {
     title: 'CharacterBook library',
