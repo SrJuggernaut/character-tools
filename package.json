@@ -18,12 +18,13 @@
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@mui/lab": "^6.0.0-dev.240424162023-9968b4889d",
-    "@mui/material": "^7.0.2",
+    "@lenml/char-card-reader": "^1.0.6",
+    "@mui/base": "^5.0.0-beta.70",
+    "@mui/lab": "^7.0.0-beta.14",
+    "@mui/material": "^7.1.2",
     "@mui/styles": "^6.4.8",
     "@mui/x-data-grid": "^8.1.0",
     "@reduxjs/toolkit": "^2.7.0",
-    "character-card-utils": "^2.0.3",
     "date-fns": "^4.1.0",
     "dexie": "^4.0.11",
     "dexie-export-import": "^4.1.4",
@@ -42,8 +43,7 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.5.2",
     "srjuggernaut-mui-theme": "^1.1.0",
-    "vite-tsconfig-paths": "^5.1.4",
-    "zod": "^3.24.3"
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -57,5 +57,7 @@
     "vite": "^5.4.18"
   },
   "packageManager": "bun@1.2.10",
-  "trustedDependencies": ["@biomejs/biome"]
+  "trustedDependencies": [
+    "@biomejs/biome"
+  ]
 }

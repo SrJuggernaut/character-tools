@@ -16,7 +16,6 @@ import {
   extractCharacterData,
   importedToCharacterEditorState
 } from '@/utilities/characterUtilities'
-import imageToPng from '@/utilities/imageToPng'
 import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Button, Typography } from '@mui/material'
@@ -28,11 +27,7 @@ const ImportOrCreate: FC = () => {
   const handleImport = useCallback(
     async (file: File): Promise<CharacterEditorState> => {
       const extracted = await extractCharacterData(file)
-      const image =
-        extracted.image !== undefined
-          ? await imageToPng(extracted.image)
-          : undefined
-      const character = importedToCharacterEditorState(extracted.character)
+      const character = importedToCharacterEditorState(extracted)
       const characterBook = extractCharacterBookFromCharacter(
         extracted.character
       )
@@ -103,7 +98,6 @@ const ImportOrCreate: FC = () => {
       }
       return {
         ...character,
-        image
       }
     },
     []

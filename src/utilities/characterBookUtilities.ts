@@ -1,61 +1,17 @@
 import { type CharacterBookEditorState } from '@/types/lorebook'
 import { replaceDateInTemplate } from '@/utilities/date'
-import { type CharacterBook, type V1, type V2, v2 } from 'character-card-utils'
-import { z } from 'zod'
-
-const characterBookEntrySchema = z.object({
-  keys: z.array(z.string()),
-  content: z.string(),
-  extensions: z.record(z.any()),
-  enabled: z.boolean(),
-  insertion_order: z.number(),
-  case_sensitive: z.boolean().optional(),
-  name: z.string().optional(),
-  priority: z.number().optional(),
-  id: z.number().optional(),
-  comment: z.string().optional(),
-  selective: z.boolean().optional(),
-  secondary_keys: z.array(z.string()).optional(),
-  constant: z.boolean().optional(),
-  position: z
-    .union([z.literal('before_char'), z.literal('after_char')])
-    .optional()
-})
-
-const characterBookSchema = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  scan_depth: z.number().optional(),
-  token_budget: z.number().optional(),
-  recursive_scanning: z.boolean().optional(),
-  extensions: z.record(z.any()).optional(),
-  entries: z.array(characterBookEntrySchema)
-})
+import { CharacterCard, CharacterSpec } from '@lenml/char-card-reader'
 
 export const extractCharacterBookFromCharacter = (
-  character: V1 | V2
-): CharacterBook | undefined => {
-  const v2Result = v2.safeParse(character)
-  if (v2Result.success) {
-    return v2Result.data.data.character_book
-  } else {
-    return undefined
-  }
+  character: CharacterCard
+): CharacterSpec.CharacterBook => {
+  return character.character_book
 }
 
 export const characterBookToCharacterEditor = (
-  characterBook: CharacterBook
+  characterBook: CharacterSpec.CharacterBook
 ): CharacterBookEditorState => {
-  const result = characterBookSchema.safeParse(characterBook)
-  if (!result.success)
-    throw new Error(
-      `Invalid CharacterBook: ${result.error.errors
-        .map((error) => {
-          return `${error.path.join('.')}: ${error.message}`
-        })
-        .join('; ')}`
-    )
-  const entries: CharacterBookEditorState['entries'] =
+    const entries: CharacterBookEditorState['entries'] =
     characterBook.entries.map((entry) => ({
       ...entry,
       position: entry.position ?? 'before_char',
@@ -75,10 +31,60 @@ export const characterBookToCharacterEditor = (
 
 export const characterEditorToCharacterBook = (
   characterEditor: CharacterBookEditorState
-): CharacterBook => {
-  const characterBook = { ...characterEditor }
-  if (characterBook.id !== undefined) delete characterBook.id
-  return characterBook
+): CharacterSpec.CharacterBook => {
+
+  const entries: CharacterSpec.Entry[] = characterEditor.entries.map((ent) => {
+    const ext = ent.extensions
+    const extensions = {
+      position: ext.position as number,
+      exclude_recursion: ext.exclude_recursion as boolean,
+      display_index: ext.display_index as number,
+      probability: ext.probability as number,
+      useProbability: ext.useProbability as boolean,
+      depth: ext.depth as number,
+      selectiveLogic: ext.selectiveLogic as number,
+      group: ext.group  as string,
+      group_override: ext.group_override as boolean,
+      group_weight: ext.group_weight  as number,
+      prevent_recursion: ext.prevent_recursion  as boolean,
+      delay_until_recursion: ext.delay_until_recursion  as boolean,
+      scan_depth: ext.scan_depth,
+      match_whole_words: ext.match_whole_words,
+      use_group_scoring: ext.use_group_scoring as boolean,
+      case_sensitive: ext.case_sensitive,
+      automation_id: ext.automation_id as string,
+      role: ext.role as number,
+      vectorized: ext.vectorized as boolean,
+      sticky: ext.sticky as number,
+      cooldown: ext.cooldown  as number,
+      delay: ext.delay  as number,
+      match_persona_description: ext.match_persona_description as boolean,
+      match_character_description: ext.match_character_description as boolean,
+      match_character_personality: ext.match_character_personality as boolean,
+      match_character_depth_prompt: ext.match_character_depth_prompt as boolean,
+      match_scenario: ext.match_scenario as boolean,
+      match_creator_notes: ext.match_creator_notes  as boolean
+    }
+    return {
+      id: ent.id ?? 0,
+      keys: ent.keys,
+      secondary_keys: ent.secondary_keys,
+      comment: ent.comment ?? '',
+      content: ent.content,
+      constant: ent.constant ?? false,
+      selective: ent.selective ?? false,
+      insertion_order: ent.insertion_order,
+      enabled: ent.enabled,
+      position: ent.position,
+      use_regex: false,
+      extensions
+    }
+  })
+  return {
+    entries,
+    name: characterEditor.name,
+    extensions: characterEditor.extensions
+  }
 }
 
 export const JSONFileToCharacterBookEditor = async (
@@ -90,7 +96,7 @@ export const JSONFileToCharacterBookEditor = async (
 }
 
 export const characterBookToJSONUrl = (
-  characterBook: CharacterBook
+  characterBook: CharacterSpec.CharacterBook
 ): string => {
   const json = JSON.stringify(characterBook)
   const blob = new Blob([json], { type: 'application/json' })

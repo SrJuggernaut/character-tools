@@ -6,21 +6,14 @@ import {
   b64DecodeUnicode,
   b64EncodeUnicode
 } from '@/utilities/stringConversion'
-import { zodErrorToString } from '@/utilities/zod'
-import {
-  type CharacterBook,
-  type V1,
-  type V2,
-  v1,
-  v2
-} from 'character-card-utils'
+import { CharacterCard, SpecV1, SpecV2 } from '@lenml/char-card-reader'
 import ExifReader, { type XmpTag } from 'exifreader'
 import json5 from 'json5'
 import { addMetadataFromBase64DataURI, getMetadata } from 'meta-png'
 import { characterEditorToCharacterBook } from '@/utilities/characterBookUtilities'
 
 interface ExtractCharacterDataReturn {
-  character: V1 | V2
+  character: CharacterCard
   image?: string
 }
 
@@ -30,7 +23,8 @@ export const extractCharacterData = async (
   switch (file.type) {
     case 'application/json': {
       const text = await file.text()
-      const character = JSON.parse(text)
+      const jsonData = JSON.parse(text)
+      const character = CharacterCard.from_json(jsonData)
       return { character }
     }
     case 'image/png': {
@@ -42,7 +36,8 @@ export const extractCharacterData = async (
           'Invalid character card, Png image does not contain metadata'
         )
       const decodedMetadata = b64DecodeUnicode(metadata)
-      const character = json5.parse(decodedMetadata)
+      const jsonData = json5.parse(decodedMetadata)
+      const character = CharacterCard.from_json(jsonData)
       const base64Image = uint8Array.reduce(
         (data, byte) => data + String.fromCharCode(byte),
         ''
@@ -70,10 +65,12 @@ export const extractCharacterData = async (
         typeof userCommentValue[0] === 'string'
       ) {
         const charPreParse = userCommentValue[0]
-        const character = json5.parse(charPreParse)
+        const jsonData = json5.parse(charPreParse)
+        const character = CharacterCard.from_json(jsonData)
         return { character, image }
       }
-      const character = json5.parse(userComment.description as string)
+      const jsonData = json5.parse(userComment.description as string)
+      const character = CharacterCard.from_json(jsonData)
       return { character, image }
     }
     default:
@@ -85,54 +82,45 @@ export const FileToCharacterEditorState = async (
   file: File
 ): Promise<CharacterEditorState> => {
   const extracted = await extractCharacterData(file)
+  
   const image =
     extracted.image !== undefined
       ? await imageToPng(extracted.image)
       : undefined
-  const character = importedToCharacterEditorState(extracted.character)
-  character.tags = [...new Set(character.tags)]
-  return {
-    ...character,
-    image
-  }
+
+  const data = {character: extracted.character, image}
+
+  return importedToCharacterEditorState(data)
 }
 
 export const importedToCharacterEditorState = (
-  data: unknown
+  data: ExtractCharacterDataReturn
 ): CharacterEditorState => {
-  const v2Result = v2.safeParse(data)
-  if (v2Result.success) {
-    return { ...v2Result.data.data, character_book: undefined }
-  }
-  const v1Result = v1.safeParse(data)
-  if (v1Result.success) {
-    return {
-      ...v1Result.data,
-      alternate_greetings: [],
-      creator: '',
-      creator_notes: '',
-      character_version: '',
-      tags: [],
-      system_prompt: '',
-      post_history_instructions: '',
-      extensions: {}
-    }
-  } else {
-    //@ts-expect-error Checking if data is trying to follow the V2 Spec
-    if (data.spec === ('chara_card_v2' as V2['spec'])) {
-      throw new Error(
-        `Imported data is not a valid character, ${zodErrorToString(v2Result.error)}`
-      )
-    }
-    throw new Error(
-      `Imported data is not a valid character, ${zodErrorToString(v1Result.error)}`
-    )
+  const v2 = data.character.toSpecV2()
+  const c = v2.data
+  return {
+    name: c.name,
+    description: c.description,
+    personality: c.personality,
+    mes_example: c.mes_example,
+    scenario: c.scenario,
+    first_mes: c.first_mes,
+    alternate_greetings: c.alternate_greetings ?? [],
+    creator: c.creator,
+    creator_notes: c.creator_notes,
+    character_version: c.character_version,
+    tags: c.tags,
+    system_prompt: c.system_prompt,
+    post_history_instructions: c.post_history_instructions,
+    character_book: undefined,
+    extensions: c.extensions,
+    image: data.image
   }
 }
 
 export const characterEditorStateToV1 = (
   characterData: CharacterEditorState
-): V1 => {
+): SpecV1.TavernCard => {
   return {
     name: characterData.name,
     description: characterData.description,
@@ -145,8 +133,8 @@ export const characterEditorStateToV1 = (
 
 export const characterEditorStateToV2 = async (
   characterData: CharacterEditorState
-): Promise<V2> => {
-  let characterBook: CharacterBook | undefined
+): Promise<SpecV2.TavernCardV2> => {
+  let characterBook: SpecV2.CharacterBook | undefined
   if (characterData.character_book !== undefined) {
     const characterBookEditor = await getCharacterBook(
       characterData.character_book
@@ -181,7 +169,7 @@ export const characterEditorStateToV2 = async (
 }
 
 export const exportCharacterAsPng = (
-  characterData: V1 | V2,
+  characterData: SpecV1.TavernCard | SpecV2.TavernCardV2,
   image: string
 ): string => {
   const stringifiedCharacterData = JSON.stringify(characterData)
@@ -194,7 +182,7 @@ export const exportCharacterAsPng = (
   return imageToExportAsUrlData
 }
 
-export const exportCharacterAsJson = (characterData: V1 | V2): string => {
+export const exportCharacterAsJson = (characterData: SpecV1.TavernCard | SpecV2.TavernCardV2): string => {
   const json = JSON.stringify(characterData)
   const blob = new Blob([json], { type: 'application/json' })
   const url = URL.createObjectURL(blob)

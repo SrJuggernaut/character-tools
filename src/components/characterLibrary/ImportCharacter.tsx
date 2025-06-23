@@ -11,7 +11,6 @@ import {
   extractCharacterData,
   importedToCharacterEditorState
 } from '@/utilities/characterUtilities'
-import imageToPng from '@/utilities/imageToPng'
 import {
   faCheckCircle,
   faFileImport,
@@ -62,13 +61,7 @@ const ImportCharacter: FC = () => {
     if (processingFile !== undefined) {
       extractCharacterData(processingFile)
         .then(async (extracted) => {
-          const image =
-            extracted.image !== undefined
-              ? await imageToPng(extracted.image)
-              : undefined
-          const characterEditorState = importedToCharacterEditorState(
-            extracted.character
-          )
+          const characterEditorState = importedToCharacterEditorState(extracted)
           const characterBook = extractCharacterBookFromCharacter(
             extracted.character
           )
@@ -80,8 +73,7 @@ const ImportCharacter: FC = () => {
           }
           characterEditorState.character_book = savedCharacterBook?.id
           const createdCharacter = await createCharacter({
-            ...characterEditorState,
-            image
+            ...characterEditorState
           })
           setImportedFiles([
             ...importedFiles,
