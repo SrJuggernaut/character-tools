@@ -35,6 +35,50 @@ Also known as LoreBooks or Worldbooks, these are collections of knowledge that c
 - Import single or multiple CharacterBooks at once.
 - Save a copy of your library to use in another browser.
 
+# Usage
+
+## Development
+
+To build the project I used [Bun](https://bun.sh) and [Vite](https://vitejs.dev/). I highly recommend using it.
+
+1. Install the dependencies
+
+```bash
+bun install
+```
+
+2. Run the development server
+
+```bash
+bun run dev
+```
+
+3. Make changes to the source code, Vite hot-reloads the page for you.
+
+4. Commit your changes and push them to GitHub.
+
+5. Make a pull request and wait for it to be merged.
+
+6. Be happy!
+
+## Deployment
+
+1. Install the dependencies
+
+```bash
+bun install
+```
+
+2. Build the project
+
+```bash
+bun run build
+```
+
+3. Deploy the project, you can use any static hosting service. Just upload all the files in the `dist` folder.
+
+4. Be happy!
+
 # Future Features
 
 Right now I don't have any plans to add new features, but I'm open to suggestions and feedback.
