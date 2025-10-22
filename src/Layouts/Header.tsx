@@ -51,7 +51,6 @@ const Header: FC = () => {
             <Typography sx={visuallyHidden}>Character Tools</Typography>
             <FontAwesomeIcon
               icon={faScrewdriverWrench}
-              fixedWidth
               size="2x"
             />
           </MuiLink>
@@ -66,7 +65,6 @@ const Header: FC = () => {
           >
             <FontAwesomeIcon
               icon={faBug}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -80,7 +78,6 @@ const Header: FC = () => {
           >
             <FontAwesomeIcon
               icon={faScrewdriverWrench}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -95,14 +92,12 @@ const Header: FC = () => {
             {theme === 'light' && (
               <FontAwesomeIcon
                 icon={faMoon}
-                fixedWidth
                 size="sm"
               />
             )}
             {theme === 'dark' && (
               <FontAwesomeIcon
                 icon={faSun}
-                fixedWidth
                 size="sm"
               />
             )}

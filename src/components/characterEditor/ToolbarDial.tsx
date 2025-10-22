@@ -49,17 +49,14 @@ const ToolbarDial = () => {
             <FontAwesomeIcon
               icon={faUser}
               size="sm"
-              fixedWidth
             />
             <FontAwesomeIcon
               icon={faRightLong}
               size="sm"
-              fixedWidth
             />
             <FontAwesomeIcon
               icon={faCode}
               size="sm"
-              fixedWidth
             />
           </>
         }
@@ -78,17 +75,14 @@ const ToolbarDial = () => {
             <FontAwesomeIcon
               icon={faUser}
               size="sm"
-              fixedWidth
             />
             <FontAwesomeIcon
               icon={faLeftLong}
               size="sm"
-              fixedWidth
             />
             <FontAwesomeIcon
               icon={faCode}
               size="sm"
-              fixedWidth
             />
           </>
         }

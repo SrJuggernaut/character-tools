@@ -169,7 +169,6 @@ const CharacterTable: FC = () => {
           >
             <FontAwesomeIcon
               icon={faPencil}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -232,7 +231,6 @@ const CharacterTable: FC = () => {
           >
             <FontAwesomeIcon
               icon={faTrashAlt}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -274,7 +272,6 @@ const CharacterTable: FC = () => {
           >
             <FontAwesomeIcon
               icon={faPlus}
-              fixedWidth
               size="sm"
             />
           </IconButton>

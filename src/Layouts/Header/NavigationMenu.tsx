@@ -59,7 +59,6 @@ const NavigationMenu: FC = () => {
         >
           <FontAwesomeIcon
             icon={faBars}
-            fixedWidth
             size="sm"
           />
         </IconButton>
@@ -106,10 +105,7 @@ const NavigationMenu: FC = () => {
                   selected={location.pathname === menuLink.url}
                 >
                   <ListItemIcon>
-                    <FontAwesomeIcon
-                      icon={menuLink.icon}
-                      fixedWidth
-                    />
+                    <FontAwesomeIcon icon={menuLink.icon} />
                   </ListItemIcon>
                   <ListItemText primary={menuLink.label} />
                 </ListItemButton>

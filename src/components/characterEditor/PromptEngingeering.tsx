@@ -143,7 +143,6 @@ const PromptEngingeering: FC = () => {
             <FontAwesomeIcon
               icon={faTimes}
               size="xs"
-              fixedWidth
             />
           }
         />
