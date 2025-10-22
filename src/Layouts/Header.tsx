@@ -1,7 +1,3 @@
-import NavigationMenu from '@/Layouts/Header/NavigationMenu'
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { setOpenSettings, setTheme } from '@/state/appSlice'
 import {
   faBug,
   faMoon,
@@ -19,6 +15,10 @@ import {
 import { visuallyHidden } from '@mui/utils'
 import { type FC } from 'react'
 import { Link as ReactRouterLink } from 'react-router-dom'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import NavigationMenu from '@/Layouts/Header/NavigationMenu'
+import { setOpenSettings, setTheme } from '@/state/appSlice'
 
 const Header: FC = () => {
   const theme = useAppSelector((state) => state.app.theme)

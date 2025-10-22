@@ -1,7 +1,7 @@
-import Fluid from '@/Layouts/FluidLayout'
 import { Button, Typography } from '@mui/material'
 import { type FC } from 'react'
-import { Link, isRouteErrorResponse, useRouteError } from 'react-router-dom'
+import { isRouteErrorResponse, Link, useRouteError } from 'react-router-dom'
+import Fluid from '@/Layouts/FluidLayout'
 
 const ErrorRoute: FC = () => {
   const error = useRouteError()

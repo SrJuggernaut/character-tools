@@ -1,6 +1,3 @@
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { clearDialog, closeDialog } from '@/state/feedbackSlice'
 import {
   Button,
   Dialog,
@@ -9,6 +6,9 @@ import {
   DialogTitle
 } from '@mui/material'
 import { type FC, useEffect } from 'react'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import { clearDialog, closeDialog } from '@/state/feedbackSlice'
 
 const FeedbackDialog: FC = () => {
   const { openDialog, dialog } = useAppSelector((state) => state.feedback)

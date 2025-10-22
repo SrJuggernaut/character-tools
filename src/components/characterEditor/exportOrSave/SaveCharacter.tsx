@@ -1,11 +1,11 @@
+import { Button } from '@mui/material'
+import { type FC, useCallback } from 'react'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { createCharacter, updateCharacter } from '@/services/character'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
 import { setAlert } from '@/state/feedbackSlice'
 import { type CharacterDatabaseData } from '@/types/character'
-import { Button } from '@mui/material'
-import { type FC, useCallback } from 'react'
 
 const SaveCharacter: FC = () => {
   const characterEditor = useAppSelector((theme) => theme.characterEditor)

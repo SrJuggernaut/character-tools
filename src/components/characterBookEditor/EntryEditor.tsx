@@ -1,5 +1,3 @@
-import NumberField from '@/components/ui/form/NumberField'
-import { type CharacterBookEntry } from '@/types/lorebook'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -16,6 +14,8 @@ import {
   Typography
 } from '@mui/material'
 import { type FC, useState } from 'react'
+import NumberField from '@/components/ui/form/NumberField'
+import { type CharacterBookEntry } from '@/types/lorebook'
 
 export interface EntryEditorProps {
   value: CharacterBookEntry

@@ -1,7 +1,3 @@
-import Drop from '@/components/ui/Drop'
-import { createCharacterBook } from '@/services/characterBooks'
-import { type CharacterBookDatabaseData } from '@/types/lorebook'
-import { characterBookToCharacterEditor } from '@/utilities/characterBookUtilities'
 import {
   faCheckCircle,
   faFileImport,
@@ -20,6 +16,10 @@ import {
   Typography
 } from '@mui/material'
 import { type FC, useCallback, useEffect, useState } from 'react'
+import Drop from '@/components/ui/Drop'
+import { createCharacterBook } from '@/services/characterBooks'
+import { type CharacterBookDatabaseData } from '@/types/lorebook'
+import { characterBookToCharacterEditor } from '@/utilities/characterBookUtilities'
 
 type ImportedFile =
   | {

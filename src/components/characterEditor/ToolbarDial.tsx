@@ -1,8 +1,3 @@
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { updateCharacterEditor } from '@/state/characterEditorSlice'
-import replaceChar from '@/utilities/character/replaceChar'
-import replaceName from '@/utilities/character/replaceName'
 import {
   faCode,
   faLeftLong,
@@ -13,6 +8,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { SpeedDial, SpeedDialAction } from '@mui/material'
 import { makeStyles } from '@mui/styles'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import { updateCharacterEditor } from '@/state/characterEditorSlice'
+import replaceChar from '@/utilities/character/replaceChar'
+import replaceName from '@/utilities/character/replaceName'
 
 const useStyles = makeStyles(() => ({
   tooltips: {

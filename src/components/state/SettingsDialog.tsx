@@ -1,7 +1,3 @@
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { setOpenSettings, setTokenizer } from '@/state/appSlice'
-import { type AppState } from '@/types/app'
 import {
   Dialog,
   DialogContent,
@@ -14,6 +10,10 @@ import {
   Typography
 } from '@mui/material'
 import { type FC } from 'react'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import { setOpenSettings, setTokenizer } from '@/state/appSlice'
+import { type AppState } from '@/types/app'
 
 const SettingsDialog: FC = () => {
   const { openSettings, tokenizer } = useAppSelector((state) => state.app)

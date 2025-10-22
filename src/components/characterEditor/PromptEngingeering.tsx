@@ -1,3 +1,8 @@
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Autocomplete, TextField, Typography } from '@mui/material'
+import { useLiveQuery } from 'dexie-react-hooks'
+import { type FC } from 'react'
 import CopyButton from '@/components/CopyButton'
 import ToolbarDial from '@/components/characterEditor/ToolbarDial'
 import TextFieldWithTokenCounter from '@/components/ui/form/TextFieldWithTokenCounter'
@@ -5,11 +10,6 @@ import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { dataBase } from '@/lib/dexie'
 import { updateCharacterEditor } from '@/state/characterEditorSlice'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Autocomplete, TextField, Typography } from '@mui/material'
-import { useLiveQuery } from 'dexie-react-hooks'
-import { type FC } from 'react'
 
 const PromptEngingeering: FC = () => {
   const characterBooks = useLiveQuery(async () => {

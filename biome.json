@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.7/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -7,7 +7,16 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["bun.lock", "node_modules", "dist"]
+    "includes": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      ".husky/**/*.{js,jsx}",
+      "vite.config.ts",
+      "tsconfig.node.json",
+      "tsconfig.json",
+      "lint-staged.config.ts",
+      "biome.json",
+      ".commitlintrc.json"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -15,19 +24,16 @@
     "indentWidth": 2,
     "attributePosition": "multiline"
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": false,
       "complexity": {
         "noExtraBooleanCast": "error",
-        "noMultipleSpacesInRegularExpressionLiterals": "error",
         "noUselessCatch": "error",
         "noUselessTypeConstraint": "error",
-        "noWith": "error"
+        "noAdjacentSpacesInRegex": "error"
       },
       "correctness": {
         "noConstAssign": "error",
@@ -50,14 +56,15 @@
         "noUnusedLabels": "error",
         "noUnusedPrivateClassMembers": "error",
         "noUnusedVariables": "error",
-        "useArrayLiterals": "off",
         "useIsNan": "error",
         "useValidForDirection": "error",
-        "useYield": "error"
+        "useYield": "error",
+        "useValidTypeof": "error"
       },
       "style": {
         "noNamespace": "error",
-        "useAsConstAssertion": "error"
+        "useAsConstAssertion": "error",
+        "useArrayLiterals": "off"
       },
       "suspicious": {
         "noAsyncPromiseExecutor": "error",
@@ -87,7 +94,7 @@
         "noUnsafeNegation": "error",
         "useGetterReturn": "error",
         "useNamespaceKeyword": "error",
-        "useValidTypeof": "error"
+        "noWith": "error"
       }
     }
   },
@@ -102,26 +109,23 @@
   },
   "overrides": [
     {
-      "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+      "includes": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
       "linter": {
         "rules": {
           "complexity": {
-            "noWith": "off"
+            "noArguments": "error"
           },
           "correctness": {
             "noConstAssign": "off",
             "noGlobalObjectCalls": "off",
             "noInvalidBuiltinInstantiation": "off",
             "noInvalidConstructorSuper": "off",
-            "noNewSymbol": "off",
             "noSetterReturn": "off",
             "noUndeclaredVariables": "off",
             "noUnreachable": "off",
             "noUnreachableSuper": "off"
           },
           "style": {
-            "noArguments": "error",
-            "noVar": "error",
             "useConst": "error"
           },
           "suspicious": {
@@ -133,7 +137,9 @@
             "noImportAssign": "off",
             "noRedeclare": "off",
             "noUnsafeNegation": "off",
-            "useGetterReturn": "off"
+            "useGetterReturn": "off",
+            "noWith": "off",
+            "noVar": "error"
           }
         }
       }

@@ -1,6 +1,3 @@
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { updateCharacterEditor } from '@/state/characterEditorSlice'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -11,6 +8,9 @@ import {
   Typography
 } from '@mui/material'
 import { type FC, useState } from 'react'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import { updateCharacterEditor } from '@/state/characterEditorSlice'
 
 const CharacterMetadata: FC = () => {
   const characterEditorState = useAppSelector((state) => state.characterEditor)

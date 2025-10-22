@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prepare": "husky",
+    "prepare": "bun .husky/install.mts",
     "develop": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
@@ -31,6 +31,7 @@
     "exifreader": "^4.29.0",
     "gpt-tokenizer": "^2.9.0",
     "json5": "^2.2.3",
+    "lint-staged": "^16.2.6",
     "llama-tokenizer-js": "^1.2.2",
     "llama3-tokenizer-js": "^1.2.0",
     "meta-png": "^1.0.6",
@@ -46,7 +47,7 @@
     "zod": "^3.24.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
+    "@biomejs/biome": "2.2.7",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@types/react": "^19.2.2",

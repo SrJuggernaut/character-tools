@@ -1,6 +1,6 @@
-import Header from '@/Layouts/Header'
 import { Box } from '@mui/material'
 import { type FC, type ReactNode } from 'react'
+import Header from '@/Layouts/Header'
 
 export interface FluidProps {
   children?: ReactNode

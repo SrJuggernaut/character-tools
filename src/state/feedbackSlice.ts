@@ -1,5 +1,5 @@
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { type Alert, type Dialog, type feedbackState } from '@/types/feedback'
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const initialState: feedbackState = {
   openAlert: false,

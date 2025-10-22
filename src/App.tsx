@@ -1,3 +1,5 @@
+import { type FC } from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import CharacterBookEditorPage from '@/routes/CharacterBookEditorPage'
 import CharacterBookLibrary from '@/routes/CharacterBookLibrary'
 import CharacterEditorPage from '@/routes/CharacterEditor'
@@ -5,8 +7,6 @@ import CharacterLibrary from '@/routes/CharacterLibrary'
 import ErrorRoute from '@/routes/Error'
 import Home from '@/routes/Home'
 import ManageDatabase from '@/routes/ManageDatabase'
-import { type FC } from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
   { path: '/', element: <Home />, errorElement: <ErrorRoute /> },

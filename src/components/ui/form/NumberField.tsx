@@ -1,6 +1,3 @@
-import NumberInput, {
-  type NumberInputProps
-} from '@/components/ui/form/NumberInput'
 import {
   FormControl,
   type FormControlProps,
@@ -10,6 +7,9 @@ import {
   type InputLabelProps
 } from '@mui/material'
 import { type FC, useId } from 'react'
+import NumberInput, {
+  type NumberInputProps
+} from '@/components/ui/form/NumberInput'
 
 export interface NumberFieldProps extends NumberInputProps {
   FormControlProps?: FormControlProps

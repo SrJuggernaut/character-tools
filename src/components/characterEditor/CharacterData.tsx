@@ -1,10 +1,3 @@
-import CopyButton from '@/components/CopyButton'
-import ImageDrop from '@/components/ImageDrop'
-import ToolbarDial from '@/components/characterEditor/ToolbarDial'
-import TextFieldWithTokenCounter from '@/components/ui/form/TextFieldWithTokenCounter'
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { updateCharacterEditor } from '@/state/characterEditorSlice'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -17,6 +10,13 @@ import {
   Typography
 } from '@mui/material'
 import { type FC } from 'react'
+import CopyButton from '@/components/CopyButton'
+import ToolbarDial from '@/components/characterEditor/ToolbarDial'
+import ImageDrop from '@/components/ImageDrop'
+import TextFieldWithTokenCounter from '@/components/ui/form/TextFieldWithTokenCounter'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import { updateCharacterEditor } from '@/state/characterEditorSlice'
 
 const CharacterData: FC = () => {
   const characterEditorState = useAppSelector((state) => state.characterEditor)

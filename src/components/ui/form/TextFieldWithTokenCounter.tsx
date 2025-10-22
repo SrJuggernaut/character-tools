@@ -1,6 +1,6 @@
-import useTokenizer from '@/hooks/useTokenizer'
 import { Avatar, Chip, TextField, TextFieldProps, Tooltip } from '@mui/material'
 import { FC, useEffect, useState } from 'react'
+import useTokenizer from '@/hooks/useTokenizer'
 
 export type TextFieldWithTokenCounterProps = TextFieldProps
 

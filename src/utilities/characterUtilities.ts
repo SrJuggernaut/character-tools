@@ -1,13 +1,3 @@
-import { getCharacterBook } from '@/services/characterBooks'
-import { type CharacterEditorState } from '@/types/character'
-import { characterEditorToCharacterBook } from '@/utilities/characterBookUtilities'
-import { replaceDateInTemplate } from '@/utilities/date'
-import imageToPng from '@/utilities/imageToPng'
-import {
-  b64DecodeUnicode,
-  b64EncodeUnicode
-} from '@/utilities/stringConversion'
-import { zodErrorToString } from '@/utilities/zod'
 import {
   type CharacterBook,
   type V1,
@@ -18,6 +8,16 @@ import {
 import ExifReader, { type XmpTag } from 'exifreader'
 import json5 from 'json5'
 import { addMetadataFromBase64DataURI, getMetadata } from 'meta-png'
+import { getCharacterBook } from '@/services/characterBooks'
+import { type CharacterEditorState } from '@/types/character'
+import { characterEditorToCharacterBook } from '@/utilities/characterBookUtilities'
+import { replaceDateInTemplate } from '@/utilities/date'
+import imageToPng from '@/utilities/imageToPng'
+import {
+  b64DecodeUnicode,
+  b64EncodeUnicode
+} from '@/utilities/stringConversion'
+import { zodErrorToString } from '@/utilities/zod'
 
 interface ExtractCharacterDataReturn {
   character: V1 | V2

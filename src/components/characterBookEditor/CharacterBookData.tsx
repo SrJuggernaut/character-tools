@@ -1,7 +1,3 @@
-import NumberField from '@/components/ui/form/NumberField'
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { updateCharacterBookEditor } from '@/state/characterBookEditorSlice'
 import {
   Checkbox,
   FormControlLabel,
@@ -11,6 +7,10 @@ import {
   Typography
 } from '@mui/material'
 import { type FC } from 'react'
+import NumberField from '@/components/ui/form/NumberField'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import { updateCharacterBookEditor } from '@/state/characterBookEditorSlice'
 
 const CharacterBookData: FC = () => {
   const characterEditorState = useAppSelector(
