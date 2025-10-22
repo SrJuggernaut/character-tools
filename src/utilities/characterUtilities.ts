@@ -1,5 +1,6 @@
 import { getCharacterBook } from '@/services/characterBooks'
 import { type CharacterEditorState } from '@/types/character'
+import { characterEditorToCharacterBook } from '@/utilities/characterBookUtilities'
 import { replaceDateInTemplate } from '@/utilities/date'
 import imageToPng from '@/utilities/imageToPng'
 import {
@@ -17,7 +18,6 @@ import {
 import ExifReader, { type XmpTag } from 'exifreader'
 import json5 from 'json5'
 import { addMetadataFromBase64DataURI, getMetadata } from 'meta-png'
-import { characterEditorToCharacterBook } from '@/utilities/characterBookUtilities'
 
 interface ExtractCharacterDataReturn {
   character: V1 | V2

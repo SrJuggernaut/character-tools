@@ -1,3 +1,4 @@
+import EntryEditor from '@/components/characterBookEditor/EntryEditor'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
 import { updateCharacterBookEditor } from '@/state/characterBookEditorSlice'
@@ -7,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, IconButton, Paper, Typography } from '@mui/material'
 import { AnimatePresence, motion } from 'motion/react'
 import { type FC, useState } from 'react'
-import EntryEditor from '@/components/characterBookEditor/EntryEditor'
 
 const EntriesEditor: FC = () => {
   const [editingEntry, setEditingEntry] = useState<number | undefined>(
