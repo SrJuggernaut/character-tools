@@ -18,7 +18,7 @@
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.0",
-    "@mui/lab": "^6.0.0-dev.240424162023-9968b4889d",
+    "@mui/lab": "^7.0.1-beta.18",
     "@mui/material": "^7.0.2",
     "@mui/styles": "^6.4.8",
     "@mui/x-data-grid": "^8.15.0",
