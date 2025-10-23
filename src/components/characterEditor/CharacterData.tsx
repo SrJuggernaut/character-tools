@@ -174,31 +174,33 @@ const CharacterData: FC = () => {
                 })
               )
             }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    size="small"
-                    color="error"
-                    onClick={() => {
-                      const newAlternateGreetings = [
-                        ...characterEditorState.alternate_greetings
-                      ]
-                      newAlternateGreetings.splice(index, 1)
-                      dispatch(
-                        updateCharacterEditor({
-                          alternate_greetings: newAlternateGreetings
-                        })
-                      )
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      icon={faTrashAlt}
-                      size="sm"
-                    />
-                  </IconButton>
-                </InputAdornment>
-              )
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      size="small"
+                      color="error"
+                      onClick={() => {
+                        const newAlternateGreetings = [
+                          ...characterEditorState.alternate_greetings
+                        ]
+                        newAlternateGreetings.splice(index, 1)
+                        dispatch(
+                          updateCharacterEditor({
+                            alternate_greetings: newAlternateGreetings
+                          })
+                        )
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrashAlt}
+                        size="sm"
+                      />
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }
             }}
             multiline
             minRows={2}

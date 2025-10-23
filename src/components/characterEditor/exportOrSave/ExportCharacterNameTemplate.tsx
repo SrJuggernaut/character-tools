@@ -78,27 +78,29 @@ const ExportCharacterNameTemplate: FC = () => {
         onChange={(event) => {
           dispatch(setCharacterCardExportNameTemplate(event.target.value))
         }}
-        InputProps={{
-          endAdornment: (
-            <>
-              <Tooltip title="Reset to Default">
-                <IconButton
-                  onClick={() => {
-                    dispatch(
-                      setCharacterCardExportNameTemplate(
-                        '{{name}}-spec{{spec}}'
+        slotProps={{
+          input: {
+            endAdornment: (
+              <>
+                <Tooltip title="Reset to Default">
+                  <IconButton
+                    onClick={() => {
+                      dispatch(
+                        setCharacterCardExportNameTemplate(
+                          '{{name}}-spec{{spec}}'
+                        )
                       )
-                    )
-                  }}
-                >
-                  <FontAwesomeIcon
-                    icon={faUndo}
-                    size="sm"
-                  />
-                </IconButton>
-              </Tooltip>
-            </>
-          )
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faUndo}
+                      size="sm"
+                    />
+                  </IconButton>
+                </Tooltip>
+              </>
+            )
+          }
         }}
       />
     </>

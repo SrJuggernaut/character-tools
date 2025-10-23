@@ -218,20 +218,22 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
             id="add-key"
             label="Add Key"
             value={keyToAdd}
-            InputProps={{
-              endAdornment: (
-                <IconButton
-                  onClick={() => {
-                    onChange({ ...value, keys: [...value.keys, keyToAdd] })
-                    setKeyToAdd('')
-                  }}
-                >
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    size="sm"
-                  />
-                </IconButton>
-              )
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <IconButton
+                    onClick={() => {
+                      onChange({ ...value, keys: [...value.keys, keyToAdd] })
+                      setKeyToAdd('')
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      size="sm"
+                    />
+                  </IconButton>
+                )
+              }
             }}
             onKeyUp={(e) => {
               if (e.key === 'Enter') {
@@ -287,26 +289,28 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
             id="add-secondary-key"
             label="Add Secondary Key"
             value={secondaryKeyToAdd}
-            InputProps={{
-              endAdornment: (
-                <IconButton
-                  onClick={() => {
-                    onChange({
-                      ...value,
-                      secondary_keys: [
-                        ...value.secondary_keys,
-                        secondaryKeyToAdd
-                      ]
-                    })
-                    setSecondaryKeyToAdd('')
-                  }}
-                >
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    size="sm"
-                  />
-                </IconButton>
-              )
+            slotProps={{
+              input: {
+                endAdornment: (
+                  <IconButton
+                    onClick={() => {
+                      onChange({
+                        ...value,
+                        secondary_keys: [
+                          ...value.secondary_keys,
+                          secondaryKeyToAdd
+                        ]
+                      })
+                      setSecondaryKeyToAdd('')
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      size="sm"
+                    />
+                  </IconButton>
+                )
+              }
             }}
             onKeyUp={(e) => {
               if (e.key === 'Enter') {
