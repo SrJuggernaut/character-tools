@@ -23,7 +23,7 @@
         "dexie-export-import": "^4.1.4",
         "dexie-react-hooks": "^4.2.0",
         "exifreader": "^4.29.0",
-        "gpt-tokenizer": "^2.9.0",
+        "gpt-tokenizer": "^3.2.0",
         "json5": "^2.2.3",
         "lint-staged": "^16.2.6",
         "llama-tokenizer-js": "^1.2.2",
@@ -507,7 +507,7 @@
 
     "globrex": ["globrex@0.1.2", "", {}, "sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg=="],
 
-    "gpt-tokenizer": ["gpt-tokenizer@2.9.0", "", {}, "sha512-YSpexBL/k4bfliAzMrRqn3M6+it02LutVyhVpDeMKrC/O9+pCe/5s8U2hYKa2vFLD5/vHhsKc8sOn/qGqII8Kg=="],
+    "gpt-tokenizer": ["gpt-tokenizer@3.2.0", "", {}, "sha512-QRRhzJIHcGbbdzhMGNCHhF+98RVaBaVD5+NYgyPOamqRBEqG5yN9p5j4udnY5FJnkesjdUPsikG/DO4OfJdhpQ=="],
 
     "hasown": ["hasown@2.0.2", "", { "dependencies": { "function-bind": "^1.1.2" } }, "sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ=="],
 
