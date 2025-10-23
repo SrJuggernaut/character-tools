@@ -127,17 +127,19 @@ const CharacterMetadata: FC = () => {
             handleAddTag()
           }
         }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                color="primary"
-                onClick={handleAddTag}
-              >
-                <FontAwesomeIcon icon={faPlus} />
-              </IconButton>
-            </InputAdornment>
-          )
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  color="primary"
+                  onClick={handleAddTag}
+                >
+                  <FontAwesomeIcon icon={faPlus} />
+                </IconButton>
+              </InputAdornment>
+            )
+          }
         }}
         helperText="Add a tag to this character card. Press Enter to add"
         variant="outlined"
