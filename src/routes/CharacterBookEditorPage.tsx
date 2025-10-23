@@ -1,9 +1,3 @@
-import FluidLayout from '@/Layouts/FluidLayout'
-import CharacterBookData from '@/components/characterBookEditor/CharacterBookData'
-import EntriesEditor from '@/components/characterBookEditor/EntriesEditor'
-import ExportOrSave from '@/components/characterBookEditor/ExportOrSave'
-import ImportOrCreate from '@/components/characterBookEditor/ImportOrCreate'
-import BookFont from '@/components/icons/bookFont'
 import {
   faBook,
   faFileExport,
@@ -14,6 +8,12 @@ import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Tab, type Theme, Typography, useMediaQuery } from '@mui/material'
 import { type FC, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import CharacterBookData from '@/components/characterBookEditor/CharacterBookData'
+import EntriesEditor from '@/components/characterBookEditor/EntriesEditor'
+import ExportOrSave from '@/components/characterBookEditor/ExportOrSave'
+import ImportOrCreate from '@/components/characterBookEditor/ImportOrCreate'
+import BookFont from '@/components/icons/bookFont'
+import FluidLayout from '@/Layouts/FluidLayout'
 
 type tabs =
   | 'import-create'

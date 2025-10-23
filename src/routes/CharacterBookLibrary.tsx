@@ -1,13 +1,13 @@
-import Fluid from '@/Layouts/FluidLayout'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { TabContext, TabList, TabPanel } from '@mui/lab'
+import { Box, Tab, type Theme, Typography, useMediaQuery } from '@mui/material'
+import { type FC, useState } from 'react'
 import CharacterBookTable from '@/components/characterBookLibrary/CharacterBookTable'
 import ImportCharacterBooks from '@/components/characterBookLibrary/ImportCharacterBooks'
 import ManageLibrary from '@/components/characterBookLibrary/ManageLibrary'
 import bookArrowUp from '@/components/icons/bookArrowUp'
 import Books from '@/components/icons/books'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { TabContext, TabList, TabPanel } from '@mui/lab'
-import { Box, Tab, type Theme, Typography, useMediaQuery } from '@mui/material'
-import { type FC, useState } from 'react'
+import Fluid from '@/Layouts/FluidLayout'
 
 type Tabs = 'Library' | 'Manage' | 'Import'
 

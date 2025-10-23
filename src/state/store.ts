@@ -1,5 +1,5 @@
-import appSlice from '@/state/appSlice'
 import { configureStore } from '@reduxjs/toolkit'
+import appSlice from '@/state/appSlice'
 import characterBookEditorSlice from '@/state/characterBookEditorSlice'
 import characterEditorSlice from '@/state/characterEditorSlice'
 import feedbackSlice from '@/state/feedbackSlice'

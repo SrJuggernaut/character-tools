@@ -1,9 +1,3 @@
-import FluidLayout from '@/Layouts/FluidLayout'
-import CharacterData from '@/components/characterEditor/CharacterData'
-import CharacterMetadata from '@/components/characterEditor/CharacterMetadata'
-import ExportOrSave from '@/components/characterEditor/ExportOrSave'
-import ImportOrCreate from '@/components/characterEditor/ImportOrCreate'
-import PromptEngingeering from '@/components/characterEditor/PromptEngingeering'
 import {
   faCircleInfo,
   faFileExport,
@@ -16,6 +10,12 @@ import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Tab, type Theme, Typography, useMediaQuery } from '@mui/material'
 import { type FC, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import CharacterData from '@/components/characterEditor/CharacterData'
+import CharacterMetadata from '@/components/characterEditor/CharacterMetadata'
+import ExportOrSave from '@/components/characterEditor/ExportOrSave'
+import ImportOrCreate from '@/components/characterEditor/ImportOrCreate'
+import PromptEngingeering from '@/components/characterEditor/PromptEngingeering'
+import FluidLayout from '@/Layouts/FluidLayout'
 
 type tabs =
   | 'import-create'

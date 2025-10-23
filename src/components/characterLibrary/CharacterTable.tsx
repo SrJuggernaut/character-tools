@@ -1,9 +1,3 @@
-import useAppDispatch from '@/hooks/useAppDispatch'
-import { dataBase } from '@/lib/dexie'
-import { deleteCharacter } from '@/services/character'
-import { setCharacterEditor } from '@/state/characterEditorSlice'
-import { setAlert, setDialog } from '@/state/feedbackSlice'
-import { type CharacterDatabaseData } from '@/types/character'
 import { faPencil, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconButton, Tooltip } from '@mui/material'
@@ -20,6 +14,12 @@ import {
 import { useLiveQuery } from 'dexie-react-hooks'
 import { type FC, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import { dataBase } from '@/lib/dexie'
+import { deleteCharacter } from '@/services/character'
+import { setCharacterEditor } from '@/state/characterEditorSlice'
+import { setAlert, setDialog } from '@/state/feedbackSlice'
+import { type CharacterDatabaseData } from '@/types/character'
 
 const renderImage = (
   params: GridRenderCellParams<CharacterDatabaseData>
@@ -169,7 +169,6 @@ const CharacterTable: FC = () => {
           >
             <FontAwesomeIcon
               icon={faPencil}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -232,7 +231,6 @@ const CharacterTable: FC = () => {
           >
             <FontAwesomeIcon
               icon={faTrashAlt}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -274,7 +272,6 @@ const CharacterTable: FC = () => {
           >
             <FontAwesomeIcon
               icon={faPlus}
-              fixedWidth
               size="sm"
             />
           </IconButton>

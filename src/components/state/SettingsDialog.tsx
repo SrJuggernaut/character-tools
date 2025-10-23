@@ -1,7 +1,3 @@
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { setOpenSettings, setTokenizer } from '@/state/appSlice'
-import { type AppState } from '@/types/app'
 import {
   Dialog,
   DialogContent,
@@ -14,6 +10,10 @@ import {
   Typography
 } from '@mui/material'
 import { type FC } from 'react'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import { setOpenSettings, setTokenizer } from '@/state/appSlice'
+import { type AppState } from '@/types/app'
 
 const SettingsDialog: FC = () => {
   const { openSettings, tokenizer } = useAppSelector((state) => state.app)
@@ -48,7 +48,9 @@ const SettingsDialog: FC = () => {
             }}
           >
             <MenuItem value="cl100k_base">GPT-3, GPT-3.5, GPT-4</MenuItem>
-            <MenuItem value="o200k_base">GPT-4o</MenuItem>
+            <MenuItem value="o200k_base">
+              GPT-4o, GPT-5, GPT-4.1, GPT-o1
+            </MenuItem>
             <MenuItem value="llama">LLAMA Tokenizer</MenuItem>
             <MenuItem value="llama3">LLAMA3 Tokenizer</MenuItem>
           </Select>

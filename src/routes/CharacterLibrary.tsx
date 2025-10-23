@@ -1,7 +1,3 @@
-import Fluid from '@/Layouts/FluidLayout'
-import CharacterTable from '@/components/characterLibrary/CharacterTable'
-import ImportCharacter from '@/components/characterLibrary/ImportCharacter'
-import ManageLibrary from '@/components/characterLibrary/ManageLibrary'
 import {
   faFileImport,
   faUsersBetweenLines
@@ -10,6 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Tab, type Theme, Typography, useMediaQuery } from '@mui/material'
 import { type FC, useState } from 'react'
+import CharacterTable from '@/components/characterLibrary/CharacterTable'
+import ImportCharacter from '@/components/characterLibrary/ImportCharacter'
+import ManageLibrary from '@/components/characterLibrary/ManageLibrary'
+import Fluid from '@/Layouts/FluidLayout'
 
 type Tabs = 'Library' | 'Manage' | 'Import'
 

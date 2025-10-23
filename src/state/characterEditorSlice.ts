@@ -1,5 +1,5 @@
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { type CharacterEditorState } from '@/types/character'
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const initialState: CharacterEditorState = {
   name: '',

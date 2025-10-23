@@ -1,12 +1,11 @@
-import Books from '@/components/icons/books'
 import {
-  type IconDefinition,
   faBars,
   faBook,
   faDatabase,
   faHome,
   faUserPen,
-  faUsersBetweenLines
+  faUsersBetweenLines,
+  type IconDefinition
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -22,6 +21,7 @@ import {
 } from '@mui/material'
 import { type FC, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import Books from '@/components/icons/books'
 
 interface MenuLink {
   label: string
@@ -59,7 +59,6 @@ const NavigationMenu: FC = () => {
         >
           <FontAwesomeIcon
             icon={faBars}
-            fixedWidth
             size="sm"
           />
         </IconButton>
@@ -106,10 +105,7 @@ const NavigationMenu: FC = () => {
                   selected={location.pathname === menuLink.url}
                 >
                   <ListItemIcon>
-                    <FontAwesomeIcon
-                      icon={menuLink.icon}
-                      fixedWidth
-                    />
+                    <FontAwesomeIcon icon={menuLink.icon} />
                   </ListItemIcon>
                   <ListItemText primary={menuLink.label} />
                 </ListItemButton>

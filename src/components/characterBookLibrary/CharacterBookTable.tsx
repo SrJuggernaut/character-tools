@@ -1,9 +1,3 @@
-import useAppDispatch from '@/hooks/useAppDispatch'
-import { dataBase } from '@/lib/dexie'
-import { deleteCharacterBook } from '@/services/characterBooks'
-import { setCharacterBookEditor } from '@/state/characterBookEditorSlice'
-import { setAlert, setDialog } from '@/state/feedbackSlice'
-import { type CharacterBookDatabaseData } from '@/types/lorebook'
 import { faPencil, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconButton, Tooltip } from '@mui/material'
@@ -18,6 +12,12 @@ import {
 import { useLiveQuery } from 'dexie-react-hooks'
 import { type FC, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import { dataBase } from '@/lib/dexie'
+import { deleteCharacterBook } from '@/services/characterBooks'
+import { setCharacterBookEditor } from '@/state/characterBookEditorSlice'
+import { setAlert, setDialog } from '@/state/feedbackSlice'
+import { type CharacterBookDatabaseData } from '@/types/lorebook'
 
 const CharacterBookTable: FC = () => {
   const dispatch = useAppDispatch()
@@ -141,7 +141,6 @@ const CharacterBookTable: FC = () => {
           >
             <FontAwesomeIcon
               icon={faPencil}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -205,7 +204,6 @@ const CharacterBookTable: FC = () => {
           >
             <FontAwesomeIcon
               icon={faTrashAlt}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -248,7 +246,6 @@ const CharacterBookTable: FC = () => {
           >
             <FontAwesomeIcon
               icon={faPlus}
-              fixedWidth
               size="sm"
             />
           </IconButton>

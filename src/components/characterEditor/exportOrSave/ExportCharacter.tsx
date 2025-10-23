@@ -1,3 +1,11 @@
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle
+} from '@mui/material'
+import { type FC, useState } from 'react'
 import ExportCharacterNameTemplate from '@/components/characterEditor/exportOrSave/ExportCharacterNameTemplate'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import useAppSelector from '@/hooks/useAppSelector'
@@ -9,14 +17,6 @@ import {
   exportCharacterAsPng,
   getCharacterExportName
 } from '@/utilities/characterUtilities'
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle
-} from '@mui/material'
-import { type FC, useState } from 'react'
 
 const ExportCharacter: FC = () => {
   const dispatch = useAppDispatch()

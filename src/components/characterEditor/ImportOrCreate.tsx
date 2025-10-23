@@ -1,3 +1,7 @@
+import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Box, Button, Typography } from '@mui/material'
+import { type FC, useCallback } from 'react'
 import Drop from '@/components/ui/Drop'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import { createCharacterBook } from '@/services/characterBooks'
@@ -17,10 +21,6 @@ import {
   importedToCharacterEditorState
 } from '@/utilities/characterUtilities'
 import imageToPng from '@/utilities/imageToPng'
-import { faFileUpload } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, Button, Typography } from '@mui/material'
-import { type FC, useCallback } from 'react'
 
 const ImportOrCreate: FC = () => {
   const dispatch = useAppDispatch()

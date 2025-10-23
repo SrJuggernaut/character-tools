@@ -1,10 +1,10 @@
-import AlertsSnackbar from '@/components/state/AlertsSnackbar'
-import FeedbackDialog from '@/components/state/FeedbackDialog'
-import useAppSelector from '@/hooks/useAppSelector'
-import { ThemeProvider, createTheme } from '@mui/material'
+import { createTheme, ThemeProvider } from '@mui/material'
 import { type FC, type ReactNode, useMemo } from 'react'
 import { darkTheme, lightTheme } from 'srjuggernaut-mui-theme'
+import AlertsSnackbar from '@/components/state/AlertsSnackbar'
+import FeedbackDialog from '@/components/state/FeedbackDialog'
 import SettingsDialog from '@/components/state/SettingsDialog'
+import useAppSelector from '@/hooks/useAppSelector'
 
 export interface StateConsumerProps {
   children?: ReactNode

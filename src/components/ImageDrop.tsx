@@ -1,9 +1,9 @@
-import useAppDispatch from '@/hooks/useAppDispatch'
-import { setAlert } from '@/state/feedbackSlice'
-import imageToPng from '@/utilities/imageToPng'
 import { Box, Button, Typography } from '@mui/material'
 import { type FC, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import { setAlert } from '@/state/feedbackSlice'
+import imageToPng from '@/utilities/imageToPng'
 
 export interface ImageDropProps {
   onDropedImage: (imageUrl: string) => void

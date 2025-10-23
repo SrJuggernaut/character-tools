@@ -1,7 +1,3 @@
-import NavigationMenu from '@/Layouts/Header/NavigationMenu'
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { setOpenSettings, setTheme } from '@/state/appSlice'
 import {
   faBug,
   faMoon,
@@ -19,6 +15,10 @@ import {
 import { visuallyHidden } from '@mui/utils'
 import { type FC } from 'react'
 import { Link as ReactRouterLink } from 'react-router-dom'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import NavigationMenu from '@/Layouts/Header/NavigationMenu'
+import { setOpenSettings, setTheme } from '@/state/appSlice'
 
 const Header: FC = () => {
   const theme = useAppSelector((state) => state.app.theme)
@@ -51,7 +51,6 @@ const Header: FC = () => {
             <Typography sx={visuallyHidden}>Character Tools</Typography>
             <FontAwesomeIcon
               icon={faScrewdriverWrench}
-              fixedWidth
               size="2x"
             />
           </MuiLink>
@@ -66,7 +65,6 @@ const Header: FC = () => {
           >
             <FontAwesomeIcon
               icon={faBug}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -80,7 +78,6 @@ const Header: FC = () => {
           >
             <FontAwesomeIcon
               icon={faScrewdriverWrench}
-              fixedWidth
               size="sm"
             />
           </IconButton>
@@ -95,14 +92,12 @@ const Header: FC = () => {
             {theme === 'light' && (
               <FontAwesomeIcon
                 icon={faMoon}
-                fixedWidth
                 size="sm"
               />
             )}
             {theme === 'dark' && (
               <FontAwesomeIcon
                 icon={faSun}
-                fixedWidth
                 size="sm"
               />
             )}

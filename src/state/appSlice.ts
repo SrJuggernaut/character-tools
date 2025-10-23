@@ -1,5 +1,5 @@
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { type AppState } from '@/types/app'
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const initialState: AppState = {
   theme: (window.localStorage.getItem('theme') as AppState['theme']) ?? 'dark',

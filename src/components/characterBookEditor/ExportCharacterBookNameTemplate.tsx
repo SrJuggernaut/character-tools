@@ -1,11 +1,11 @@
-import CopyButton from '@/components/CopyButton'
-import useAppDispatch from '@/hooks/useAppDispatch'
-import useAppSelector from '@/hooks/useAppSelector'
-import { setCharacterBookExportNameTemplate } from '@/state/appSlice'
 import { faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconButton, Link, TextField, Tooltip, Typography } from '@mui/material'
 import { type FC } from 'react'
+import CopyButton from '@/components/CopyButton'
+import useAppDispatch from '@/hooks/useAppDispatch'
+import useAppSelector from '@/hooks/useAppSelector'
+import { setCharacterBookExportNameTemplate } from '@/state/appSlice'
 
 const ExportCharacterBookNameTemplate: FC = () => {
   const characterBookExportNameTemplate = useAppSelector(

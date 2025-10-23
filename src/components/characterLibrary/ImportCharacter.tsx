@@ -1,17 +1,3 @@
-import Drop from '@/components/ui/Drop'
-import { createCharacter } from '@/services/character'
-import { createCharacterBook } from '@/services/characterBooks'
-import { type CharacterDatabaseData } from '@/types/character'
-import { type CharacterBookDatabaseData } from '@/types/lorebook'
-import {
-  characterBookToCharacterEditor,
-  extractCharacterBookFromCharacter
-} from '@/utilities/characterBookUtilities'
-import {
-  extractCharacterData,
-  importedToCharacterEditorState
-} from '@/utilities/characterUtilities'
-import imageToPng from '@/utilities/imageToPng'
 import {
   faCheckCircle,
   faFileImport,
@@ -30,6 +16,20 @@ import {
   Typography
 } from '@mui/material'
 import { type FC, useEffect, useState } from 'react'
+import Drop from '@/components/ui/Drop'
+import { createCharacter } from '@/services/character'
+import { createCharacterBook } from '@/services/characterBooks'
+import { type CharacterDatabaseData } from '@/types/character'
+import { type CharacterBookDatabaseData } from '@/types/lorebook'
+import {
+  characterBookToCharacterEditor,
+  extractCharacterBookFromCharacter
+} from '@/utilities/characterBookUtilities'
+import {
+  extractCharacterData,
+  importedToCharacterEditorState
+} from '@/utilities/characterUtilities'
+import imageToPng from '@/utilities/imageToPng'
 
 type ImportedFile =
   | {

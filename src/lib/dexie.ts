@@ -1,10 +1,10 @@
+import Dexie, { type Table } from 'dexie'
+import { nanoid } from 'nanoid'
 import { setAlert } from '@/state/feedbackSlice'
 import store from '@/state/store'
 import { type CharacterDatabaseData } from '@/types/character'
 import { type CharacterBookDatabaseData } from '@/types/lorebook'
 import { characterBookToCharacterEditor } from '@/utilities/characterBookUtilities'
-import Dexie, { type Table } from 'dexie'
-import { nanoid } from 'nanoid'
 
 export class CharacterToolsDatabase extends Dexie {
   characters!: Table<CharacterDatabaseData>

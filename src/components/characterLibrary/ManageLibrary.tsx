@@ -1,3 +1,8 @@
+import { faFileImport } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Box, Button, Link as MuiLink, Typography } from '@mui/material'
+import { type FC } from 'react'
+import { Link as ReactRouterLink } from 'react-router-dom'
 import Drop from '@/components/ui/Drop'
 import useAppDispatch from '@/hooks/useAppDispatch'
 import {
@@ -6,11 +11,6 @@ import {
   importCharacterCollection
 } from '@/services/character'
 import { setAlert, setDialog } from '@/state/feedbackSlice'
-import { faFileImport } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Box, Button, Link as MuiLink, Typography } from '@mui/material'
-import { type FC } from 'react'
-import { Link as ReactRouterLink } from 'react-router-dom'
 
 const ManageLibrary: FC = () => {
   const dispatch = useAppDispatch()
