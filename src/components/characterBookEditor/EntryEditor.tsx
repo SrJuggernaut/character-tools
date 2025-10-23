@@ -56,8 +56,12 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         id="priority"
         label="Priority"
         value={value.priority ?? 10}
-        onChange={(_, newValue) => {
-          onChange({ ...value, priority: newValue ?? undefined })
+        onValueChange={(newValue) => {
+          if (newValue === undefined || newValue === null) {
+            onChange({ ...value, priority: 10 })
+          } else {
+            onChange({ ...value, priority: newValue })
+          }
         }}
         error={value.priority === undefined}
         helperText="The higher the number, the higher the priority. The lower the number, the entry will be discarded first if token budget is exceeded."
@@ -68,9 +72,9 @@ const EntryEditor: FC<EntryEditorProps> = ({ onChange, value }) => {
         id="insertion_order"
         label="Insertion Order"
         value={value.insertion_order ?? 1}
-        onChange={(_, newValue) => {
+        onValueChange={(newValue) => {
           if (newValue === undefined || newValue === null) {
-            onChange({ ...value, insertion_order: 0 })
+            onChange({ ...value, insertion_order: 1 })
           } else {
             onChange({ ...value, insertion_order: newValue })
           }

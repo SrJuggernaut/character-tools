@@ -67,11 +67,15 @@ const CharacterBookData: FC = () => {
       <NumberField
         id="scan_depth"
         label="Scan Depth"
-        value={characterEditorState.scan_depth}
-        onChange={(_, value) => {
-          dispatch(
-            updateCharacterBookEditor({ scan_depth: value ?? undefined })
-          )
+        value={characterEditorState.scan_depth ?? null}
+        min={0}
+        step={1}
+        onValueChange={(newValue) => {
+          if (newValue === null) {
+            dispatch(updateCharacterBookEditor({ scan_depth: undefined }))
+          } else {
+            dispatch(updateCharacterBookEditor({ scan_depth: newValue }))
+          }
         }}
         error={characterEditorState.scan_depth === undefined}
         helperText={
@@ -86,10 +90,12 @@ const CharacterBookData: FC = () => {
         id="token_budget"
         label="Token Budget"
         value={characterEditorState.token_budget}
-        onChange={(_, value) => {
-          dispatch(
-            updateCharacterBookEditor({ token_budget: value ?? undefined })
-          )
+        onValueChange={(newValue) => {
+          if (newValue === null) {
+            dispatch(updateCharacterBookEditor({ token_budget: undefined }))
+          } else {
+            dispatch(updateCharacterBookEditor({ token_budget: newValue }))
+          }
         }}
         error={characterEditorState.token_budget === undefined}
         helperText={
