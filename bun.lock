@@ -16,12 +16,12 @@
         "@mui/material": "^7.0.2",
         "@mui/styles": "^6.4.8",
         "@mui/x-data-grid": "^8.1.0",
-        "@reduxjs/toolkit": "^2.7.0",
+        "@reduxjs/toolkit": "^2.9.2",
         "character-card-utils": "^2.0.3",
         "date-fns": "^4.1.0",
         "dexie": "^4.0.11",
         "dexie-export-import": "^4.1.4",
-        "dexie-react-hooks": "^1.1.7",
+        "dexie-react-hooks": "^4.2.0",
         "exifreader": "^4.29.0",
         "gpt-tokenizer": "^2.9.0",
         "json5": "^2.2.3",
@@ -447,7 +447,7 @@
 
     "dexie-export-import": ["dexie-export-import@4.1.4", "", { "peerDependencies": { "dexie": "^2.0.4 || ^3.0.0 || ^4.0.1" } }, "sha512-3bw171qUuOTWSYLXI7C/0M6p1X65Rho3tu1IvD9By8jn0+3t3dLSkDlZ1BC6MbABl3kRlhtGigzC+SF+qcS5Og=="],
 
-    "dexie-react-hooks": ["dexie-react-hooks@1.1.7", "", { "peerDependencies": { "@types/react": ">=16", "dexie": "^3.2 || ^4.0.1-alpha", "react": ">=16" } }, "sha512-Lwv5W0Hk+uOW3kGnsU9GZoR1er1B7WQ5DSdonoNG+focTNeJbHW6vi6nBoX534VKI3/uwHebYzSw1fwY6a7mTw=="],
+    "dexie-react-hooks": ["dexie-react-hooks@4.2.0", "", { "peerDependencies": { "@types/react": ">=16", "dexie": ">=4.2.0-alpha.1 <5.0.0", "react": ">=16" } }, "sha512-u7KqTX9JpBQK8+tEyA9X0yMGXlSCsbm5AU64N6gjvGk/IutYDpLBInMYEAEC83s3qhIvryFS+W+sqLZUBEvePQ=="],
 
     "dom-helpers": ["dom-helpers@5.2.1", "", { "dependencies": { "@babel/runtime": "^7.8.7", "csstype": "^3.0.2" } }, "sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA=="],
 
