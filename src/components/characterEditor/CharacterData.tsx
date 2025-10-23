@@ -1,4 +1,8 @@
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import {
+  faDownLong,
+  faTrashAlt,
+  faUpLong
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   Box,
@@ -7,6 +11,7 @@ import {
   InputAdornment,
   Link,
   TextField,
+  Tooltip,
   Typography
 } from '@mui/material'
 import { type FC } from 'react'
@@ -158,56 +163,123 @@ const CharacterData: FC = () => {
       </Typography>
       {characterEditorState.alternate_greetings.length > 0 &&
         characterEditorState.alternate_greetings.map((greeting, index) => (
-          <TextFieldWithTokenCounter
+          <div
             key={`alternate_greeting_${index}`}
-            id={`alternate_greeting[${index}]`}
-            label={`Alternate Greeting ${index + 1}`}
-            value={greeting}
-            onChange={(event) => {
-              const newAlternateGreetings = [
-                ...characterEditorState.alternate_greetings
-              ]
-              newAlternateGreetings[index] = event.target.value
-              dispatch(
-                updateCharacterEditor({
-                  alternate_greetings: newAlternateGreetings
-                })
-              )
-            }}
-            slotProps={{
-              input: {
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      size="small"
-                      color="error"
-                      onClick={() => {
-                        const newAlternateGreetings = [
-                          ...characterEditorState.alternate_greetings
-                        ]
-                        newAlternateGreetings.splice(index, 1)
-                        dispatch(
-                          updateCharacterEditor({
-                            alternate_greetings: newAlternateGreetings
-                          })
-                        )
-                      }}
-                    >
-                      <FontAwesomeIcon
-                        icon={faTrashAlt}
-                        size="sm"
-                      />
-                    </IconButton>
-                  </InputAdornment>
+            css={{ display: 'flex', alignItems: 'center' }}
+          >
+            <div
+              css={{ display: 'flex', flexDirection: 'column', padding: '' }}
+            >
+              <Tooltip title="Move Up">
+                <IconButton
+                  size="small"
+                  disabled={index === 0}
+                  onClick={() => {
+                    const newAlternateGreetings = [
+                      ...characterEditorState.alternate_greetings
+                    ]
+                    ;[
+                      newAlternateGreetings[index],
+                      newAlternateGreetings[index - 1]
+                    ] = [
+                      newAlternateGreetings[index - 1],
+                      newAlternateGreetings[index]
+                    ]
+                    dispatch(
+                      updateCharacterEditor({
+                        alternate_greetings: newAlternateGreetings
+                      })
+                    )
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faUpLong}
+                    size="sm"
+                  />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Move Down">
+                <IconButton
+                  disabled={
+                    index ===
+                    characterEditorState.alternate_greetings.length - 1
+                  }
+                  size="small"
+                  onClick={() => {
+                    const newAlternateGreetings = [
+                      ...characterEditorState.alternate_greetings
+                    ]
+                    ;[
+                      newAlternateGreetings[index],
+                      newAlternateGreetings[index + 1]
+                    ] = [
+                      newAlternateGreetings[index + 1],
+                      newAlternateGreetings[index]
+                    ]
+                    dispatch(
+                      updateCharacterEditor({
+                        alternate_greetings: newAlternateGreetings
+                      })
+                    )
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={faDownLong}
+                    size="sm"
+                  />
+                </IconButton>
+              </Tooltip>
+            </div>
+            <TextFieldWithTokenCounter
+              id={`alternate_greeting[${index}]`}
+              label={`Alternate Greeting ${index + 1}`}
+              value={greeting}
+              onChange={(event) => {
+                const newAlternateGreetings = [
+                  ...characterEditorState.alternate_greetings
+                ]
+                newAlternateGreetings[index] = event.target.value
+                dispatch(
+                  updateCharacterEditor({
+                    alternate_greetings: newAlternateGreetings
+                  })
                 )
-              }
-            }}
-            multiline
-            minRows={2}
-            variant="outlined"
-            fullWidth
-            margin="normal"
-          />
+              }}
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        size="small"
+                        color="error"
+                        onClick={() => {
+                          const newAlternateGreetings = [
+                            ...characterEditorState.alternate_greetings
+                          ]
+                          newAlternateGreetings.splice(index, 1)
+                          dispatch(
+                            updateCharacterEditor({
+                              alternate_greetings: newAlternateGreetings
+                            })
+                          )
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faTrashAlt}
+                          size="sm"
+                        />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }
+              }}
+              multiline
+              minRows={2}
+              variant="outlined"
+              fullWidth
+              margin="normal"
+            />
+          </div>
         ))}
       <Button
         variant="contained"
