@@ -22,7 +22,7 @@
     "@mui/material": "^7.0.2",
     "@mui/styles": "^6.4.8",
     "@mui/x-data-grid": "^8.1.0",
-    "@reduxjs/toolkit": "^2.7.0",
+    "@reduxjs/toolkit": "^2.9.2",
     "character-card-utils": "^2.0.3",
     "date-fns": "^4.1.0",
     "dexie": "^4.0.11",
